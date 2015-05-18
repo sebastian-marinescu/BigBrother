@@ -58,7 +58,7 @@ $builder = new modPackageBuilder($modx);
 $builder->createPackage(PKG_NAMESPACE,PKG_VERSION,PKG_RELEASE);
 $builder->registerNamespace(PKG_NAMESPACE,false,true,'{core_path}components/'.PKG_NAMESPACE.'/');
 $modx->getService('lexicon','modLexicon');
-$modx->lexicon->load('myjournal:default');
+$modx->lexicon->load('bigbrother:default');
 
 /* Load system settings */
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in System Settings...');
