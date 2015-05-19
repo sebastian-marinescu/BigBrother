@@ -6,6 +6,7 @@
  * @subpackage processors
  */
 class getAccountList extends modProcessor {
+    /** @var BigBrother $ga */
     public $ga = null;
     public $error = null;
 
@@ -18,7 +19,7 @@ class getAccountList extends modProcessor {
         if( !$this->ga->loadOAuth() ){
             return $this->failure( $this->modx->lexicon('bigbrother.err_load_oauth') );
         }
-        $result = $this->callAPI( $this->ga->baseUrl . 'management/accounts' );
+        $result = $this->callAPI( $this->ga->baseUrl . 'management/accounts/~all/webproperties/~all/profiles' );
         if( !empty( $this->error ) ){
             return $this->failure( $this->error );
         }
@@ -33,24 +34,14 @@ class getAccountList extends modProcessor {
         $total = 0;
         // Get account list
         foreach( $result['items'] as $value ){
-            $account['account'] = $value['name'];
-
-            // Following GA API v3 from July 2012 - The only way to get the right profile ID is to call accountlist -> webproperties -> profile
-            $webProperties = $this->callAPI( $value['childLink']['href'] );
-            if( !empty( $this->error ) ){
-                return $this->failure( $this->error );
-            }
-            $profile = $this->callAPI( $webProperties['items'][0]['childLink']['href'] );
-            if( !empty( $this->error ) ){
-                return $this->failure( $this->error );
-            }
-            foreach ($profile['items'] as $view) {
-                $account['name'] = $view['name'];
-                $account['id'] = $view['id'];
-                $output[] = $account;
-                $total += 1;
-            }
+            $account['id'] = $value['id'];
+            $account['name'] = $value['name'];
+            $account['websiteUrl'] = $value['websiteUrl'];
+            $account['webPropertyId'] = $value['webPropertyId'];
+            $output[] = $account;
+            $total += 1;
         }
+
         //$this->ga->updateOption('total_account', $result['totalResults']);
         $this->ga->updateOption('total_account', $total);
         return $this->success( '', $output );
@@ -70,12 +61,14 @@ class getAccountList extends modProcessor {
         $result = curl_exec($ch);
         if( curl_errno( $ch ) ){
             $this->error = curl_error($ch);
-            return;
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'cURL Error on API call to ' . $url . ': ' . $this->error);
+            return false;
         }
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if( $http_code !== 200 ){
             $this->error = $result;
-            return;
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Non-200 HTTP Code returned from calling ' . $url . ': ' . $http_code . ' Result: ' . $this->error);
+            return false;
         }
         curl_close($ch);
         return $this->modx->fromJSON( $result );

@@ -14,8 +14,8 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','BigBrother');
 define('PKG_NAMESPACE','bigbrother');
-define('PKG_VERSION','1.2.1');
-define('PKG_RELEASE','beta');
+define('PKG_VERSION','1.3.0');
+define('PKG_RELEASE','rc1');
 
 function getSnippetContent($path, $name, $debug = false) {
     $name = ($debug) ? 'debug.'. $name .'.php' : $name .'.php';
@@ -55,10 +55,11 @@ $modx->setLogTarget('ECHO');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
+$builder->directory = dirname(dirname(__FILE__)) . '/_packages/';
 $builder->createPackage(PKG_NAMESPACE,PKG_VERSION,PKG_RELEASE);
 $builder->registerNamespace(PKG_NAMESPACE,false,true,'{core_path}components/'.PKG_NAMESPACE.'/');
 $modx->getService('lexicon','modLexicon');
-$modx->lexicon->load('myjournal:default');
+$modx->lexicon->load('bigbrother:default');
 
 /* Load system settings */
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in System Settings...');

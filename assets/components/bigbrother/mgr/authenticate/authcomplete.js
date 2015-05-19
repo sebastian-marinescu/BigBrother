@@ -50,35 +50,15 @@ MODx.panel.BigBrotherAuthComplete = function(config) {
         }]
     });
     MODx.panel.BigBrotherAuthComplete.superclass.constructor.call(this,config);
-
-    this.init();
+    this.on('afterrender', this.init);
 };
 Ext.extend(MODx.panel.BigBrotherAuthComplete,MODx.Panel,{
     init: function(){
-        Ext.Ajax.request({
-            url : MODx.BigBrotherConnectorUrl
-            ,params : {
-                action : 'authenticate/oauthComplete'
-                ,oauth_verifier : MODx.OAuthVerifier
-                ,oauth_token : MODx.OAuthToken
-            }
-            ,method: 'GET'
-            ,scope: this
-            ,success: function ( result, request ) {
-                var data = Ext.util.JSON.decode( result.responseText );
-                if(!data.success){
-                    data.className = 'highlight desc-error';
-                } else {
-                    Ext.getCmp('account-panel').show();
-                    Ext.getCmp('account-list').store.load();
-                    Ext.getCmp('account-list').setWidth(300);
-                }
-                Ext.getCmp('bb-breadcrumbs').updateDetail(data);
-            }
-            ,failure: function ( result, request) {
-                Ext.MessageBox.alert(_('bigbrother.alert_failed'), result.responseText);
-            }
-        });
+        setTimeout(function() {
+            Ext.getCmp('bb-breadcrumbs').updateDetail(MODx.BigBrotherAuthCompleteData);
+            Ext.getCmp('account-panel').show();
+            Ext.getCmp('account-list').setWidth(300);
+        }, 500);
     }
 });
 Ext.reg('bb-authcomplete', MODx.panel.BigBrotherAuthComplete);
@@ -112,11 +92,12 @@ MODx.panel.BigBrotherAccountList = function(config) {
             ,ctCls: 'cb-account-list'
             ,emptyText: _('bigbrother.oauth_select_account')
             ,id: 'account-list'
+            ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item">{name}<br><small>{websiteUrl} - {webPropertyId}</small></div></tpl>')
             ,store: new Ext.data.JsonStore({
                 url: MODx.BigBrotherConnectorUrl
                 ,root: 'results'
                 ,totalProperty: 'total'
-                ,fields: ['id', 'name']
+                ,fields: ['id', 'name', 'account', 'websiteUrl', 'webPropertyId']
                 ,errorReader: MODx.util.JSONReader
                 ,baseParams: {
                     action : 'manage/accountlist'
@@ -144,12 +125,16 @@ Ext.extend(MODx.panel.BigBrotherAccountList,Ext.Panel,{
     selectAccount: function(){
         Ext.getCmp('select-account-btn').disable();
         Ext.getCmp('account-list').disable();
+
+        var accountList = Ext.getCmp('account-list');
+
+        var record = accountList.findRecord(accountList.valueField, accountList.getValue());
         Ext.Ajax.request({
             url : MODx.BigBrotherConnectorUrl
             ,params : {
                 action : 'manage/setAccount'
-                ,account : Ext.getCmp('account-list').getValue()
-                ,accountName : Ext.getCmp('account-list').getRawValue()
+                ,account : record.data.id
+                ,accountName : record.data.name
             }
             ,method: 'GET'
             ,scope: this
@@ -162,8 +147,7 @@ Ext.extend(MODx.panel.BigBrotherAccountList,Ext.Panel,{
                     data.className = 'highlight loading';
                     Ext.getCmp('bb-breadcrumbs').updateDetail(data);
                     setTimeout(function(){
-                        //location.href = MODx.BigBrotherRedirect;
-                        location.href = location.href;
+                        location.href = MODx.BigBrotherRedirect;
                     }, 800);
                 }
             }
