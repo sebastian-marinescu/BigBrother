@@ -103,7 +103,7 @@ class BigBrother {
     public function loadOAuth() {
         $basePath = dirname(dirname(__FILE__)) . '/OAuth2/';
         require_once $basePath . 'Client.php';
-        require_once $basePath . 'GrantType/iGrantType.php';
+        require_once $basePath . 'GrantType/IGrantType.php';
         require_once $basePath . 'GrantType/AuthorizationCode.php';
         require_once $basePath . 'GrantType/RefreshToken.php';
 
