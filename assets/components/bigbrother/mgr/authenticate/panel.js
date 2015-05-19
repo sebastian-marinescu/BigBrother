@@ -84,7 +84,7 @@ Ext.extend(MODx.panel.BigBrotherAuthorizePanel,Ext.Panel,{
             ,method: 'GET'
             ,scope: this
             ,success: function ( result, request ) { 
-                data = Ext.util.JSON.decode( result.responseText );
+                var data = Ext.util.JSON.decode( result.responseText );
                 if(!data.success){
                     data.className = 'highlight desc-error';
                     this.getToken = false;          
@@ -119,7 +119,7 @@ Ext.extend(MODx.panel.BigBrotherAuthorizePanel,Ext.Panel,{
                 ,method: 'GET'
                 ,scope: this
                 ,success: function ( result, request ) { 
-                    data = Ext.util.JSON.decode( result.responseText );
+                    var data = Ext.util.JSON.decode( result.responseText );
                     if(!data.success){
                         data.className = 'highlight desc-error';
                         Ext.getCmp('bb-breadcrumbs').updateDetail(data);

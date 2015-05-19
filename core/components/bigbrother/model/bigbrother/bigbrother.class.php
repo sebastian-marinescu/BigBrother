@@ -30,8 +30,14 @@ class BigBrother {
     public $report = null;
     public $sideReport = null;
     public $cacheKey = null;
+    public $cacheOptions = array(
+        xPDO::OPT_CACHE_KEY => 'bigbrother',
+    );
     public $baseUrl = 'https://www.googleapis.com/analytics/v3/';
+    public $oauthEndpoint = 'https://accounts.google.com/o/oauth2/auth';
+    public $oauthTokenEndpoint = 'https://accounts.google.com/o/oauth2/token';
     private $output = null;
+    public $http_code;
 
     /**
      * The bigbrother Constructor.
@@ -89,22 +95,28 @@ class BigBrother {
     }
 
     /**
-     * Load the OAuth file containing the OAuth classes
+     * Load the OAuth2 Service
      *
      * @access public
-     * @return boolean
+     * @return boolean|OAuth2\Client
      */
     public function loadOAuth() {
-        $file = $this->config['model_path'].'bigbrother/OAuth.php';
-        if (!file_exists($file)) {
+        $basePath = dirname(dirname(__FILE__)) . '/OAuth2/';
+        require_once $basePath . 'Client.php';
+        require_once $basePath . 'GrantType/iGrantType.php';
+        require_once $basePath . 'GrantType/AuthorizationCode.php';
+        require_once $basePath . 'GrantType/RefreshToken.php';
+
+        $clientId = $this->getOption('native_app_client_id'); // '932629683766-qujj8lbna9ua8i3speskd392i4t7dt4m.apps.googleusercontent.com';
+        $clientSecret = $this->getOption('native_app_client_secret'); // 'k5i6mEQNkzrTyitq4Pv5orKj';
+
+        try {
+            $client = new OAuth2\Client($clientId, $clientSecret);
+        } catch (Exception $e) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
-        require_once $file;
-        $oauthToken = $this->getOption('oauth_token');
-        $oauthSecret = $this->getOption('oauth_secret');
-        if($oauthToken != null && $oauthToken != ''){ $this->oauthToken = $oauthToken; }
-        if($oauthSecret != null && $oauthSecret != ''){ $this->oauthSecret = $oauthSecret; }
-        return true;
+        return $client;
     }
 
     /**
@@ -336,16 +348,39 @@ class BigBrother {
      * @return mixed The requested header or false if no url is provided
      */
     public function createAuthHeader($url = null, $method = null) {
-        if($url == NULL) {    return false; }
-        $signatureMethod = new GADOAuthSignatureMethod_HMAC_SHA1();
+        $accessToken = $this->modx->getCacheManager()->get('access_token', $this->cacheOptions);
+        $this->refreshAccessToken();
+        if (empty($accessToken)) {
+            $accessToken = $this->refreshAccessToken();
+        }
 
-        $params = array();
-        $consumer = new GADOAuthConsumer('anonymous', 'anonymous', NULL);
-        $token = new GADOAuthConsumer($this->oauthToken, $this->oauthSecret);
-        $oauthRequest = GADOAuthRequest::from_consumer_and_token($consumer, $token, $method, $url, $params);
-        $oauthRequest->sign_request($signatureMethod, $consumer, $token);
+        return 'Authorization: Bearer ' . $accessToken;
+    }
 
-        return $oauthRequest->to_header();
+    public function refreshAccessToken() {
+        $client = $this->loadOAuth();
+
+        $params = array(
+            'refresh_token' => $this->getOption('refresh_token'),
+            'grant_type' => 'refresh_token',
+        );
+
+        $result = false;
+        try {
+            $result = $client->getAccessToken($this->oauthTokenEndpoint, 'refresh_token', $params);
+        } catch (Exception $e) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Error refreshing oAuth2 token: ' . $e->getMessage());
+        }
+
+        if (is_array($result) && $result['code'] == 200) {
+            $accessToken = $result['result']['access_token'];
+            $refreshToken = $result['result']['refresh_token'];
+            $expiresIn = $result['result']['expires_in'];
+
+            $this->modx->getCacheManager()->set('access_token', $accessToken, $expiresIn, $this->cacheOptions);
+        }
+
+        $this->modx->log(modX::LOG_LEVEL_ERROR, print_r($result, true));
     }
 
     /**

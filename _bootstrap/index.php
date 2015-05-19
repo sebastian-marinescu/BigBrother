@@ -105,19 +105,23 @@ if ($action) {
     }
 }
 
-/*$settings = include dirname(dirname(__FILE__)).'/_build/data/transport.settings.php';
-foreach ($settings as $key => $opts) {
-    if (!createObject('modSystemSetting', array(
-        'key' => 'bigbrother.' . $key,
-        'value' => $opts['value'],
-        'xtype' => (isset($opts['xtype'])) ? $opts['xtype'] : 'textfield',
-        'namespace' => 'bigbrother',
-        'area' => $opts['area'],
-        'editedon' => time(),
-    ), 'key', false)) {
-        echo "Error creating bigbrother.".$key." setting.\n";
+if (!createObject('modDashboardWidget', array (
+    'name' => 'bigbrother.name',
+    'description' => 'bigbrother.desc',
+    'type' => 'file',
+    'size' => 'full',
+    'content' => $componentPath . '/core/components/bigbrother/controllers/widget.class.php',
+    'namespace' => 'bigbrother',
+    'lexicon' => 'bigbrother:dashboard',
+), 'name', false));
+
+$settings = include dirname(dirname(__FILE__)).'/_build/data/transport.settings.php';
+foreach ($settings as $key => $obj) {
+    /** @var modSystemSetting $obj */
+    if (!createObject('modSystemSetting', $obj->toArray(), 'key', false)) {
+        echo "Error creating bigbrother.".$obj->get('key')." setting.\n";
     }
-}*/
+}
 
 echo "Done.";
 

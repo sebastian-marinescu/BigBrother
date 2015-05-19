@@ -71,4 +71,22 @@ $settings['bigbrother.show_pies_on_dashboard']->fromArray(array(
     'area' => 'Google Analytics for MODx Revolution',
 ),'',true,true);
 
+$settings['bigbrother.native_app_client_id']= $modx->newObject('modSystemSetting');
+$settings['bigbrother.native_app_client_id']->fromArray(array(
+    'key' => 'bigbrother.native_app_client_id',
+    'value' => '932629683766-qujj8lbna9ua8i3speskd392i4t7dt4m.apps.googleusercontent.com',
+    'xtype' => 'text-password',
+    'namespace' => 'bigbrother',
+    'area' => 'Google Analytics for MODx Revolution',
+),'',true,true);
+
+$settings['bigbrother.native_app_client_secret']= $modx->newObject('modSystemSetting');
+$settings['bigbrother.native_app_client_secret']->fromArray(array(
+    'key' => 'bigbrother.native_app_client_secret',
+    'value' => 'k5i6mEQNkzrTyitq4Pv5orKj',
+    'xtype' => 'text-password',
+    'namespace' => 'bigbrother',
+    'area' => 'Google Analytics for MODx Revolution',
+),'',true,true);
+
 return $settings;

@@ -4,6 +4,8 @@
  *
  * @package bigbrother
  * @subpackage processors
+ *
+ * @var BigBrother $ga
  */
 $ga =& $modx->bigbrother;
 
@@ -19,11 +21,13 @@ $modx->removeCollection('modUserSetting', $query);
 
 
 /* Delete all bigbrother's related system settings */
+$ga->deleteOption('refresh_token');
 $ga->deleteOption('oauth_token');
 $ga->deleteOption('oauth_secret');
 $ga->deleteOption('account');
 $ga->deleteOption('account_name');
 $ga->deleteOption('total_account');
+$modx->getCacheManager()->delete('access_token', $ga->cacheOptions);
 
 $response['success'] = true;
 

@@ -151,6 +151,7 @@ BigBrother.Panel.GeneralOptions = function(config) {
             fieldLabel: _('bigbrother.accounts_list')
             ,name: 'account_name'
             ,id: 'account'
+            ,width: 300
             ,xtype: 'combo'
             ,displayField: 'name'
             ,valueField: 'id'
@@ -160,12 +161,12 @@ BigBrother.Panel.GeneralOptions = function(config) {
             ,forceSelection: true
             ,listClass: 'account-list'
             ,ctCls: 'cb-account-list'
-            ,tpl: '<tpl for="."><div class="x-combo-list-item">{name} <br><i>{account}</i></div></tpl>'
+            ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item">{name}<br><small>{websiteUrl} - {webPropertyId}</small></div></tpl>')
             ,store: new Ext.data.JsonStore({
                 url: BigBrother.ConnectorUrl
                 ,root: 'results'
                 ,totalProperty: 'total'
-                ,fields: ['id', 'name', 'account']
+                ,fields: ['id', 'name', 'account', 'websiteUrl', 'webPropertyId']
                 ,errorReader: MODx.util.JSONReader
                 ,baseParams: {
                     action : 'manage/accountlist'
