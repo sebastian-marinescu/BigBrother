@@ -349,7 +349,6 @@ class BigBrother {
      */
     public function createAuthHeader($url = null, $method = null) {
         $accessToken = $this->modx->getCacheManager()->get('access_token', $this->cacheOptions);
-        $this->refreshAccessToken();
         if (empty($accessToken)) {
             $accessToken = $this->refreshAccessToken();
         }
@@ -374,13 +373,13 @@ class BigBrother {
 
         if (is_array($result) && $result['code'] == 200) {
             $accessToken = $result['result']['access_token'];
-            $refreshToken = $result['result']['refresh_token'];
             $expiresIn = $result['result']['expires_in'];
-
             $this->modx->getCacheManager()->set('access_token', $accessToken, $expiresIn, $this->cacheOptions);
+            return $accessToken;
         }
 
-        $this->modx->log(modX::LOG_LEVEL_ERROR, print_r($result, true));
+        $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not refresh access token!');
+        return false;
     }
 
     /**
