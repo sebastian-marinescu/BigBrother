@@ -26,45 +26,18 @@ class BigBrotherDefaultManagerController extends BigBrotherManagerController {
 
     //
     public function checkOauth(){
-        $code = isset($_GET['code']) ? $_GET['code'] : false;
-
-        if (!empty($code)) {
-            $client = $this->bigbrother->loadOAuth();
-            // https://developers.google.com/identity/protocols/OAuth2InstalledApp
-            $authParams = array(
-                'code' => $code,
-                'redirect_uri' => 'http://localhost/release-2.3/manager/?a=16',
-                'scope' => 'https://www.googleapis.com/auth/analytics.readonly',
-                'grant_type' => 'authorization_code'
-            );
-
-            $result = false;
-            try {
-                $result = $client->getAccessToken($this->bigbrother->oauthTokenEndpoint, 'authorization_code', $authParams);
-            } catch (Exception $e) {
-                $this->modx->log(modX::LOG_LEVEL_ERROR, 'Exception during getAccessToken: ' . $e->getMessage());
-            }
-
-            if (is_array($result) && $result['code'] == 200) {
-                $accessToken = $result['result']['access_token'];
-                $refreshToken = $result['result']['refresh_token'];
-                $expiresIn = $result['result']['expires_in'];
-
-                $this->modx->getCacheManager()->set('access_token', $accessToken, $expiresIn, $this->bigbrother->cacheOptions);
-                $this->bigbrother->updateOption('refresh_token', $refreshToken, 'text-password');
-
-                $this->loadAuthCompletePanel();
-                return;
-            }
-
-            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Unable to complete oAuth2 flow: ' . print_r($result, true));
-
-        }
-
         //Authorize process
+
+        $oAuthClient = $this->bigbrother->loadOAuth();
+        $authParams = array(
+            'scope' => 'https://www.googleapis.com/auth/analytics.readonly'
+        );
+        $url = $oAuthClient->getAuthenticationUrl($this->bigbrother->oauthEndpoint, 'urn:ietf:wg:oauth:2.0:oob', $authParams);
+
         $this->addJavascript($this->bigbrother->config['assets_url'] . 'mgr/authenticate/panel.js');
         $this->addHtml('<script type="text/javascript">
             MODx.BigBrotherConnectorUrl = "'.$this->bigbrother->config['connector_url'].'";
+            MODx.BigBrotherAuthorizeUrl = "' . $url  . '";
             Ext.onReady(function(){ MODx.add("bb-authorize-panel"); });
         </script>');
     }

@@ -38,18 +38,28 @@ MODx.panel.BigBrotherAuthorizePanel = function(config) {
                 ,unstyled : true    
                 ,labelAlign: 'top'
                 ,items: [{
+                    xtype: 'button'
+                    ,text: _('bigbrother.authorize')
+                    ,name: 'authorize'
+                    ,id: 'auth-btn'
+                    ,anchor: '100%'
+                    ,hidden: true
+                    ,handler: function() {
+                        window.authorizeWindow = window.open(MODx.BigBrotherAuthorizeUrl, 'bigbrother_authorize', 'height=500,width=450');
+                    }
+                },{
                     xtype: 'textfield'
-                    ,fieldLabel: _('bigbrother.callback_label')
-                    ,name: 'callback_url'
-                    ,id: 'callback_url'
+                    ,fieldLabel: _('bigbrother.code_label')
+                    ,name: 'code'
+                    ,id: 'code'
                     ,anchor: '100%'
                     ,hidden: true
                 },{
                     xtype: 'label'
-                    ,forId: 'callback_url'
-                    ,text: _('bigbrother.callback_label_under')
+                    ,forId: 'code'
+                    ,text: _('bigbrother.code_label_under')
                     ,cls: 'desc-under'
-                    ,id: 'callback_url_label'
+                    ,id: 'code_label'
                     ,hidden: true
                 }]
                 ,buttonAlign: 'center'            
@@ -73,8 +83,9 @@ Ext.extend(MODx.panel.BigBrotherAuthorizePanel,Ext.Panel,{
     ,init: function(){    
         var form = Ext.getCmp('login-panel');
         var btn = Ext.getCmp('action-btn');
-        var field = Ext.getCmp('callback_url');
-        var fieldLabel = Ext.getCmp('callback_url_label');
+        var authBtn = Ext.getCmp('auth-btn');
+        var field = Ext.getCmp('code');
+        var fieldLabel = Ext.getCmp('code_label');
         
         Ext.Ajax.request({
             url : MODx.BigBrotherConnectorUrl
@@ -90,7 +101,8 @@ Ext.extend(MODx.panel.BigBrotherAuthorizePanel,Ext.Panel,{
                     this.getToken = false;          
                 } else {                    
                     this.getToken = true;
-                    btn.setText(_('bigbrother.start_the_login_process'));
+                    btn.setText(_('bigbrother.verify_authentication'));
+                    authBtn.show();
                     field.show();
                     fieldLabel.show();                    
                     form.getForm().setValues(data);                    
@@ -113,28 +125,34 @@ Ext.extend(MODx.panel.BigBrotherAuthorizePanel,Ext.Panel,{
             Ext.Ajax.request({
                 url : MODx.BigBrotherConnectorUrl
                 ,params : { 
-                    action : 'authenticate/getAnonymousToken'
-                    ,callback_url : Ext.getCmp('callback_url').getValue()
+                    action : 'authenticate/completeauth'
+                    ,code : Ext.getCmp('code').getValue()
                 }
                 ,method: 'GET'
                 ,scope: this
                 ,success: function ( result, request ) { 
                     var data = Ext.util.JSON.decode( result.responseText );
                     if(!data.success){
-                        data.className = 'highlight desc-error';
-                        Ext.getCmp('bb-breadcrumbs').updateDetail(data);
+                        data.object.className = 'highlight desc-error';
+                        Ext.getCmp('bb-breadcrumbs').updateDetail(data.object);
                     } else {
-                        data.className = 'highlight loading';        
-                        Ext.getCmp('bb-breadcrumbs').updateDetail(data);
+                        data.object.className = 'highlight loading';
+                        Ext.getCmp('bb-breadcrumbs').updateDetail(data.object);
+                        Ext.getCmp('login-panel').hide();
+
                         setTimeout(function(){
-                            window.location = data.url;
-                        }, 800);                            
+                            window.location = location.href;
+                        }, 800);
                     }                    
                 }
                 ,failure: function ( result, request) { 
                     Ext.MessageBox.alert(_('bigbrother.alert_failed'), result.responseText); 
                 } 
             });
+
+            if (window.authorizeWindow) {
+                window.authorizeWindow.close();
+            }
         } else {
             this.init();
         }        
