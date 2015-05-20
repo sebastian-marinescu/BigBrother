@@ -107,8 +107,8 @@ class BigBrother {
         require_once $basePath . 'GrantType/AuthorizationCode.php';
         require_once $basePath . 'GrantType/RefreshToken.php';
 
-        $clientId = $this->getOption('native_app_client_id'); // '932629683766-qujj8lbna9ua8i3speskd392i4t7dt4m.apps.googleusercontent.com';
-        $clientSecret = $this->getOption('native_app_client_secret'); // 'k5i6mEQNkzrTyitq4Pv5orKj';
+        $clientId = $this->getOption('native_app_client_id');
+        $clientSecret = $this->getOption('native_app_client_secret');
 
         try {
             $client = new OAuth2\Client($clientId, $clientSecret);

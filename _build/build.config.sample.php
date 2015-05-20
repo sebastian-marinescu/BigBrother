@@ -5,6 +5,13 @@
  * @package samples
  * @subpackage build
  */
+
+// Go to https://console.developers.google.com and create a project
+// Under APIs & Auth > Credentials, create a Native Application (other) Client ID.
+// Put the Client ID and Client Secret here to embed those into the built package.
+define('GAPI_CLIENT_ID', 'Your Google API Client ID Here');
+define('GAPI_CLIENT_SECRET', 'Your Google API Client Secret Here');
+
 define('MODX_BASE_PATH', dirname(dirname(dirname(__FILE__))).'/');
 define('MODX_CORE_PATH', MODX_BASE_PATH . 'core/');
 define('MODX_MANAGER_PATH', MODX_BASE_PATH . 'manager/');
