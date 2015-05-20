@@ -4,6 +4,9 @@
  *
  * @package bigbrother
  * @subpackage processors
+ *
+ * @var array $scriptProperties
+ * @var modX $modx
  */
 $ga =& $modx->bigbrother;
 $response['success'] = false;
@@ -58,7 +61,8 @@ $query->limit($limit, $start);
 
 $users = $modx->getCollection('modUser', $query);
 foreach($users as $user){
-    $row['id'] = $user->get('id'); 
+    /** @var modUser $user */
+    $row['id'] = $user->get('id');
     $row['fullname'] = !empty( $user->fullname ) ? $user->fullname : $user->username; 
     $row['account'] = empty( $user->account ) ? $modx->lexicon('bigbrother.user_account_default') : $user->account; 
     $data[] = $row;

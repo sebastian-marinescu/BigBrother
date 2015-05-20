@@ -4,66 +4,73 @@
  *
  * @package bigbrother
  * @subpackage processors
+ *
+ * @var BigBrother $ga
+ * @var array $scriptProperties
+ * @var modX $modx
  */
 $ga =& $modx->bigbrother;
 $response['success'] = false;
 
 /* Get the edited user object */
 $user = $modx->getObject('modUser', $scriptProperties['user']);
-
 $defaultValue = $modx->lexicon('bigbrother.user_account_default');
-/* Unassign override */
-if($scriptProperties['account'] == $defaultValue){
-    $settings = $user->getMany('UserSettings');
-    foreach($settings as $setting){
-        $key = $setting->get('key');
-        /* Remove account */
-        if($key == 'bigbrother.account'){
-            $setting->remove();
-        }
-        /* Remove nice name */
-        if($key == 'bigbrother.account_name'){
-            $setting->remove();
-        }
-    }
-/* Assign selected account to a user */    
-} else {
-    $settings = $user->getMany('UserSettings');
-    if(!$settings){
-        $account = array();
-        
-        /* Assign the account key - used for report */
-        $new =  $modx->newObject('modUserSetting');
-        $new->set('namespace', 'bigbrother');
-        $new->set('key', 'bigbrother.account');
-        $new->set('value', $scriptProperties['account']);
-        $account[] = $new;
-        
-        /* Add the account name - For display only */
-        $new =  $modx->newObject('modUserSetting');
-        $new->set('namespace', 'bigbrother');
-        $new->set('key', 'bigbrother.account_name');
-        $new->set('value', $scriptProperties['accountName']);
-        $account[] = $new;    
-        
-        $user->addMany($account);
-    } else {
-        foreach($settings as $setting){
-            $key = $setting->get('key');
-            /* Update account */
-            if($key == 'bigbrother.account'){
-                $setting->set('value', $scriptProperties['account']);
-            }
-            /* Update nice name */
-            if($key == 'bigbrother.account_name'){
-                $setting->set('value', $scriptProperties['accountName']);
-            }
-        }
-    }
+$remove = false;
+
+if ($scriptProperties['account'] == $defaultValue) {
+    $remove = true;
 }
 
-/* Save current user object */
-if( $user->save() ){
-    $response['success'] = true;
+/** @var modUserSetting $account */
+$account = $modx->getObject('modUserSetting', array(
+    'user' => (int)$scriptProperties['user'],
+    'key' => 'bigbrother.account'
+));
+
+if ($remove) {
+    if ($account) {
+        $account->remove();
+    }
 }
+else {
+    if (!$account) {
+        $account = $modx->newObject('modUserSetting');
+        $account->fromArray(array(
+            'user' => (int)$scriptProperties['user'],
+            'key' => 'bigbrother.account',
+            'xtype' => 'textfield',
+            'namespace' => 'bigbrother'
+        ), '', true);
+    }
+    $account->set('value', $scriptProperties['account']);
+    $account->save();
+}
+
+/** @var modUserSetting $accountName */
+$accountName = $modx->getObject('modUserSetting', array(
+    'user' => (int)$scriptProperties['user'],
+    'key' => 'bigbrother.account_name'
+));
+
+if ($remove) {
+    if ($accountName) {
+        $accountName->remove();
+    }
+}
+else {
+    if (!$accountName) {
+        $accountName = $modx->newObject('modUserSetting');
+        $accountName->fromArray(array(
+            'user' => (int)$scriptProperties['user'],
+            'key' => 'bigbrother.account_name',
+            'xtype' => 'textfield',
+            'namespace' => 'bigbrother'
+        ), '', true);
+    }
+    $accountName->set('value', $scriptProperties['accountName']);
+    $accountName->save();
+}
+
+$response['success'] = true;
+
 return $modx->toJSON($response);
