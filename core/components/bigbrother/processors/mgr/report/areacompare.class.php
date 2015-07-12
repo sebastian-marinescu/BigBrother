@@ -43,7 +43,7 @@ class getSeriesForComparisonAreaChart extends modProcessor {
         if( !$this->ga->getReport($url) ){
             return $this->failure( $this->ga->getOutput() );
         }
-        $this->addSerie();
+        $this->addSerie(true);
 
         $this->modx->cacheManager->set($cacheKey, $this->series, $this->ga->getOption('cache_timeout'));
         return $this->success('Fetched data from Google', $this->series);
@@ -51,9 +51,9 @@ class getSeriesForComparisonAreaChart extends modProcessor {
 
     /**
      * Set a serie for the current loaded report
-     * @return void
+     * @param bool $delayed
      */
-    public function addSerie(){
+    public function addSerie($delayed = false){
         $serie = $row = array();
         foreach( $this->ga->report["rows"] as $key => $value ){
             // Convert date in javascript format
@@ -61,9 +61,8 @@ class getSeriesForComparisonAreaChart extends modProcessor {
             if( empty( $serie ) ){
                 // Create entries for each requested metrics
                 $serie['begin'] = $date;
-                $labelDate = $this->ga->getDates('d M Y');
+                $labelDate = $this->ga->getDates('d M Y', $delayed);
                 $serie['name'] = strtoupper( $labelDate['begin'] .' - '.$labelDate['end'] );
-                //$serie['name'] = strtoupper( $this->formatDate($this->ga->report['query']['start-date'], 'd M Y') .' - '. $this->formatDate($this->ga->report['query']['end-date'], 'd M Y') );
                 $serie['data'] = array();
             }
             $row[] = $date;
