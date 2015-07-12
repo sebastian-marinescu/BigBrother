@@ -21,6 +21,9 @@ class modDashboardWidgetBigBrother extends modDashboardWidgetInterface {
     public function render() {
         $this->bigbrother = new BigBrother($this->modx);
 
+        // Make sure we have a valid access token _before_ showing the widget
+        $this->bigbrother->createAuthHeader();
+
         $this->modx->controller->addCss($this->bigbrother->config['css_url'] . 'dashboard.css');
 
         //jQuery + charts class

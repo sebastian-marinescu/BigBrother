@@ -1,5 +1,6 @@
 Reload the page after installation to access the menu item under "Components"
 
+- Fix issue with the first load of the widget not showing all results (#5)
 - Fix assigning analytic profiles to specific users (#1)
 - Fix access token being refreshed when not necessary (#3)
 
