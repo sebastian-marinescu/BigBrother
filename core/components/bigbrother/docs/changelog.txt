@@ -1,19 +1,21 @@
 Reload the page after installation to access the menu item under "Components"
 
+2015/07/13: 1.3.0-pl
+********************
 - Fix wrong date displayed for historical visits comparison (#7)
 - Fix issue with the first load of the widget not showing all results (#5)
 - Fix assigning analytic profiles to specific users (#1)
 - Fix access token being refreshed when not necessary (#3)
 
-2015/05/20:  1.3.0-rc3
+2015/05/20: 1.3.0-rc3
 ********************
 - Fix authentication flow to make it easier and pretty much zero-configuration
 
-2015/05/19:  1.3.0-rc2
+2015/05/19: 1.3.0-rc2
 ********************
 - Fix issued caused by typo on case-sensitive systems
 
-2015/05/19:  1.3.0-rc1
+2015/05/19  1.3.0-rc1
 ********************
 - Upgrade to OAuth2 Authentication, re-authentication will be required.
 - Fix potential issue with empty account dropdowns (#39)
