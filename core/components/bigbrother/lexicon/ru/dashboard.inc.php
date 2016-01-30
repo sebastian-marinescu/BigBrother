@@ -13,7 +13,7 @@ $_lang['bigbrother.desc']               = 'Описание панели Big Bro
 $_lang['bigbrother.notlogged_desc']     = 'Аккаунт Google Analytics еще не настроен.<br />Нажмите на кнопку внизу, чтобы перейти на страницу с настройкой.';
 $_lang['bigbrother.notlogged_btn']      = 'Настройка вашего аккаунта Google Analytics';
 
-$_lang['bigbrother.desc_markup']        = "<h3>{title}<span>{date_begin} - {date_end}</span></h3><div class=\"account-infos\"><button onclick=\"Ext.getCmp(\'modx-panel-bigbrother\').redirect(); return false;\" class=\"inline-button green\">Детальный отчёт</button>{name}<span>{id}</span></div>";
+$_lang['bigbrother.desc_markup']        = "<h3>{title}<span>{date_begin} - {date_end}</span></h3><div class=\"account-infos\"><button onclick=\"Ext.getCmp('modx-panel-bigbrother').redirect(); return false;\" class=\"inline-button green\">Детальный отчёт</button>{name}<span>{id}</span></div>";
 $_lang['bigbrother.desc_title']         = 'Обзор';
 
 $_lang['bigbrother.visits']             = 'Посещения';
