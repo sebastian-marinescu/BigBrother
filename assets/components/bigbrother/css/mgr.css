@@ -319,3 +319,6 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner { background: none repeat scroll 0 0 t
 .x-grid3 .x-small-editor .x-form-text, .x-grid3 .x-small-editor .x-form-field-wrap {
     margin-top: 0;
 }
+.bigbrother-account-name {
+    white-space: normal;
+}

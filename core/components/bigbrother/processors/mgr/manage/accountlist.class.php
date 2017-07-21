@@ -19,7 +19,7 @@ class getAccountList extends modProcessor {
         if( !$this->ga->loadOAuth() ){
             return $this->failure( $this->modx->lexicon('bigbrother.err_load_oauth') );
         }
-        $result = $this->callAPI( $this->ga->baseUrl . 'management/accounts/~all/webproperties/~all/profiles' );
+        $result = $this->callAPI( $this->ga->baseUrl . 'management/accountSummaries?max-results=900' );
         if( !empty( $this->error ) ){
             return $this->failure( $this->error );
         }
@@ -33,12 +33,18 @@ class getAccountList extends modProcessor {
         }
         $total = 0;
         // Get account list
-        foreach( $result['items'] as $value ){
-            $account['id'] = $value['id'];
-            $account['name'] = $value['name'];
-            $account['websiteUrl'] = $value['websiteUrl'];
-            $account['webPropertyId'] = $value['webPropertyId'];
-            $output[] = $account;
+        foreach( $result['items'] as $account ){
+            foreach ($account['webProperties'] as $webProperty) {
+                foreach ($webProperty['profiles'] as $profile) {
+                    $output[] = [
+                        'id' => $profile['id'],
+                        'name' => $account['name'] . ' &raquo; ' . $webProperty['name'] . ' &raquo; ' . $profile['name'],
+                        'websiteUrl' => $webProperty['websiteUrl'],
+                        'webPropertyId' => $webProperty['id'],
+                    ];
+                }
+            }
+
             $total += 1;
         }
 

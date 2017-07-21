@@ -92,7 +92,7 @@ MODx.panel.BigBrotherAccountList = function(config) {
             ,ctCls: 'cb-account-list'
             ,emptyText: _('bigbrother.oauth_select_account')
             ,id: 'account-list'
-            ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item">{name}<br><small>{websiteUrl} - {webPropertyId}</small></div></tpl>')
+            ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span class="bigbrother-account-name">{name}</span><br><small>{websiteUrl} - {webPropertyId}</small></div></tpl>')
             ,store: new Ext.data.JsonStore({
                 url: MODx.BigBrotherConnectorUrl
                 ,root: 'results'

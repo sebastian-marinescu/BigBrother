@@ -1,10 +1,5 @@
 <?php
-/**
- * bigbrother
- *
- *
- * @package bigbrother
- */
+
 /**
  * Main class file for bigbrother.
  *
@@ -49,7 +44,7 @@ class BigBrother {
      * behaviour.
      * @return bigbrother A unique bigbrother instance.
      */
-    function __construct(modX &$modx,array $config = array()) {
+   public function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
 
         $core = $this->modx->getOption('bigbrother.core_path',$config,$this->modx->getOption('core_path').'components/bigbrother/');
