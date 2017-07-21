@@ -92,15 +92,13 @@ class BigBrotherDefaultManagerController extends BigBrotherManagerController {
             $this->addJavascript($this->bigbrother->config['assets_url'] . 'mgr/cmp/options.js');
             $admin .= 'var pnl = Ext.getCmp("bb-panel");
                 Ext.getCmp("bb-panel").actionToolbar.add({
-                    text: _("bigbrother.options")
+                    text: "<i class=\"icon icon-cog\"></i> " + _("bigbrother.options")
                     ,id: "options-btn"
-                    ,iconCls: "icon-options"
                     ,handler: function(b){ this.showOptionsPanel(); b.disable(); }
                 });';
         
             $admin .= 'pnl.actionToolbar.add({
-                text: _("bigbrother.revoke_authorization")
-                ,iconCls: "icon-delete"
+                text: "<i class=\"icon icon-trash-o\"></i> " + _("bigbrother.revoke_authorization")
                 ,handler: function(me){ this.revokeAuthorizationPromptWindow(me) }
             });
             pnl.actionToolbar.doLayout();';
