@@ -60,7 +60,7 @@ Ext.extend(BigBrother.Panel.Dashboard,Ext.Panel,{
                 return {
                     xtype:'bb-meta-panel'
                     ,id:'report-content-metas'
-                    ,metrics: 'ga:visits,ga:visitors,ga:pageviews,ga:uniquePageviews,ga:percentNewVisits,ga:exitRate,ga:avgTimeOnSite,ga:visitBounceRate'
+                    ,metrics: 'ga:visits,ga:visitors,ga:pageviews,ga:uniquePageviews,ga:percentNewVisits,ga:exitRate,ga:avgSessionDuration,ga:visitBounceRate'
                     ,cols: 4
                 };
                 break;

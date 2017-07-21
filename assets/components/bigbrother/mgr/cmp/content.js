@@ -32,7 +32,7 @@ BigBrother.Panel.ContentOverview = function(config) {
             },{
                 xtype:'bb-meta-panel'
                 ,id:'report_content-metas'
-                ,metrics: 'ga:visits,ga:visitors,ga:pageviews,ga:uniquePageviews,ga:percentNewVisits,ga:exitRate,ga:avgTimeOnSite,ga:visitBounceRate'
+                ,metrics: 'ga:visits,ga:visitors,ga:pageviews,ga:uniquePageviews,ga:percentNewVisits,ga:exitRate,ga:avgSessionDuration,ga:visitBounceRate'
                 ,cols: 4
             },{    
                 xtype: 'panel'

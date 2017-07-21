@@ -1,4 +1,5 @@
 - Show account/web properties/profile hierarchy in account selection
+- Bring back big numbers that went missing due to an api deprecation [#26]
 
 2015/07/13: 1.3.0-pl
 ********************

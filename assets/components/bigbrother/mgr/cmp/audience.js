@@ -34,7 +34,7 @@ BigBrother.Panel.AudienceOverview = function(config) {
                 ,items:[{
                     xtype:'bb-meta-panel'
                     ,id:'report-audience-metas'
-                    ,metrics: 'ga:visits,ga:visitors,ga:pageviews,ga:uniquePageviews,ga:percentNewVisits,ga:pageviewsPerVisit,ga:avgTimeOnSite,ga:visitBounceRate'
+                    ,metrics: 'ga:visits,ga:visitors,ga:pageviews,ga:uniquePageviews,ga:percentNewVisits,ga:pageviewsPerVisit,ga:avgSessionDuration,ga:visitBounceRate'
                     ,cols: 2
                     ,columnWidth: 0.5
                 },{

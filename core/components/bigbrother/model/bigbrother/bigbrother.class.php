@@ -183,7 +183,7 @@ class BigBrother {
             'ga:pageviews',
             'ga:visits',
             'ga:visitors',
-            'ga:avgTimeOnSite',
+            'ga:avgSessionDuration',
             'ga:visitBounceRate',
             'ga:percentNewVisits',
             'ga:newVisits',
