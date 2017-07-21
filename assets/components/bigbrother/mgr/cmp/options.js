@@ -161,7 +161,7 @@ BigBrother.Panel.GeneralOptions = function(config) {
             ,forceSelection: true
             ,listClass: 'account-list'
             ,ctCls: 'cb-account-list'
-            ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item">{name}<br><small>{websiteUrl} - {webPropertyId}</small></div></tpl>')
+            ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span class="bigbrother-account-name">{name}</span><br><small>{websiteUrl} - {webPropertyId}</small></div></tpl>')
             ,store: new Ext.data.JsonStore({
                 url: BigBrother.ConnectorUrl
                 ,root: 'results'
