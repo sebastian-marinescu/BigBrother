@@ -308,7 +308,7 @@ class BigBrother {
      */
     public function getOption($key, $checkUser = true) {
         // Allow user Settings to override global system_settings when searching for a specific account
-        if($key == "account" && $checkUser || $key == "account_name" && $checkUser){
+        if(($key == "account" && $checkUser) || ($key == "account_name" && $checkUser)){
             $setting = $this->modx->getObject('modUserSetting', array(
                 'key' => 'bigbrother.'. $key,
                 'user' => $this->modx->user->id,
