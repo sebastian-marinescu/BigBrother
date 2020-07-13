@@ -57,7 +57,7 @@ $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
 $builder->directory = dirname(dirname(__FILE__)) . '/_packages/';
 $builder->createPackage(PKG_NAMESPACE,PKG_VERSION,PKG_RELEASE);
-$builder->registerNamespace(PKG_NAMESPACE,false,true,'{core_path}components/'.PKG_NAMESPACE.'/');
+$builder->registerNamespace(PKG_NAMESPACE,false,true,'{core_path}components/'.PKG_NAMESPACE.'/', '{assets_path}components/'.PKG_NAMESPACE.'/');
 $modx->getService('lexicon','modLexicon');
 $modx->lexicon->load('bigbrother:default');
 
