@@ -1,3 +1,6 @@
+- Ship new oAuth keys as old one reached its user quota
+- Fix deprecated sizeof() calls [#31]
+
 2017/07/21: 1.3.1-pl
 ********************
 - Show account/web properties/profile hierarchy in account selection
