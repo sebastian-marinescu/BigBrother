@@ -1,4 +1,7 @@
-- Ship new oAuth keys as old one reached its user quota
+2020/07/13: 1.4.0-pl
+********************
+
+- Ship new oAuth keys as old one reached its user quota. For instructions on using your own oauth credentials, please see: https://docs.modmore.com/en/Open_Source/BigBrother/Custom_oAuth_Credentials.html
 - Fix deprecated sizeof() calls [#31]
 - Fix incorrect assets path on namespace [#28]
 - Change action to namespace-based routing [#30]

@@ -14,7 +14,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','BigBrother');
 define('PKG_NAMESPACE','bigbrother');
-define('PKG_VERSION','1.3.1');
+define('PKG_VERSION','1.4.0');
 define('PKG_RELEASE','pl');
 
 function getSnippetContent($path, $name, $debug = false) {
@@ -94,7 +94,7 @@ $vehicle= $builder->createVehicle($menu,array (
 ));
 $builder->putVehicle($vehicle);
 unset($vehicle,$action);
-$modx->log(modX::LOG_LEVEL_INFO,'<strong>Packaged in '.count($menus).' menus.</strong>'); flush();
+$modx->log(modX::LOG_LEVEL_INFO,'<strong>Packaged in menu.</strong>'); flush();
 
 /* Load Dashboard Widgets */
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in Dashboard Widgets...');
