@@ -7,8 +7,8 @@
 */
 require_once dirname(__FILE__) . '/model/bigbrother/bigbrother.class.php';
 
-class IndexManagerController extends modExtraManagerController {
-    public static function getDefaultController() { return 'default'; }
+class BigBrotherIndexManagerController extends modExtraManagerController {
+    public static function getDefaultController() { return 'report'; }
 }
 
 abstract class BigBrotherManagerController extends modManagerController {

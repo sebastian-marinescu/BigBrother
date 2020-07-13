@@ -1,4 +1,5 @@
 <?php
+require_once dirname(__DIR__) . '/index.class.php';
 /**
 * BigBrother
 *
@@ -6,7 +7,7 @@
 * @package bigbrother
 * @subpackage controllers
 */
-class BigBrotherDefaultManagerController extends BigBrotherManagerController {
+class BigBrotherReportManagerController extends BigBrotherManagerController {
 
     public function process(array $scriptProperties = array()) {}
     public function getPageTitle() { return $this->modx->lexicon('bigbrother'); }
