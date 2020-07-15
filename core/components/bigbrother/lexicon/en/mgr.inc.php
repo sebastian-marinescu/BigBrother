@@ -21,7 +21,7 @@ $_lang['bigbrother.revoke_permission_msg'] = 'By revoking permission, you\'ll ha
 
 /* Authenticate */
 $_lang['bigbrother.account_authentication_desc'] = 'Use the button below to login to Google to authorize MODX to access your Google Analytics Data.</p>
-                                                      <p><em>The authorization page of Google will be opened in a new window. After logging in and accepting the requested authentication, Google will provide you with a code. Copy/paste this code into the field below to verify the authorization. After that, you will be prompted to choose which Analytics Profile to use for the report.</em>';
+<p style="margin-top: 1em;">The authorization page of Google will open in a popup. After logging in and accepting the requested authentication and terms, Google will provide you with a code. Copy the presented code into the field below to verify the authorization. After that, you will be prompted to choose which Analytics Profile to use for the report.';
 $_lang['bigbrother.bd_root_desc'] = 'Verifying if SimpleXML and cURL PHP extensions are activated...';
 $_lang['bigbrother.bd_root_crumb_text'] = 'Verify prerequisites';
 
@@ -30,7 +30,7 @@ $_lang['bigbrother.verify_authentication'] = 'Verify Authentication';
 $_lang['bigbrother.authorize'] = 'Authorize with Google';
 $_lang['bigbrother.authorize_success'] = 'Successfully authorized with Google! Please wait...';
 $_lang['bigbrother.code_label'] = 'Authentication Code';
-$_lang['bigbrother.code_label_under'] = 'Copy and paste the Authentication Code provided by Google into the field, and click the button to validate your authentication.';
+$_lang['bigbrother.code_label_under'] = 'Paste the Authentication Code provided by Google into this field, and click Verify Authentication to complete the authorization and choose the desired account.';
 
 /* Oauth complete */
 $_lang['bigbrother.bd_oauth_complete_in_progress'] = 'Authentication in progress...';
