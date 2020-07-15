@@ -77,32 +77,16 @@ if (!createObject('modSystemSetting', array(
     echo "Error creating bigbrother.assets_url setting.\n";
 }
 
-// Menu
-
-if (!createObject('modAction', array(
+if (!createObject('modMenu', array(
+    'parent' => 'components',
+    'text' => 'bigbrother',
+    'description' => 'bigbrother.menu_desc',
+    'icon' => 'images/icons/plugin.gif',
+    'menuindex' => '0',
     'namespace' => 'bigbrother',
-    'parent' => '0',
-    'controller' => 'index',
-    'haslayout' => '1',
-    'lang_topics' => 'bigbrother:mgr',
-), 'namespace', false)) {
-    echo "Error creating action.\n";
-}
-$action = $modx->getObject('modAction', array(
-    'namespace' => 'bigbrother'
-));
-
-if ($action) {
-    if (!createObject('modMenu', array(
-        'parent' => 'components',
-        'text' => 'bigbrother',
-        'description' => 'bigbrother.menu_desc',
-        'icon' => 'images/icons/plugin.gif',
-        'menuindex' => '0',
-        'action' => $action->get('id')
-    ), 'text', false)) {
-        echo "Error creating menu.\n";
-    }
+    'action' => 'report',
+), 'text', false)) {
+    echo "Error creating menu.\n";
 }
 
 if (!createObject('modDashboardWidget', array (

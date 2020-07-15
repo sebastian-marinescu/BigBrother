@@ -49,12 +49,6 @@ class BigBrotherReportManagerController extends BigBrotherManagerController {
         $oauth .= ( isset($_REQUEST['code'])) ? ' MODx.OAuthToken = "'. $_REQUEST['code'] .'";' : null;
         
         $this->addJavascript($this->bigbrother->config['assets_url'] . 'mgr/authenticate/authcomplete.js');
-        /** @var $page modAction */
-        $page = $this->modx->getObject('modAction', array(
-            'namespace' => 'bigbrother',
-            'controller' => 'index',
-        ));
-
         $data = $this->modx->toJSON(array(
             'text' => $this->modx->lexicon('bigbrother.authentification_complete'),
             'trail' => array(
@@ -67,7 +61,7 @@ class BigBrotherReportManagerController extends BigBrotherManagerController {
             )
         ));
 
-        $url = $this->bigbrother->getManagerLink() . '?a='. $page->get('id');
+        $url = $this->bigbrother->getManagerLink() . '?a=report&namespace=bigbrother';
         $this->addHtml('<script type="text/javascript">
             MODx.BigBrotherAssetsUrl = "'.$this->bigbrother->config['assets_url'].'";
             MODx.BigBrotherRedirect = "'.$url.'";

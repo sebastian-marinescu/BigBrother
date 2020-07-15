@@ -1,6 +1,6 @@
 <?php
 /**
- * Adds modActions and modMenus into package
+ * Adds modMenu into package
  *
  * @package bigbrother
  * @subpackage build

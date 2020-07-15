@@ -28,12 +28,7 @@ if(!function_exists('curl_init')){
 }
 
 $callbackUrl = $ga->getOption('callback_url');
-if($callbackUrl == null){
-    //The Google Analytics manager page
-    $page = $modx->getObject('modAction', array(
-        'namespace' => 'bigbrother',
-        'controller' => 'index',
-    ));
+if(empty($callbackUrl)){
     //Base url
     $baseUrl = $modx->getOption('base_url');
     //Absolute url who contain the base_url
@@ -41,7 +36,7 @@ if($callbackUrl == null){
     //Remove the base_url
     $url = str_replace($baseUrl, '', $siteUrl);
     //Concatenate the manager_url (who also contain the base_url) and add page id
-    $callbackUrl = $url . $modx->getOption('manager_url') . '?a='. $page->get('id');
+    $callbackUrl = $url . $modx->getOption('manager_url') . '?a=report&namespace=bigbrother';
 }
 
 if($success){
