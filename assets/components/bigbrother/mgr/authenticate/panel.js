@@ -39,10 +39,12 @@ MODx.panel.BigBrotherAuthorizePanel = function(config) {
                 ,labelAlign: 'top'
                 ,items: [{
                     xtype: 'button'
-                    ,text: _('bigbrother.authorize')
+                    ,text: '<img src="' + MODx.BigBrotherAssetsUrl + 'images/signin-google.png">'
+                    // ,icon: MODx.BigBrotherAssetsUrl + 'images/signin-google.png'
                     ,name: 'authorize'
                     ,id: 'auth-btn'
                     ,anchor: '100%'
+                    ,cls: 'bigbrother-signin-button'
                     ,hidden: true
                     ,handler: function() {
                         window.authorizeWindow = window.open(MODx.BigBrotherAuthorizeUrl, 'bigbrother_authorize', 'height=500,width=450');
@@ -62,10 +64,11 @@ MODx.panel.BigBrotherAuthorizePanel = function(config) {
                     ,id: 'code_label'
                     ,hidden: true
                 }]
-                ,buttonAlign: 'center'            
+                ,buttonAlign: 'left'
                 ,buttons: [{
                      xtype: 'button'
                     ,id: 'action-btn'
+                    ,cls: 'primary-button'
                     ,text: _('bigbrother.verify_prerequisite_settings') 
                     ,handler: this.doAction
                     ,disabled: true

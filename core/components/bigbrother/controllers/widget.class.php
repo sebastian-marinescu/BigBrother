@@ -35,21 +35,15 @@ class modDashboardWidgetBigBrother extends modDashboardWidgetInterface {
         $this->modx->controller->addJavascript($this->bigbrother->config['assets_url'] . 'mgr/lib/charts.js');
 
         $account = $this->bigbrother->getOption('account');
-        if($account == null){
+        if(empty($account)){
             $this->modx->controller->addJavascript($this->bigbrother->config['assets_url'] . 'dashboard/notlogged.js');
         } else {
             $this->modx->controller->addJavascript($this->bigbrother->config['assets_url'] . 'dashboard/dashboard.js');
         }
 
         $date = $this->bigbrother->getDates('d M Y');
-        /** @var $page modAction */
-        $page = $this->modx->getObject('modAction', array(
-            'namespace' => 'bigbrother',
-            'controller' => 'index',
-        ));
 
-        $url = $this->bigbrother->getManagerLink() . '?a='. $page->get('id');
-
+        $url = $this->bigbrother->getManagerLink() . '?a=report&namespace=bigbrother';
         $this->modx->controller->addHtml('<script type="text/javascript">
     BigBrother.RedirectUrl = "'.$url.'";
     BigBrother.ConnectorUrl = "'.$this->bigbrother->config['connector_url'].'";

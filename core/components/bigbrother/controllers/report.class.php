@@ -37,6 +37,7 @@ class BigBrotherReportManagerController extends BigBrotherManagerController {
 
         $this->addJavascript($this->bigbrother->config['assets_url'] . 'mgr/authenticate/panel.js');
         $this->addHtml('<script type="text/javascript">
+            MODx.BigBrotherAssetsUrl = "'.$this->bigbrother->config['assets_url'].'";
             MODx.BigBrotherConnectorUrl = "'.$this->bigbrother->config['connector_url'].'";
             MODx.BigBrotherAuthorizeUrl = "' . $url  . '";
             Ext.onReady(function(){ MODx.add("bb-authorize-panel"); });
@@ -68,6 +69,7 @@ class BigBrotherReportManagerController extends BigBrotherManagerController {
 
         $url = $this->bigbrother->getManagerLink() . '?a='. $page->get('id');
         $this->addHtml('<script type="text/javascript">
+            MODx.BigBrotherAssetsUrl = "'.$this->bigbrother->config['assets_url'].'";
             MODx.BigBrotherRedirect = "'.$url.'";
             MODx.BigBrotherConnectorUrl = "'.$this->bigbrother->config['connector_url'].'"; '. $oauth .'
             MODx.BigBrotherAuthCompleteData = ' . $data . ';
@@ -109,16 +111,12 @@ class BigBrotherReportManagerController extends BigBrotherManagerController {
         $this->addJavascript($this->bigbrother->config['assets_url'] . 'mgr/cmp/audience.js');    
         $this->addJavascript($this->bigbrother->config['assets_url'] . 'mgr/cmp/traffic-sources.js');    
         $this->addJavascript($this->bigbrother->config['assets_url'] . 'mgr/cmp/container.js');
-        /** @var $page modAction */
-        $page = $this->modx->getObject('modAction', array(
-            'namespace' => 'bigbrother',
-            'controller' => 'index',
-        ));    
         $date = $this->bigbrother->getDates('d M Y');
 
-        $url = $this->bigbrother->getManagerLink() . '?a='. $page->get('id');
+        $url = $this->bigbrother->getManagerLink() . '?a=report&namespace=bigbrother';
         $this->addHtml('<script type="text/javascript">            
             BigBrother.RedirectUrl = "'.$url.'";
+            BigBrother.AssetsUrl = "'.$this->bigbrother->config['assets_url'].'";
             BigBrother.ConnectorUrl = "'.$this->bigbrother->config['connector_url'].'";
             BigBrother.DateBegin = "'.$date['begin'].'";
             BigBrother.DateEnd = "'.$date['end'].'";

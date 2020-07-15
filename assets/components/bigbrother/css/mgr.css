@@ -322,3 +322,19 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner { background: none repeat scroll 0 0 t
 .bigbrother-account-name {
     white-space: normal;
 }
+
+.bigbrother-signin-button {
+    padding: 0;
+    box-shadow: none;
+}
+.bigbrother-signin-button:hover,
+.bigbrother-signin-button.x-btn-over {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+.bigbrother-signin-button button {
+    height: auto;
+    padding: 0;
+    text-align: left;
+}

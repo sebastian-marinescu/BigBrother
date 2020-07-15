@@ -27,6 +27,7 @@ MODx.panel.BigBrotherNotLogged = function(config) {
                 ,buttons: [{
                     xtype: 'button'
                     ,id: 'action-btn'
+                    ,cls: 'primary-button'
                     ,text: _('bigbrother.notlogged_btn')
                     ,handler: function(){ location.href = BigBrother.RedirectUrl; }
                     ,scope: this

@@ -1,3 +1,9 @@
+2020/07-15: 1.4.1-pl
+********************
+
+- Fix incorrect link to detail page from dashboard
+- Use official "Sign in with Google" button for authorization to satisfy Google Branding Guidelines
+
 2020/07/13: 1.4.0-pl
 ********************
 
