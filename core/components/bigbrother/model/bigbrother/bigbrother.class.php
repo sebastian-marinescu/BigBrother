@@ -395,16 +395,26 @@ class BigBrother {
         $url  = $this->baseUrl . 'data/ga?';
 
         $queryString[] = 'ids=ga:' . $this->getOption('account');
-        if( count($dimensions) > 0  ) $queryString[] = ('&dimensions=' . join(array_reverse($dimensions), ','));
-        if( count($metrics) > 0 ) $queryString[] = ('&metrics=' . join($metrics, ','));
-        if( count($sort) > 0 ) $queryString[] = '&sort=' . join($sort, ',');
-        if( count($filters) > 0 ) $queryString[] = '&filters=' . urlencode(join($filters, ','));
+        if (is_array($dimensions) && count($dimensions) > 0) {
+            $queryString[] = ('&dimensions=' . implode(',', array_reverse($dimensions)));
+        }
+        if (is_array($metrics) && count($metrics) > 0) {
+            $queryString[] = ('&metrics=' . implode(',', $metrics));
+        }
+        if (is_array($sort) && count($sort) > 0) {
+            $queryString[] = '&sort=' . implode(',', $sort);
+        }
+        if (is_array($filters) && count($filters) > 0) {
+            $queryString[] = '&filters=' . urlencode(implode(',', $filters));
+        }
         $queryString[] = '&start-date=' . $dateStart;
         $queryString[] = '&end-date=' .$dateEnd;
-        if( $limit != null ) $queryString[] = '&max-results=' .$limit;
+        if (!empty($limit)) {
+            $queryString[] = '&max-results=' . (int)$limit;
+        }
 
-        $url =  $url . implode('', $queryString);
-        $this->cacheKey = md5( urlencode( $url ) );
+        $url .= implode('', $queryString);
+        $this->cacheKey = md5(urlencode($url));
 
         return $url;
     }
