@@ -38,7 +38,7 @@ class getDataForGrid extends modProcessor {
         $url = $this->ga->buildUrl($date['begin'], $date['end'], $this->dimension, $this->metrics, array('-ga:visits'), $this->filters, $this->limit);
 
         $cacheKey = $this->ga->cacheKey;
-        $fromCache = $this->modx->cacheManager->get($cacheKey);
+        $fromCache = $this->modx->cacheManager->get($cacheKey, $this->ga->cacheOptions);
         if( !empty($fromCache) ){
             return $this->success( 'Fetched data from cache', $fromCache, true );
         }
@@ -50,7 +50,7 @@ class getDataForGrid extends modProcessor {
         }
         $this->visits = $this->ga->getTotalVisits($date['begin'], $date['end']);
         $response = $this->iterate();
-        $this->modx->cacheManager->set($cacheKey, $response, $this->ga->getOption('cache_timeout'));
+        $this->modx->cacheManager->set($cacheKey, $response, $this->ga->getOption('cache_timeout'), $this->ga->cacheOptions);
         return $this->success( 'Fetched data from Google', $response );
     }
 
@@ -63,8 +63,8 @@ class getDataForGrid extends modProcessor {
         if (isset($this->ga->report['rows'])) {
             foreach ($this->ga->report['rows'] as $key => $value) {
                 $row[$this->name] = $value[0];
-                $row['visits'] = intval($value[1]);
-                $row['percent'] = round($row['visits'] / $this->visits * 100, 2) . ' %';
+                $row['visits'] = (int)$value[1];
+                $row['percent'] = $this->visits > 0 ? round($row['visits'] / $this->visits * 100, 2) . ' %' : 'n/a';
                 $rows[] = $row;
             }
         }

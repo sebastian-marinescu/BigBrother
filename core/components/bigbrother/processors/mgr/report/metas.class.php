@@ -28,7 +28,7 @@ class getMetas extends modProcessor {
         $url = $this->ga->buildUrl($date['begin'], $date['end'], array('ga:date'), $this->metrics, array('-ga:visits'));
 
         $cacheKey = $this->ga->cacheKey;
-        $fromCache = $this->modx->cacheManager->get($cacheKey);
+        $fromCache = $this->modx->cacheManager->get($cacheKey, $this->ga->cacheOptions);
         if( !empty($fromCache) ){
             return $this->success('Fetched data from cache', $fromCache, true);
         }
@@ -45,7 +45,7 @@ class getMetas extends modProcessor {
             return $this->failure( $this->ga->getOutput() );
         }
         $this->compareData();
-        $this->modx->cacheManager->set($cacheKey, $this->output, $this->ga->getOption('cache_timeout'));
+        $this->modx->cacheManager->set($cacheKey, $this->output, $this->ga->getOption('cache_timeout'), $this->ga->cacheOptions);
         return $this->success( 'Fetched data from Google', $this->output );
     }
 

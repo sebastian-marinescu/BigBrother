@@ -26,7 +26,7 @@ class getSeriesForComparisonAreaChart extends modProcessor {
         $url = $this->ga->buildUrl($date['begin'], $date['end'], array('ga:date'), $this->metrics);
 
         $cacheKey = md5($this->ga->cacheKey /*. $beforeDate*/);
-        $fromCache = $this->modx->cacheManager->get($cacheKey);
+        $fromCache = $this->modx->cacheManager->get($cacheKey, $this->ga->cacheOptions);
         if( !empty($fromCache) ){
             return $this->success('Fetched data from cache', $fromCache);
         }
@@ -45,7 +45,7 @@ class getSeriesForComparisonAreaChart extends modProcessor {
         }
         $this->addSerie(true);
 
-        $this->modx->cacheManager->set($cacheKey, $this->series, $this->ga->getOption('cache_timeout'));
+        $this->modx->cacheManager->set($cacheKey, $this->series, $this->ga->getOption('cache_timeout'), $this->ga->cacheOptions);
         return $this->success('Fetched data from Google', $this->series);
     }
 
