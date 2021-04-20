@@ -16,7 +16,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $setting = $modx->getObject('modSystemSetting',array('key' => 'bigbrother.admin_groups'));
         if ($setting != null) { $values['admin_groups'] = $setting->get('value'); }
         unset($setting);
-        
+
         $setting = $modx->getObject('modSystemSetting',array('key' => 'bigbrother.cache_timeout'));
         if ($setting != null) { $values['cache_timeout'] = $setting->get('value'); }
         unset($setting);
@@ -39,7 +39,19 @@ $output = '
         margin-bottom: 15px;
         padding-bottom: 15px;
     }
+    .bb-v2 {
+        padding: 15px;
+        border-radius: 5px;
+        background: #bee2ff;
+        color: #10436d;
+        margin-bottom: 15px;
+    }
 </style>';
+
+$output .= '<p class="bb-v2">
+<b>You\'re currently using Big Brother v1, which only supports MODX 2.x and Universal Analytics (Google Analytics v3).</b>
+In April 2021 we launched a <a href="https://modmore.com/extras/bigbrother/crowdfunding/" target="_blank" rel="noopener">crowdfunding campaign for Big Brother v2</a>, to support Google Analytics v4 and MODX 3. If you enjoy Big Brother, please consider contributing to make v2 possible. Thank you!
+</p>';
 
 $output .= '<label for="admin_groups">Administrator Groups:</label>
 <input type="text" name="admin_groups" id="admin_groups" width="300" value="'.$values['admin_groups'].'" />

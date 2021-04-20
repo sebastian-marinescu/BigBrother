@@ -1,5 +1,17 @@
-2020/07-15: 1.4.1-pl
-********************
+Big Brother 1.5.0-pl
+----------------------
+Released on 2021-04-20
+
+- Update the build to allow distribution via the modmore package provider
+- Add requirements validator: requires MODX 2.7+ (and < 3.0) and PHP 7.1+ in line with standard modmore support
+- Add link to the v2 crowdfunding campaign during installation: https://modmore.com/extras/bigbrother/crowdfunding/
+- Fix PHP warnings when optional parameters aren't specified [#37]
+- Remove old disabling of SSL peer verification to avoid potential MITM attack in fetching reports
+- Fix cache handling to use custom cache partition rather than default
+
+Big Brother 1.4.1-pl
+----------------------
+Released on 2020-07-15
 
 - Fix incorrect link to detail page from dashboard
 - Use official "Sign in with Google" button for authorization to satisfy Google Branding Guidelines
