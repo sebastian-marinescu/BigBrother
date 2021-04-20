@@ -67,7 +67,7 @@ if (file_exists(__DIR__ . '/build.config.php')) {
 }
 if (!defined('GAPI_CLIENT_ID')) {
     echo "Missing GAPI_CLIENT_ID constant, make sure to provide a _build/build.config.php file based on the provided simple.\n";
-    exit(1);
+    return;
 }
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
@@ -180,4 +180,3 @@ $totalTime= sprintf("%2.4f s", $totalTime);
 
 $modx->log(modX::LOG_LEVEL_INFO,"\n<br />Package Built.<br />\nExecution time: {$totalTime}\n");
 
-exit ();
