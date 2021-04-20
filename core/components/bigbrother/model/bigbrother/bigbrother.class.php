@@ -419,7 +419,6 @@ class BigBrother {
     public function getReport($url, $returnArray = false){
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array($this->createAuthHeader($url, 'GET')));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
