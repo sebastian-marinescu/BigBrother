@@ -73,22 +73,16 @@ class BigbrotherMockManagerController extends modExtraManagerController {
 //                    'name' => 'date',
 //                ]),
                 new Dimension([
-                    'name' => 'firstUserMedium',
+                    'name' => 'sessionMedium',
                 ]),
                 new Dimension([
-                    'name' => 'firstUserSource',
+                    'name' => 'sessionSource',
                 ]),
                 new Dimension([
                     'name' => 'pagePath',
                 ]),
             ],
             'metrics' => [
-//                new Metric([
-//                    'name' => 'firstUserMedium',
-//                ]),
-//                new Metric([
-//                    'name' => 'firstUserSource',
-//                ]),
 //                new Metric([
 //                    'name' => 'sessions',
 //                ]),
