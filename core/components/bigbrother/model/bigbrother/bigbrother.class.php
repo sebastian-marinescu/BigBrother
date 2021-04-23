@@ -102,6 +102,7 @@ class BigBrother
                 'scope' => 'https://www.googleapis.com/auth/analytics.readonly',
                 'tokenCredentialUri' => 'https://oauth2.googleapis.com/token',
                 'authorizationUri' => 'https://accounts.google.com/o/oauth2/auth',
+                'redirectUri' => 'urn:ietf:wg:oauth:2.0:oob',
                 'clientId' => $clientId,
                 'clientSecret' => $clientSecret,
             ]);
@@ -124,7 +125,8 @@ class BigBrother
                 && !empty($accessToken['access_token'])
             ) {
                 $this->OAuth2->updateToken($accessToken);
-            } // If we don't have the access token, but we do have a refresh token, fetch a new auth token
+            }
+            // If we don't have the access token, but we do have a refresh token, fetch a new auth token
             elseif ($this->OAuth2->getRefreshToken()) {
                 $accessToken = $this->OAuth2->fetchAuthToken();
                 // Turn expires_in into an absolute time to avoid reading from cache not determining it's still valid
