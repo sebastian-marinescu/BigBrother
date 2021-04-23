@@ -12,6 +12,8 @@ use Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
 use Google\Analytics\Data\V1beta\DateRange;
 use Google\Analytics\Data\V1beta\Dimension;
 use Google\Analytics\Data\V1beta\Metric;
+use Google\Analytics\Data\V1beta\OrderBy;
+use Google\Analytics\Data\V1beta\OrderBy\DimensionOrderBy;
 
 require_once dirname(__DIR__) . '/model/bigbrother/bigbrother.class.php';
 
@@ -64,90 +66,126 @@ class BigbrotherMockManagerController extends modExtraManagerController {
             'property' => 'properties/' . $property,
             'dateRanges' => [
                 new DateRange([
-                    'start_date' => '2020-03-31',
+                    'start_date' => '28daysAgo',
                     'end_date' => 'today',
                 ]),
             ],
             'dimensions' => [
-//                new Dimension([
-//                    'name' => 'date',
-//                ]),
                 new Dimension([
-                    'name' => 'sessionMedium',
-                ]),
-                new Dimension([
-                    'name' => 'sessionSource',
-                ]),
-                new Dimension([
-                    'name' => 'pagePath',
-                ]),
+                    'name' => 'date',
+                ])
             ],
             'metrics' => [
-//                new Metric([
-//                    'name' => 'sessions',
-//                ]),
+                new Metric([
+                    'name' => 'sessions',
+                ]),
                 new Metric([
                     'name' => 'screenPageViews',
                 ]),
-//                new Metric([
-//                    'name' => 'avgUserEngagementDuration',
-//                    'expression' => 'userEngagementDuration / totalUsers',
-//                ])
             ],
-
-            'dimensionFilter' => new \Google\Analytics\Data\V1beta\FilterExpression([
-                'filter' => new Google\Analytics\Data\V1beta\Filter([
-                    'field_name' => 'pagePath',
-                    'string_filter' => new Google\Analytics\Data\V1beta\Filter\StringFilter([
-                        'value' => '/contentblocks/'
+            'orderBys' => [
+                new OrderBy([
+                    'dimension' => new DimensionOrderBy([
+                        'dimension_name' => 'date'
                     ])
                 ])
-            ]),
-
-            'orderBys' => [
-//                new \Google\Analytics\Data\V1beta\OrderBy([
-//                    'dimension' => new Google\Analytics\Data\V1beta\OrderBy\DimensionOrderBy([
-//                        'dimension_name' => 'date'
-//                    ])
-//                ])
-
             ]
         ]);
 
+//        $response = $client->runReport([
+//            'property' => 'properties/' . $property,
+//            'dateRanges' => [
+//                new DateRange([
+//                    'start_date' => '2020-03-31',
+//                    'end_date' => 'today',
+//                ]),
+//            ],
+//            'dimensions' => [
+////                new Dimension([
+////                    'name' => 'date',
+////                ]),
+//                new Dimension([
+//                    'name' => 'sessionMedium',
+//                ]),
+//                new Dimension([
+//                    'name' => 'sessionSource',
+//                ]),
+//                new Dimension([
+//                    'name' => 'pagePath',
+//                ]),
+//            ],
+//            'metrics' => [
+////                new Metric([
+////                    'name' => 'sessions',
+////                ]),
+////                new Metric([
+////                    'name' => 'screenPageViews',
+////                ]),
+//                new Metric([
+//                    'name' => 'engagementRate',
+//                ]),
+////                new Metric([
+////                    'name' => 'avgUserEngagementDuration',
+////                    'expression' => 'userEngagementDuration / totalUsers',
+////                ])
+//            ],
+//
+//            'dimensionFilter' => new \Google\Analytics\Data\V1beta\FilterExpression([
+//                'filter' => new Google\Analytics\Data\V1beta\Filter([
+//                    'field_name' => 'pagePath',
+//                    'string_filter' => new Google\Analytics\Data\V1beta\Filter\StringFilter([
+//                        'value' => '/contentblocks/'
+//                    ])
+//                ])
+//            ]),
+//
+//            'orderBys' => [
+////                new \Google\Analytics\Data\V1beta\OrderBy([
+////                    'dimension' => new Google\Analytics\Data\V1beta\OrderBy\DimensionOrderBy([
+////                        'dimension_name' => 'date'
+////                    ])
+////                ])
+//
+//            ]
+//        ]);
 
-        $dataDimensions = [];
-        $dataRows = [];
 
-        /** @var \Google\Analytics\Data\V1beta\MetricHeader[] $headers */
-        $headers = $response->getMetricHeaders();
-        foreach ($headers as $idx => $header) {
-            $dataRows[$idx] = [
-                'name' => $header->getName(),
-                'type' => $header->getType(),
-                'rows' => [],
-            ];
+        $metricHeaders = [];
+        $dimensionHeaders = [];
+        $data = [];
+
+        /** @var \Google\Analytics\Data\V1beta\MetricHeader $metricHeader */
+        foreach ($response->getMetricHeaders() as $metricHeader) {
+            $metricHeaders[] = $metricHeader->getName();
+        }
+
+        /** @var \Google\Analytics\Data\V1beta\DimensionHeader $dimensionHeader */
+        foreach ($response->getDimensionHeaders() as $dimensionHeader) {
+            $dimensionHeaders[] = $dimensionHeader->getName();
         }
 
         /** @var \Google\Analytics\Data\V1beta\Row $row */
         foreach ($response->getRows() as $row) {
+            $rowData = [];
 
             /** @var \Google\Analytics\Data\V1beta\DimensionValue $dimensionValue */
-            foreach ($row->getDimensionValues() as $dimensionValue) {
-                $dataDimensions[] = $dimensionValue->getValue();
+            foreach ($row->getDimensionValues() as $idx => $dimensionValue) {
+                $rowData[$dimensionHeaders[$idx]] = $dimensionValue->getValue();
                 print $dimensionValue->getValue() . ' => ';
             }
 
             /** @var \Google\Analytics\Data\V1beta\MetricValue $metricValue */
             
             foreach ($row->getMetricValues() as $idx => $metricValue) {
-                $dataRows[$idx]['rows'][] = $metricValue->getValue();
-                print $metricValue->getValue() . ' ';
+                $rowData[$metricHeaders[$idx]] = $metricValue->getValue();
+                print '[' . $metricHeaders[$idx] . '] ' . $metricValue->getValue() . ' ';
             }
+
+            $data[] = $rowData;
             print PHP_EOL;
         }
 
-        var_dump($dataRows);
-        var_dump($dataDimensions);
+        var_dump($data);
     }
 
 }
