@@ -1,8 +1,13 @@
 <?php
 /* Get the core config */
-if (!file_exists(dirname(dirname(__FILE__)).'/config.core.php')) {
-    die('ERROR: missing '.dirname(dirname(__FILE__)).'/config.core.php file defining the MODX core path.');
+if (!file_exists(dirname(__DIR__).'/config.core.php')) {
+    die('ERROR: missing ' . dirname(__DIR__).'/config.core.php file defining the MODX core path.');
 }
+/* Get the core config */
+if (!file_exists(dirname(__DIR__).'/_build/build.config.php')) {
+    die('ERROR: missing ' . dirname(__DIR__).'/_build/build.config.php file defining the Google API Credentials.');
+}
+require_once dirname(__DIR__).'/_build/build.config.php';
 
 echo "<pre>";
 /* Boot up MODX */
