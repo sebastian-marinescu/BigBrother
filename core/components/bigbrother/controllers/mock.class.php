@@ -29,7 +29,7 @@ class BigbrotherMockManagerController extends modExtraManagerController {
 
         echo '<pre>';
 //        $this->dumpProperties();
-//        $this->dumpReport();
+        $this->dumpReport();
 
         exit();
     }
@@ -69,24 +69,36 @@ class BigbrotherMockManagerController extends modExtraManagerController {
                 ]),
             ],
             'dimensions' => [
+//                new Dimension([
+//                    'name' => 'date',
+//                ]),
                 new Dimension([
-                    'name' => 'date',
+                    'name' => 'firstUserMedium',
+                ]),
+                new Dimension([
+                    'name' => 'firstUserSource',
                 ]),
                 new Dimension([
                     'name' => 'pagePath',
                 ]),
             ],
             'metrics' => [
-                new Metric([
-                    'name' => 'sessions',
-                ]),
+//                new Metric([
+//                    'name' => 'firstUserMedium',
+//                ]),
+//                new Metric([
+//                    'name' => 'firstUserSource',
+//                ]),
+//                new Metric([
+//                    'name' => 'sessions',
+//                ]),
                 new Metric([
                     'name' => 'screenPageViews',
                 ]),
-                new Metric([
-                    'name' => 'avgUserEngagementDuration',
-                    'expression' => 'userEngagementDuration / totalUsers',
-                ])
+//                new Metric([
+//                    'name' => 'avgUserEngagementDuration',
+//                    'expression' => 'userEngagementDuration / totalUsers',
+//                ])
             ],
 
             'dimensionFilter' => new \Google\Analytics\Data\V1beta\FilterExpression([
