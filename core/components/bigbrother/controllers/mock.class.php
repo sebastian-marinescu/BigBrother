@@ -14,6 +14,8 @@ use Google\Analytics\Data\V1beta\Dimension;
 use Google\Analytics\Data\V1beta\Metric;
 use Google\Analytics\Data\V1beta\OrderBy;
 use Google\Analytics\Data\V1beta\OrderBy\DimensionOrderBy;
+use Google\Analytics\Data\V1beta\RunRealtimeReportResponse;
+use Google\Analytics\Data\V1beta\RunReportResponse;
 
 require_once dirname(__DIR__) . '/model/bigbrother/bigbrother.class.php';
 
@@ -31,7 +33,9 @@ class BigbrotherMockManagerController extends modExtraManagerController {
 
         echo '<pre>';
 //        $this->dumpProperties();
-        $this->dumpReport();
+//        $this->dumpPageSpecificReport();
+        $this->dumpRealtimeReport();
+//        $this->dumpReport();
 
         exit();
     }
@@ -55,6 +59,96 @@ class BigbrotherMockManagerController extends modExtraManagerController {
         }
     }
 
+    public function dumpPageSpecificReport()
+    {
+        $property = '268477819'; // @fixme
+
+        $oauth = $this->bigbrother->getOAuth2();
+        $client = new BetaAnalyticsDataClient(['credentials' => $oauth]);
+
+        $response = $client->runReport([
+            'property' => 'properties/' . $property,
+            'dateRanges' => [
+                new DateRange([
+                    'start_date' => '2020-03-31',
+                    'end_date' => 'today',
+                ]),
+            ],
+            'dimensions' => [
+//                new Dimension([
+//                    'name' => 'date',
+//                ]),
+                new Dimension([
+                    'name' => 'sessionMedium',
+                ]),
+                new Dimension([
+                    'name' => 'sessionSource',
+                ]),
+                new Dimension([
+                    'name' => 'pagePath',
+                ]),
+            ],
+            'metrics' => [
+                new Metric([
+                    'name' => 'sessions',
+                ]),
+                new Metric([
+                    'name' => 'screenPageViews',
+                ]),
+                new Metric([
+                    'name' => 'engagementRate',
+                ]),
+//                new Metric([
+//                    'name' => 'avgUserEngagementDuration',
+//                    'expression' => 'userEngagementDuration / totalUsers',
+//                ])
+            ],
+
+            'dimensionFilter' => new \Google\Analytics\Data\V1beta\FilterExpression([
+                'filter' => new Google\Analytics\Data\V1beta\Filter([
+                    'field_name' => 'pagePath',
+                    'string_filter' => new Google\Analytics\Data\V1beta\Filter\StringFilter([
+                        'value' => '/contentblocks/'
+                    ])
+                ])
+            ]),
+
+            'orderBys' => [
+//                new \Google\Analytics\Data\V1beta\OrderBy([
+//                    'dimension' => new Google\Analytics\Data\V1beta\OrderBy\DimensionOrderBy([
+//                        'dimension_name' => 'date'
+//                    ])
+//                ])
+            ]
+        ]);
+
+        var_dump($this->parseReportToArray($response));
+    }
+
+    public function dumpRealtimeReport()
+    {
+        $property = '268477819'; // @fixme
+
+        $oauth = $this->bigbrother->getOAuth2();
+        $client = new BetaAnalyticsDataClient(['credentials' => $oauth]);
+
+        $response = $client->runRealtimeReport([
+            'property' => 'properties/' . $property,
+            'dimensions' => [
+                new Dimension([
+                    'name' => 'unifiedScreenName',
+                ]),
+            ],
+            'metrics' => [
+                new Metric([
+                    'name' => 'screenPageViews',
+                ]),
+            ],
+        ]);
+
+        var_dump($this->parseReportToArray($response));
+    }
+
     public function dumpReport()
     {
         $property = '268477819'; // @fixme
@@ -71,26 +165,34 @@ class BigbrotherMockManagerController extends modExtraManagerController {
                 ]),
             ],
             'dimensions' => [
+//                new Dimension([
+//                    'name' => 'date',
+//                ]),
                 new Dimension([
-                    'name' => 'date',
-                ])
+                    'name' => 'audienceName',
+                ]),
+                new Dimension([
+                    'name' => 'brandingInterest',
+                ]),
             ],
             'metrics' => [
-                new Metric([
-                    'name' => 'sessions',
-                ]),
+//                new Metric([
+//                    'name' => 'sessions',
+//                ]),
                 new Metric([
                     'name' => 'screenPageViews',
                 ]),
             ],
             'orderBys' => [
-                new OrderBy([
-                    'dimension' => new DimensionOrderBy([
-                        'dimension_name' => 'date'
-                    ])
-                ])
+//                new OrderBy([
+//                    'dimension' => new DimensionOrderBy([
+//                        'dimension_name' => 'date'
+//                    ])
+//                ])
             ]
         ]);
+
+        var_dump($this->parseReportToArray($response));
 
 //        $response = $client->runReport([
 //            'property' => 'properties/' . $property,
@@ -150,6 +252,15 @@ class BigbrotherMockManagerController extends modExtraManagerController {
 //        ]);
 
 
+    }
+
+    /**
+     * @param RunReportResponse|RunRealtimeReportResponse $response
+     * @param bool $print
+     * @return array
+     */
+    public function parseReportToArray($response, $print = true): array
+    {
         $metricHeaders = [];
         $dimensionHeaders = [];
         $data = [];
@@ -171,22 +282,23 @@ class BigbrotherMockManagerController extends modExtraManagerController {
             /** @var \Google\Analytics\Data\V1beta\DimensionValue $dimensionValue */
             foreach ($row->getDimensionValues() as $idx => $dimensionValue) {
                 $rowData[$dimensionHeaders[$idx]] = $dimensionValue->getValue();
-                print $dimensionValue->getValue() . ' => ';
+                if ($print) print $dimensionValue->getValue() . ' => ';
             }
 
             /** @var \Google\Analytics\Data\V1beta\MetricValue $metricValue */
-            
+
             foreach ($row->getMetricValues() as $idx => $metricValue) {
                 $rowData[$metricHeaders[$idx]] = $metricValue->getValue();
-                print '[' . $metricHeaders[$idx] . '] ' . $metricValue->getValue() . ' ';
+                if ($print) print '[' . $metricHeaders[$idx] . '] ' . $metricValue->getValue() . ' ';
             }
 
             $data[] = $rowData;
-            print PHP_EOL;
+            if ($print) print PHP_EOL;
         }
 
-        var_dump($data);
-    }
+        if ($print) var_dump($data);
 
+        return $data;
+    }
 }
 
