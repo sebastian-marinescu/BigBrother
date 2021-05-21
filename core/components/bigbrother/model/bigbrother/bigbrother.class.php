@@ -29,11 +29,17 @@ class BigBrother
     public $config = [];
 
     /**
+     * The cache key to use for the access token.
+     * @var string
+     */
+    public static $cacheKey = 'ga4_access_token';
+
+    /**
      * Custom cache options to make sure data is cached to a custom cache partition instead of default.
      *
      * @var array
      */
-    public $cacheOptions = [
+    public static $cacheOptions = [
         xPDO::OPT_CACHE_KEY => 'bigbrother',
     ];
 
@@ -119,7 +125,7 @@ class BigBrother
         // If the scope doesn't already have the access token...
         if (!$this->OAuth2->getAccessToken()) {
             // If we have it in cache and it's the right (array) format, set it
-            $accessToken = $this->modx->cacheManager->get('ga4_access_token', $this->cacheOptions);
+            $accessToken = $this->modx->cacheManager->get(self::$cacheKey, self::$cacheOptions);
             if (is_array($accessToken)
                 && array_key_exists('access_token', $accessToken)
                 && !empty($accessToken['access_token'])
@@ -135,7 +141,7 @@ class BigBrother
                 unset($accessToken['expires_in']);
 
                 // Save it in the cache until 1 minute before its expiration time
-                $this->modx->cacheManager->set('ga4_access_token', $accessToken, $lifetime - 60, $this->cacheOptions);
+                $this->modx->cacheManager->set(self::$cacheKey, $accessToken, $lifetime - 60, self::$cacheOptions);
             }
         }
 
