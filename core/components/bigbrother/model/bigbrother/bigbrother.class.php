@@ -102,7 +102,7 @@ class BigBrother
                 'scope' => 'https://www.googleapis.com/auth/analytics.readonly',
                 'tokenCredentialUri' => 'https://oauth2.googleapis.com/token',
                 'authorizationUri' => 'https://accounts.google.com/o/oauth2/auth',
-                'redirectUri' => 'urn:ietf:wg:oauth:2.0:oob',
+                'redirectUri' => 'urn:ietf:wg:oauth:2.0:oob', // "out of band", i.e. copy/paste token instead of redirect
                 'clientId' => $clientId,
                 'clientSecret' => $clientSecret,
             ]);
@@ -130,12 +130,12 @@ class BigBrother
             elseif ($this->OAuth2->getRefreshToken()) {
                 $accessToken = $this->OAuth2->fetchAuthToken();
                 // Turn expires_in into an absolute time to avoid reading from cache not determining it's still valid
-                $accessToken['expires_at'] = time() + $accessToken['expires_in'];
+                $lifetime = $accessToken['expires_in'];
+                $accessToken['expires_at'] = time() + $lifetime;
                 unset($accessToken['expires_in']);
 
                 // Save it in the cache until 1 minute before its expiration time
-                $this->modx->cacheManager->set('ga4_access_token', $accessToken, $accessToken['expires_in'] - 60,
-                    $this->cacheOptions);
+                $this->modx->cacheManager->set('ga4_access_token', $accessToken, $lifetime - 60, $this->cacheOptions);
             }
         }
 
