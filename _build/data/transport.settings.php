@@ -44,32 +44,6 @@ $settings['bigbrother.date_end']->fromArray(array(
     'area' => 'Google Analytics for MODx Revolution',
 ),'',true,true);
 
-$settings['bigbrother.show_visits_on_dashboard']= $modx->newObject('modSystemSetting');
-$settings['bigbrother.show_visits_on_dashboard']->fromArray(array(
-    'key' => 'bigbrother.show_visits_on_dashboard',
-    'value' => 1,
-    'xtype' => 'combo-boolean',
-    'namespace' => 'bigbrother',
-    'area' => 'Google Analytics for MODx Revolution',
-),'',true,true);
-
-$settings['bigbrother.show_metas_on_dashboard']= $modx->newObject('modSystemSetting');
-$settings['bigbrother.show_metas_on_dashboard']->fromArray(array(
-    'key' => 'bigbrother.show_metas_on_dashboard',
-    'value' => 1,
-    'xtype' => 'combo-boolean',
-    'namespace' => 'bigbrother',
-    'area' => 'Google Analytics for MODx Revolution',
-),'',true,true);
-
-$settings['bigbrother.show_pies_on_dashboard']= $modx->newObject('modSystemSetting');
-$settings['bigbrother.show_pies_on_dashboard']->fromArray(array(
-    'key' => 'bigbrother.show_pies_on_dashboard',
-    'value' => 1,
-    'xtype' => 'combo-boolean',
-    'namespace' => 'bigbrother',
-    'area' => 'Google Analytics for MODx Revolution',
-),'',true,true);
 
 $settings['bigbrother.native_app_client_id']= $modx->newObject('modSystemSetting');
 $settings['bigbrother.native_app_client_id']->fromArray(array(
@@ -77,7 +51,7 @@ $settings['bigbrother.native_app_client_id']->fromArray(array(
     'value' => GAPI_CLIENT_ID,
     'xtype' => 'text-password',
     'namespace' => 'bigbrother',
-    'area' => 'Google Analytics for MODx Revolution',
+    'area' => 'Authorization',
 ),'',true,true);
 
 $settings['bigbrother.native_app_client_secret']= $modx->newObject('modSystemSetting');
@@ -86,7 +60,16 @@ $settings['bigbrother.native_app_client_secret']->fromArray(array(
     'value' => GAPI_CLIENT_SECRET,
     'xtype' => 'text-password',
     'namespace' => 'bigbrother',
-    'area' => 'Google Analytics for MODx Revolution',
+    'area' => 'Authorization',
+),'',true,true);
+
+$settings['bigbrother.profile_id']= $modx->newObject('modSystemSetting');
+$settings['bigbrother.profile_id']->fromArray(array(
+    'key' => 'bigbrother.profile_id',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'bigbrother',
+    'area' => 'Authorization',
 ),'',true,true);
 
 return $settings;

@@ -221,4 +221,9 @@ class BigBrother
 
         $setting->save();
     }
+
+    public function getProfileId(): string
+    {
+        return (string)$this->modx->getOption('bigbrother.profile_id');
+    }
 }

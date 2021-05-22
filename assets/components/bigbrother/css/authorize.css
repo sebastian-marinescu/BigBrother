@@ -2,26 +2,32 @@
     padding: 0;
     box-shadow: none;
 }
+
 .bigbrother-signin-button:hover,
 .bigbrother-signin-button.x-btn-over {
     padding: 0;
     background: transparent;
     box-shadow: none;
 }
+
 .bigbrother-signin-button button {
     height: auto;
     padding: 0;
     text-align: left;
 }
+
 .bigbrother-panel-intro {
     margin-bottom: 1em;
 }
+
 .bigbrother-panel p {
     /*margin-bottom: 1em;*/
 }
+
 .bigbrother-step {
     text-align: center;
 }
+
 .bigbrother-step span {
     display: inline-block;
     border-radius: 50%;
@@ -39,8 +45,8 @@
 
 .bigbrother-desc {
     color: #444;
-
 }
+
 .bigbrother-columns {
     margin-top: 2em;
 }
@@ -49,19 +55,105 @@
     display: flex;
     align-items: center;
 }
+
 .bigbrother-credits__version {
     margin: 0 0 0 auto;
-    color: rgba(0,0,0,.6);
+    color: rgba(0, 0, 0, .6);
 }
+
 .bigbrother-credits__logo {
     margin-left: 1rem;
     display: flex;
     opacity: 0.6;
     transition: opacity 0.5s;
 }
+
 .bigbrother-credits__logo:hover, .bigbrother-credits__logo:focus {
     opacity: 1.0;
 }
+
 .bigbrother-credits__logo img {
     height: 2.5rem;
 }
+
+.bigbrother-spinner {
+    position: relative;
+    -webkit-animation: bigbrother-rotation .6s infinite linear;
+    -moz-animation: bigbrother-rotation .6s infinite linear;
+    -o-animation: bigbrother-rotation .6s infinite linear;
+    animation: bigbrother-rotation .6s infinite linear;
+    border: 6px solid rgba(0, 174, 239, .15);
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+}
+
+.bigbrother-spinner:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -6px;
+    top: -6px;
+    height: 100%;
+    width: 100%;
+    border-top: 6px solid #1F4A7F;
+    border-left: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-radius: 100%;
+}
+
+@-webkit-keyframes bigbrother-rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+}
+
+@-moz-keyframes bigbrother-rotation {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(359deg);
+    }
+}
+
+@-o-keyframes bigbrother-rotation {
+    from {
+        -o-transform: rotate(0deg);
+    }
+    to {
+        -o-transform: rotate(359deg);
+    }
+}
+
+@keyframes bigbrother-rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+.bigbrother-revoke-button {
+    transition: background-color .2s ease-out;
+    background: #e20000;
+    box-shadow: none;
+    color: #fff7f7;
+}
+
+.bigbrother-revoke-button:hover,
+.bigbrother-revoke-button:active,
+.bigbrother-revoke-button.x-btn-focus,
+.bigbrother-revoke-button.x-btn-over,
+.bigbrother-revoke-button.x-btn-click {
+    background: #bc0000;
+    box-shadow: none;
+    color: #ffffff;
+}
+

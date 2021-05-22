@@ -9,19 +9,21 @@
 $_lang['bigbrother.main_title'] = 'Google Analytics by Big Brother';
 $_lang['bigbrother.main_description'] = '<p><b>Welcome to Big Brother.</b> With Big Brother, you can see your Google Analytics information at a glance on the MODX Dashboard. On this page you can configure your integration.</p>';
 
-$_lang['bigbrother.authorization'] = 'Authorization';
-$_lang['bigbrother.initial_authorization_description'] = '<p>To access your Google Analytics data, Big Brother needs authorization to access your Google account in three simple steps. The integration requires only read-only access, authorization secrets will never leave your site. </p>
-<!--
-<p>The authorization process is simple. Click the button below, choose your account, approve the Big Brother integration, and then copy/paste the provided code into the field below.</p>
-<p>After pasting the authorization token, click the Continue button to choose the Google Analytics Profile to use.</p>-->
-';
+$_lang['bigbrother.initial_authorization'] = 'Authorization';
+$_lang['bigbrother.initial_authorization_description'] = '<p>To access your Google Analytics data, Big Brother needs authorization to access your Google account in three simple steps. The integration requires only read-only access, authorization secrets will never leave your site. </p>';
 $_lang['bigbrother.authorization_step1desc'] = 'Click the button to start the sign in process in a new window. Choose your Google Account if prompted, and authorize the Big Brother integration. Copy the provided authorization token.';
 $_lang['bigbrother.authorization_step2desc'] = 'Copy and paste the authorization token into the field below. ';
 $_lang['bigbrother.code'] = 'Paste the Authorization Code';
+$_lang['bigbrother.loading'] = 'Loading...';
 $_lang['bigbrother.verify_code'] = 'Verify Code';
-$_lang['bigbrother.oauth_error'] = 'Received an oAuth error. This may indicate the provided token or stored refresh token is invalid, and you need to re-authorize Big Brother. A detailed technical error is available in the MODX error log.';
+$_lang['bigbrother.oauth_error'] = 'Received an authentication error. This may indicate the provided code or a stored token is no longer valid.';
 $_lang['bigbrother.error.enter_auth_code'] = 'Please copy the authorization code provided when signing in with Google, and paste it into the Authorization Code field.';
 
+$_lang['bigbrother.authorized'] = 'Authorized';
+$_lang['bigbrother.authorized_desc'] = 'Successfully authorized, Big Brother can access your Google Analytics reports. To re-authorize or use a different account, revoke the authorization.';
+$_lang['bigbrother.revoke_authorization'] = 'Revoke authorization';
+$_lang['bigbrother.revoke_authorization.confirm'] = 'Are you sure?';
+$_lang['bigbrother.revoke_authorization.confirm_text'] = 'Revoking the authorization will remove the current authorization for your account. To continue using Big Brother, you will need to sign in with Google again.';
 
 return;
 /* Alert */
