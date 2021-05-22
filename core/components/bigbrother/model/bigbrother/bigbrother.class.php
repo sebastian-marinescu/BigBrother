@@ -222,7 +222,7 @@ class BigBrother
         $setting->save();
 
         $this->modx->getCacheManager()->refresh([
-            'system_settings'
+            'system_settings' => [],
         ]);
     }
 
