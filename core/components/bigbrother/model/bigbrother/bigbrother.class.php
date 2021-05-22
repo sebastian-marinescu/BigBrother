@@ -210,16 +210,20 @@ class BigBrother
         ));
         if (!$setting) {
             $setting = $this->modx->newObject('modSystemSetting');
+            $setting->fromArray(array(
+                'key' => 'bigbrother.' . $key,
+                'xtype' => $type,
+                'namespace' => 'bigbrother',
+                'area' => 'core',
+            ), '', true);
         }
-        $setting->fromArray(array(
-            'key' => 'bigbrother.' . $key,
-            'value' => $value,
-            'xtype' => $type,
-            'namespace' => 'bigbrother',
-            'area' => 'Google Analytics for MODx Revolution',
-        ), '', true);
 
+        $setting->set('value', $value);
         $setting->save();
+
+        $this->modx->getCacheManager()->refresh([
+            'system_settings'
+        ]);
     }
 
     public function getProfileId(): string
