@@ -142,11 +142,6 @@ class BigBrother
         return $this->OAuth2;
     }
 
-    public function setRefreshToken(string $refreshToken)
-    {
-        $this->updateOption('refresh_token', $refreshToken);
-    }
-
     public function setAccessToken(array $accessToken)
     {
         // Turn expires_in into an absolute time to avoid reading from cache not determining it's still valid
@@ -226,8 +221,18 @@ class BigBrother
         ]);
     }
 
-    public function getProfileId(): string
+    public function getPropertyID(): string
     {
-        return (string)$this->modx->getOption('bigbrother.profile_id');
+        return (string)$this->modx->getOption('bigbrother.property_id');
+    }
+
+    public function setProperty(string $propertyId)
+    {
+        $this->updateOption('property_id', $propertyId);
+    }
+
+    public function setRefreshToken(string $refreshToken)
+    {
+        $this->updateOption('refresh_token', $refreshToken);
     }
 }

@@ -18,12 +18,18 @@ $_lang['bigbrother.loading'] = 'Loading...';
 $_lang['bigbrother.verify_code'] = 'Verify Code';
 $_lang['bigbrother.oauth_error'] = 'Received an authentication error. This may indicate the provided code or a stored token is no longer valid.';
 $_lang['bigbrother.error.enter_auth_code'] = 'Please copy the authorization code provided when signing in with Google, and paste it into the Authorization Code field.';
+$_lang['bigbrother.error.select_a_property'] = 'Please select an account and then a property from the list.';
+$_lang['bigbrother.error.invalid_property'] = 'Property does not seem valid or a communication error occurred.';
 
 $_lang['bigbrother.authorized'] = 'Authorized';
 $_lang['bigbrother.authorized_desc'] = 'Successfully authorized, Big Brother can access your Google Analytics reports. To re-authorize or use a different account, revoke the authorization.';
 $_lang['bigbrother.revoke_authorization'] = 'Revoke authorization';
 $_lang['bigbrother.revoke_authorization.confirm'] = 'Are you sure?';
 $_lang['bigbrother.revoke_authorization.confirm_text'] = 'Revoking the authorization will remove the current authorization for your account. To continue using Big Brother, you will need to sign in with Google again.';
+$_lang['bigbrother.current_property'] = '<p>Currently using property <b>[[+displayName]]</b> (<code>[[+propertyId]]</code>)</p>';
+$_lang['bigbrother.property'] = 'Property';
+$_lang['bigbrother.property_desc'] = 'Select the account and profile ';
+$_lang['bigbrother.save_property'] = 'Save selected property';
 
 return;
 /* Alert */

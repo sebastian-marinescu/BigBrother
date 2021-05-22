@@ -63,9 +63,9 @@ $settings['bigbrother.native_app_client_secret']->fromArray(array(
     'area' => 'Authorization',
 ),'',true,true);
 
-$settings['bigbrother.profile_id']= $modx->newObject('modSystemSetting');
-$settings['bigbrother.profile_id']->fromArray(array(
-    'key' => 'bigbrother.profile_id',
+$settings['bigbrother.property_id']= $modx->newObject('modSystemSetting');
+$settings['bigbrother.property_id']->fromArray(array(
+    'key' => 'bigbrother.property_id',
     'value' => '',
     'xtype' => 'textfield',
     'namespace' => 'bigbrother',

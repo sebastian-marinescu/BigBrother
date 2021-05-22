@@ -20,8 +20,8 @@
     margin-bottom: 1em;
 }
 
-.bigbrother-panel p {
-    /*margin-bottom: 1em;*/
+.bigbrother-panel {
+    margin-bottom: 1em;
 }
 
 .bigbrother-step {
@@ -155,5 +155,19 @@
     background: #bc0000;
     box-shadow: none;
     color: #ffffff;
+}
+
+.bigbrother-list-container {
+    max-height: 350px;
+    overflow-y: scroll;
+}
+.bigbrother-list-item {
+    padding: 0.5em;
+    border-bottom: 1px dotted #ccc;
+    cursor: pointer;
+}
+.bigbrother-list-item.x-view-selected {
+    background-color: #eee;
+    font-weight: bold;
 }
 
