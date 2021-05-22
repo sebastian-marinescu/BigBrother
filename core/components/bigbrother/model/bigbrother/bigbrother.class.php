@@ -135,17 +135,34 @@ class BigBrother
             // If we don't have the access token, but we do have a refresh token, fetch a new auth token
             elseif ($this->OAuth2->getRefreshToken()) {
                 $accessToken = $this->OAuth2->fetchAuthToken();
-                // Turn expires_in into an absolute time to avoid reading from cache not determining it's still valid
-                $lifetime = $accessToken['expires_in'];
-                $accessToken['expires_at'] = time() + $lifetime;
-                unset($accessToken['expires_in']);
-
-                // Save it in the cache until 1 minute before its expiration time
-                $this->modx->cacheManager->set(self::$cacheKey, $accessToken, $lifetime - 60, self::$cacheOptions);
+                $this->setAccessToken($accessToken);
             }
         }
 
         return $this->OAuth2;
+    }
+
+    public function setRefreshToken(string $refreshToken)
+    {
+        $this->updateOption('refresh_token', $refreshToken);
+    }
+
+    public function setAccessToken(array $accessToken)
+    {
+        // Turn expires_in into an absolute time to avoid reading from cache not determining it's still valid
+        $lifetime = $accessToken['expires_in'];
+        $accessToken['expires_at'] = time() + $lifetime;
+        unset($accessToken['expires_in']);
+
+        // Save it in the cache until 1 minute before its expiration time
+        $this->modx->cacheManager->set(self::$cacheKey, $accessToken, $lifetime - 60, self::$cacheOptions);
+
+        if (array_key_exists('refresh_token', $accessToken)
+            && !empty($accessToken['refresh_token'])
+            && $accessToken['refresh_token'] !== $this->modx->getOption('bigbrother.refresh_token')
+        ) {
+            $this->setRefreshToken($accessToken['refresh_token']);
+        }
     }
 
     /**
@@ -183,13 +200,10 @@ class BigBrother
      *
      * @param string $key The setting key
      * @param mixed $value The setting value
-     * @param string $type The setting type (Optionnal) default to textfield
-     * @access public
-     * @return boolean
-     * @deprecated Miiiiiight come in handy, though (1) settings ought to always have been created in build
-     * and (2) might be better in the one or two processors that handle it which then also clear the settings cache
+     * @param string $type The setting type (Optional) default to textfield
+     * @return void
      */
-    public function updateOption($key, $value, $type = 'textfield')
+    private function updateOption($key, $value, $type = 'textfield'): void
     {
         $setting = $this->modx->getObject('modSystemSetting', array(
             'key' => 'bigbrother.' . $key,
@@ -205,6 +219,6 @@ class BigBrother
             'area' => 'Google Analytics for MODx Revolution',
         ), '', true);
 
-        return $setting->save();
+        $setting->save();
     }
 }

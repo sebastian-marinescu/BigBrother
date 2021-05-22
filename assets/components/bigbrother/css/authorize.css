@@ -1,0 +1,67 @@
+.bigbrother-signin-button {
+    padding: 0;
+    box-shadow: none;
+}
+.bigbrother-signin-button:hover,
+.bigbrother-signin-button.x-btn-over {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+.bigbrother-signin-button button {
+    height: auto;
+    padding: 0;
+    text-align: left;
+}
+.bigbrother-panel-intro {
+    margin-bottom: 1em;
+}
+.bigbrother-panel p {
+    /*margin-bottom: 1em;*/
+}
+.bigbrother-step {
+    text-align: center;
+}
+.bigbrother-step span {
+    display: inline-block;
+    border-radius: 50%;
+    width: 1.8rem;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    background: #1F4A7F;
+    text-align: center;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    font-family: "Courier New", monospace;
+    overflow: hidden;
+}
+
+.bigbrother-desc {
+    color: #444;
+
+}
+.bigbrother-columns {
+    margin-top: 2em;
+}
+
+.bigbrother-credits {
+    display: flex;
+    align-items: center;
+}
+.bigbrother-credits__version {
+    margin: 0 0 0 auto;
+    color: rgba(0,0,0,.6);
+}
+.bigbrother-credits__logo {
+    margin-left: 1rem;
+    display: flex;
+    opacity: 0.6;
+    transition: opacity 0.5s;
+}
+.bigbrother-credits__logo:hover, .bigbrother-credits__logo:focus {
+    opacity: 1.0;
+}
+.bigbrother-credits__logo img {
+    height: 2.5rem;
+}
