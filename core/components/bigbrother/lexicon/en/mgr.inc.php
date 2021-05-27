@@ -9,6 +9,7 @@
 $_lang['bigbrother.main_title'] = 'Google Analytics by Big Brother';
 $_lang['bigbrother.main_description'] = '<p><b>Welcome to Big Brother.</b> With Big Brother, you can see your Google Analytics information at a glance on the MODX Dashboard. On this page you can configure your integration.</p>';
 
+$_lang['bigbrother.donate'] = 'Donate';
 $_lang['bigbrother.initial_authorization'] = 'Authorization';
 $_lang['bigbrother.initial_authorization_description'] = '<p>To access your Google Analytics data, Big Brother needs authorization to access your Google account in three simple steps. The integration requires only read-only access, authorization secrets will never leave your site. </p>';
 $_lang['bigbrother.authorization_step1desc'] = 'Click the button to start the sign in process in a new window. Choose your Google Account if prompted, and authorize the Big Brother integration. Copy the provided authorization token.';

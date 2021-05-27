@@ -7,12 +7,6 @@
  * @subpackage controllers
  */
 
-use Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
-use Google\Analytics\Data\V1beta\DateRange;
-use Google\Analytics\Data\V1beta\Dimension;
-use Google\Analytics\Data\V1beta\Metric;
-use Google\Auth\OAuth2;
-
 require_once dirname(__DIR__) . '/model/bigbrother/bigbrother.class.php';
 
 class BigbrotherAuthorizeManagerController extends modExtraManagerController {
@@ -48,6 +42,7 @@ class BigbrotherAuthorizeManagerController extends modExtraManagerController {
 </script>
 HTML
         );
+        $this->addJavascript($this->assetsUrl . 'mgr/authorize.page.js?v=' . urlencode($this->bigbrother->version));
     }
 
     /**
@@ -71,55 +66,6 @@ HTML
 
         $authUrl = $oauth->buildFullAuthorizationUri();
         $this->addHtml("<script>BigBrother.config.authorizeUrl = '$authUrl';</script>");
-        $this->addHtml("<script>Ext.onReady(function() {
-    MODx.load({
-        xtype: 'bigbrother-panel-authorize',
-        renderTo: 'bigbrother-page'
-    });
-});
-</script>");
-
-        return;
-
-//            $authParams = array(
-//                'scope' => 'https://www.googleapis.com/auth/analytics.readonly'
-//            );
-//            $url = $oAuthClient->getAuthenticationUrl($this->bigbrother->oauthEndpoint, 'urn:ietf:wg:oauth:2.0:oob', $authParams);
-
-        return;
-        $accessToken = $this->modx->cacheManager->get('ga4_access_token', $this->bigbrother->cacheOptions);
-
-
-        return;
-        $property = '268477819'; // @fixme
-        echo '<pre>';
-
-
-        $oauth = new OAuth2([
-            'scope' => 'https://www.googleapis.com/auth/analytics.readonly',
-            'tokenCredentialUri' => 'https://oauth2.googleapis.com/token',
-            'authorizationUri' => 'https://accounts.google.com/o/oauth2/auth',
-            'clientId' => $clientId,
-            'clientSecret' => $clientSecret,
-        ]);
-        $oauth->setCode($code);
-
-        if (!empty($refreshToken)) {
-            $oauth->setRefreshToken($refreshToken);
-        }
-
-        if (is_array($accessToken) && array_key_exists('access_token',
-                $accessToken) && !empty($accessToken['access_token'])) {
-            $oauth->updateToken($accessToken);
-        } else {
-            $accessToken = $oauth->fetchAuthToken();
-
-            // Turn expires_in into an absolute time to avoid reading from cache not determining it's still valid
-            $accessToken['expires_at'] = time() + $accessToken['expires_in'];
-            unset($accessToken['expires_in']);
-            $this->modx->cacheManager->set('ga4_access_token', $accessToken, $accessToken['expires_in'] - 60,
-                $this->bigbrother->cacheOptions);
-        }
     }
 
     public function getTemplateFile()
