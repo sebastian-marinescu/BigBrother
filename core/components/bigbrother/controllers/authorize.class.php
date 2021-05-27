@@ -17,6 +17,11 @@ class BigbrotherAuthorizeManagerController extends modExtraManagerController {
      */
     protected $assetsUrl;
 
+    public function getPageTitle()
+    {
+        return $this->modx->lexicon('bigbrother');
+    }
+
     public function getLanguageTopics()
     {
         return ['bigbrother:default', 'bigbrother:mgr'];
