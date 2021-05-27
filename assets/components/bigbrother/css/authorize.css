@@ -165,9 +165,40 @@
     padding: 0.5em;
     border-bottom: 1px dotted #ccc;
     cursor: pointer;
+    position: relative;
 }
 .bigbrother-list-item.x-view-selected {
     background-color: #eee;
     font-weight: bold;
+}
+.bigbrother-list-count {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    min-width: 1em;
+    height: 1em;
+    background: #eee;
+    border-radius: 50%;
+    display: block;
+    padding: 0.25em;
+    line-height: 1em;
+    text-align: center;
+}
+.bigbrother-list-id {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    min-width: 1em;
+    height: 1em;
+    display: block;
+    padding: 0.25em;
+    line-height: 1em;
+    font-family: "Courier New", monospace;
+}
+.bigbrother-no-properties, .bigbrother-no-accounts {
+    background: #ffedd2;
+    padding: 1em;
+    border-radius: 1em;
+    color: #683e00;
 }
 

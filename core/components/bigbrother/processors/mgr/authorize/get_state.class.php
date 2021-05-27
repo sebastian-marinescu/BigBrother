@@ -47,6 +47,7 @@ class BigBrotherGetStateProcessor extends BigBrotherProcessor
             $account = [
                 'account' => $summary->getAccount(),
                 'displayName' => $summary->getDisplayName(),
+                'total_properties' => 0,
                 'properties' => [],
             ];
 
@@ -59,6 +60,7 @@ class BigBrotherGetStateProcessor extends BigBrotherProcessor
                     'propertyId' => $propNum,
                     'displayName' => $property->getDisplayName(),
                 ];
+                $account['total_properties']++;
             }
 
             usort($account['properties'], static function ($a, $b) {

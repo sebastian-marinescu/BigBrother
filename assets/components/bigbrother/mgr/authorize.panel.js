@@ -144,7 +144,7 @@ BigBrother.panel.AuthorizePanel = function(config) {
                             autoDestroy: true,
                             storeId: 'bigbrother-accounts',
                             idIndex: 0,
-                            fields: ['account', 'displayName', 'properties'],
+                            fields: ['account', 'displayName', 'total_properties', 'properties'],
                         }),
                         tpl: new Ext.XTemplate(
                             '<div class="bigbrother-list-container">' +
@@ -152,6 +152,7 @@ BigBrother.panel.AuthorizePanel = function(config) {
                             '       <tpl for=".">' +
                             '           <li class="bigbrother-list-item">' +
                             '               <p>{displayName:htmlEncode}</p>' +
+                            '               <span class="bigbrother-list-count">{total_properties}</span>' +
                             '           </li>' +
                             '       </tpl>' +
                             '   </ul>' +
@@ -161,7 +162,7 @@ BigBrother.panel.AuthorizePanel = function(config) {
                         singleSelect: true,
                         overClass: 'x-view-over',
                         itemSelector: 'li.bigbrother-list-item',
-                        emptyText: 'No accounts found',
+                        emptyText: '<p class="bigbrother-no-accounts">The authorized Google account does not seem to have any Google Analytics web properties. Revoke the authorization and try signing in with a different account.</p>',
                         listeners: {
                             click: {fn: function(view) {
                                 var selected = view.getSelectedRecords()[0];
@@ -189,6 +190,7 @@ BigBrother.panel.AuthorizePanel = function(config) {
                             '       <tpl for=".">' +
                             '           <li class="bigbrother-list-item">' +
                             '               <p>{displayName:htmlEncode}</p>' +
+                            '               <span class="bigbrother-list-id">{propertyId:htmlEncode}</span>' +
                             '           </li>' +
                             '       </tpl>' +
                             '   </ul>' +
@@ -198,7 +200,7 @@ BigBrother.panel.AuthorizePanel = function(config) {
                         singleSelect: true,
                         overClass: 'x-view-over',
                         itemSelector: 'li.bigbrother-list-item',
-                        emptyText: 'The selected account does not have any Google Analytics 4 properties.',
+                        emptyText: '<p class="bigbrother-no-properties">The selected account does not have any Google Analytics 4 properties. <br><br> To use Google Analytics 3 ("Universal Analytics") properties, please downgrade to Big Brother v1, available from modmore. <a href="https://support.modmore.com/article/233-how-can-i-use-universal-analytics-properties-with-big-brother" target="_blank" rel="noopener">Learn more &raquo;</a></p>',
                         listeners: {
                             click: {fn: function(view) {
                                 var selected = view.getSelectedRecords()[0];
@@ -374,7 +376,7 @@ Ext.extend(BigBrother.panel.AuthorizePanel, MODx.Panel,{
             cleanData = [];
 
         accounts.forEach(function(row) {
-            cleanData.push([row.account, row.displayName, row.properties]);
+            cleanData.push([row.account, row.displayName, row.total_properties, row.properties]);
         });
         accountView.store.loadData(cleanData);
 

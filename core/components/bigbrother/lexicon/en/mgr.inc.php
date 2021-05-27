@@ -27,8 +27,8 @@ $_lang['bigbrother.revoke_authorization'] = 'Revoke authorization';
 $_lang['bigbrother.revoke_authorization.confirm'] = 'Are you sure?';
 $_lang['bigbrother.revoke_authorization.confirm_text'] = 'Revoking the authorization will remove the current authorization for your account. To continue using Big Brother, you will need to sign in with Google again.';
 $_lang['bigbrother.current_property'] = '<p>Currently using property <b>[[+displayName]]</b> (<code>[[+propertyId]]</code>)</p>';
-$_lang['bigbrother.property'] = 'Property';
-$_lang['bigbrother.property_desc'] = 'Select the account and profile ';
+$_lang['bigbrother.property'] = 'Select the Google Analytics Property';
+$_lang['bigbrother.property_desc'] = 'Using the browser below, please select the Google Analytics account and the property to use with Big Brother. Note that this information is cached, so if you have just added an account or property, it may take a few minutes to appear in the list.';
 $_lang['bigbrother.save_property'] = 'Save selected property';
 
 return;
