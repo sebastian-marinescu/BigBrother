@@ -12,36 +12,7 @@ BigBrother.page.Authorize = function(config) {
         id : 'bigbrother-page-wrapper',
         components: [{
             cls: 'container',
-            xtype: 'bigbrother-panel-authorize',
-            // items: [{
-            //     html: '<h2>' + _('bigbrother.mgr.authorize') + '</h2>',
-            //     border: false,
-            //     id: 'modx-bigbrother-header',
-            //     cls: 'modx-page-header'
-            // }, {
-            //     xtype: 'modx-tabs',
-            //     id: 'bigbrother-page-authorize-tabs',
-            //     width: '98%',
-            //     border: false,
-            //
-            //     stateful: true,
-            //     stateId: 'bigbrother-page-authorize',
-            //     stateEvents: ['tabchange'],
-            //     getState: function () {
-            //         return {
-            //             activeTab: this.items.indexOf(this.getActiveTab())
-            //         };
-            //     },
-            //
-            //     defaults: {
-            //         border: false,
-            //         autoHeight: true,
-            //         defaults: {
-            //             border: false
-            //         }
-            //     },
-            //     items: this.getTabs(config)
-            // }, BigBrother.attribution()],
+            xtype: 'bigbrother-panel-authorize'
         }],
         buttons: this.getButtons(config)
     });
