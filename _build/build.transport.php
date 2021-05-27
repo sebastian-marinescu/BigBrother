@@ -25,7 +25,7 @@ if (!defined('MOREPROVIDER_BUILD')) {
     /* define version */
     define('PKG_NAME', 'BigBrother');
     define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-    define('PKG_VERSION', '1.5.0');
+    define('PKG_VERSION', '2.0.0');
     define('PKG_RELEASE', 'dev1');
 
     /* load modx */
@@ -66,7 +66,7 @@ if (file_exists(__DIR__ . '/build.config.php')) {
     require_once __DIR__ . '/build.config.php';
 }
 if (!defined('GAPI_CLIENT_ID')) {
-    echo "Missing GAPI_CLIENT_ID constant, make sure to provide a _build/build.config.php file based on the provided simple.\n";
+    echo "Missing GAPI_CLIENT_ID constant, make sure to provide a _build/build.config.php file based on the provided sample.\n";
     return;
 }
 
@@ -84,31 +84,31 @@ $category->set('id',1);
 $category->set('category',PKG_NAME);
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in category.'); flush();
 
-$vehicle= $builder->createVehicle($category, array(
+$vehicle= $builder->createVehicle($category, [
     xPDOTransport::UNIQUE_KEY => 'category',
     xPDOTransport::PRESERVE_KEYS => false,
     xPDOTransport::UPDATE_OBJECT => true,
     xPDOTransport::RELATED_OBJECTS => false,
-));
+]);
 
 $modx->log(modX::LOG_LEVEL_INFO, 'Adding file resolvers to category...');
 
-$vehicle->validate('php', array(
+$vehicle->validate('php', [
     'source' => $sources['validators'] . 'requirements.script.php'
-));
-$vehicle->resolve('file',array(
+]);
+$vehicle->resolve('file', [
     'source' => $sources['core'],
     'target' => "return MODX_CORE_PATH . 'components/';",
-));
+]);
 
-$vehicle->resolve('file',array(
+$vehicle->resolve('file', [
     'source' => $sources['assets'],
     'target' => "return MODX_ASSETS_PATH . 'components/';",
-));
+]);
 
-$vehicle->resolve('php',array(
+$vehicle->resolve('php', [
     'source' => $sources['resolvers'] . 'setupoptions.resolver.php',
-));
+]);
 
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in resolvers.'); flush();
 $builder->putVehicle($vehicle);
@@ -129,17 +129,6 @@ foreach ($settings as $setting) {
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' system settings.'); flush();
 unset($settings,$setting,$attributes);
 
-/* Load action/menu */
-$menus = include $sources['data'].'transport.menu.php';
-$vehicle= $builder->createVehicle($menu,array (
-    xPDOTransport::PRESERVE_KEYS => true,
-    xPDOTransport::UPDATE_OBJECT => true,
-    xPDOTransport::UNIQUE_KEY => 'text',
-));
-$builder->putVehicle($vehicle);
-unset($vehicle,$action);
-$modx->log(modX::LOG_LEVEL_INFO,'Packaged in menu.'); flush();
-
 /* Load Dashboard Widgets */
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in Dashboard Widgets...');
 $widgets = include $sources['data'].'transport.dashboard_widgets.php';
@@ -158,14 +147,14 @@ $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($widgets).' widgets.'); flu
 unset($widgets,$widget,$attributes);
 
 /* Pack in the license file, readme and setup options */
-$builder->setPackageAttributes(array(
+$builder->setPackageAttributes([
     'license' => file_get_contents($sources['docs'] . 'license.txt'),
     'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
     'changelog' => file_get_contents($sources['docs'] . 'changelog.txt'),
-    'setup-options' => array(
+    'setup-options' => [
         'source' => $sources['build'].'setup.options.php',
-    ),
-));
+    ],
+]);
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in package attributes.'); flush();
 
 $modx->log(modX::LOG_LEVEL_INFO,'Packing...'); flush();
