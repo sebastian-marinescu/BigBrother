@@ -6,17 +6,17 @@
  * @subpackage build
  */
 
-$widgets = array();
+$widgets = [];
 
 $widgets[1]= $modx->newObject('modDashboardWidget');
-$widgets[1]->fromArray(array (
-    'name' => 'bigbrother.name',
-    'description' => 'bigbrother.desc',
+$widgets[1]->fromArray([
+    'name' => 'bigbrother.main_widget',
+    'description' => 'bigbrother.main_widget_desc',
     'type' => 'file',
     'size' => 'full',
-    'content' => '[[++core_path]]components/bigbrother/controllers/widget.class.php',
+    'content' => '[[++core_path]]components/bigbrother/elements/widgets/main.widget.php',
     'namespace' => 'bigbrother',
-    'lexicon' => 'bigbrother:dashboard',
-), '', true, true);
+    'lexicon' => 'bigbrother:mgr',
+], '', true, true);
 
 return $widgets;

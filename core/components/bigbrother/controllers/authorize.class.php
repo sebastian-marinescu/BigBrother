@@ -35,7 +35,7 @@ class BigbrotherAuthorizeManagerController extends modExtraManagerController {
 
         $this->addJavascript($this->assetsUrl . 'mgr/bigbrother.class.js?v=' . urlencode($this->bigbrother->version));
         $this->addJavascript($this->assetsUrl . 'mgr/authorize.panel.js?v=' . urlencode($this->bigbrother->version));
-        $this->addCss($this->assetsUrl . 'css/authorize.css?v=' . urlencode($this->bigbrother->version));
+        $this->addCss($this->assetsUrl . 'css/mgr.css?v=' . urlencode($this->bigbrother->version));
         $this->addHtml(<<<HTML
 <script>
     BigBrother.config = $config;

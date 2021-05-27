@@ -32,6 +32,9 @@ $_lang['bigbrother.property'] = 'Select the Google Analytics Property';
 $_lang['bigbrother.property_desc'] = 'Using the browser below, please select the Google Analytics account and the property to use with Big Brother. Note that this information is cached, so if you have just added an account or property, it may take a few minutes to appear in the list.';
 $_lang['bigbrother.save_property'] = 'Save selected property';
 
+$_lang['bigbrother.main_widget'] = 'Big Brother - Full Stats';
+$_lang['bigbrother.main_widget_desc'] = 'Shows a complete overview of your connected Google Analytics profile.';
+
 return;
 /* Alert */
 $_lang['bigbrother.alert_failed'] = 'Failed';

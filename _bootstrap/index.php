@@ -94,15 +94,17 @@ if (!createObject('modMenu', array(
     echo "Error creating menu.\n";
 }
 
-if (!createObject('modDashboardWidget', array (
-    'name' => 'bigbrother.name',
-    'description' => 'bigbrother.desc',
+if (!createObject('modDashboardWidget', [
+    'name' => 'bigbrother.main_widget',
+    'description' => 'bigbrother.main_widget_desc',
     'type' => 'file',
     'size' => 'full',
-    'content' => $componentPath . '/core/components/bigbrother/controllers/widget.class.php',
+    'content' =>  $componentPath.'/core/components/bigbrother/elements/widgets/main.class.php',
     'namespace' => 'bigbrother',
-    'lexicon' => 'bigbrother:dashboard',
-), 'name', false));
+    'lexicon' => 'bigbrother:mgr',
+], 'name', false)) {
+    echo "Error creating main_widget.\n";
+}
 
 $settings = include dirname(dirname(__FILE__)).'/_build/data/transport.settings.php';
 foreach ($settings as $key => $obj) {

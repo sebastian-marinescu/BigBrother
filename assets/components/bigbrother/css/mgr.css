@@ -60,6 +60,12 @@
     margin: 0 0 0 auto;
     color: rgba(0, 0, 0, .6);
 }
+.bigbrother-credits--justified {
+    margin-top: 0.75em;
+}
+.bigbrother-credits--justified .bigbrother-credits__logo {
+    margin-right: auto;
+}
 
 .bigbrother-credits__logo {
     margin-left: 1rem;
@@ -195,10 +201,12 @@
     line-height: 1em;
     font-family: "Courier New", monospace;
 }
-.bigbrother-no-properties, .bigbrother-no-accounts {
+.bigbrother-no-properties, .bigbrother-no-accounts, .bigbrother-warning {
     background: #ffedd2;
     padding: 1em;
-    border-radius: 1em;
+    border-radius: 5px;
     color: #683e00;
+    border: 1px solid rgba(104, 62, 0, 0.3);
+    max-width: 60em;
+    margin: 0 auto;
 }
-
