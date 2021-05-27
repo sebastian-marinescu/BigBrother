@@ -132,6 +132,14 @@ BigBrother.panel.AuthorizePanel = function(config) {
                 hidden: true,
                 id: 'bigbrother-current-property'
             }, {
+                xtype: 'button',
+                text: _('bigbrother.save_property'),
+                id: 'bigbrother-save-property',
+                hidden: true,
+                cls: 'primary-button',
+                handler: this.saveProperty,
+                scope: this
+            }, {
                 xtype: 'panel',
                 layout: 'column',
                 cls: 'bigbrother-columns',
@@ -211,14 +219,6 @@ BigBrother.panel.AuthorizePanel = function(config) {
                         }
                     }]
                 },]
-            },{
-                xtype: 'button',
-                text: _('bigbrother.save_property'),
-                id: 'bigbrother-save-property',
-                hidden: true,
-                cls: 'primary-button',
-                handler: this.saveProperty,
-                scope: this
             }]
         }, BigBrother.attribution()],
         listeners: {
