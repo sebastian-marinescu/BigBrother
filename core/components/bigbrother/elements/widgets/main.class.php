@@ -52,14 +52,18 @@ HTML;
         // Return the widget contents with a spinner which will client-side build the rest of the UI.
         return <<<HTML
 <div class="bigbrother-inner-widget">
-    <p style="margin-bottom: 1em;">Loading your Google Analytics data... (altho not really)</p>
+    <div class="bigbrother-spinner" id="bb{$this->widget->get('id')}-spinner"></div>
+    <div class="bigbrother-row">
+        <div id="bb{$this->widget->get('id')}-visits-line"  style="position:relative; width: 100%; height: 200px"></div>
+    </div>
 </div>
 
-<div class="bigbrother-spinner"></div>
 
 <script>
 Ext.onReady(function() {
-    console.log('ready to initiate report');
+    let charts = [];
+    charts.push(BigBrother.VisitsLineGraph(document.getElementById("bb{$this->widget->get('id')}-visits-line")));
+    BigBrother.registerCharts(charts);
 });
 </script>
 HTML;
@@ -70,6 +74,10 @@ HTML;
         $this->bigbrother = new BigBrother($this->modx);
         $this->assetsUrl = $this->bigbrother->config['assets_url'];
         $this->controller->addCss($this->assetsUrl . 'css/mgr.css?v=' . urlencode($this->bigbrother->version));
+
+        $this->controller->addJavascript($this->assetsUrl . 'node_modules/chart.js/dist/chart.min.js?v=' . urlencode($this->bigbrother->version));
+        $this->controller->addJavascript($this->assetsUrl . 'mgr/bigbrother.class.js?v=' . urlencode($this->bigbrother->version));
+        $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/visits.js?v=' . urlencode($this->bigbrother->version));
 
         $config = $this->modx->toJSON([
             'assetsUrl' => $this->assetsUrl,

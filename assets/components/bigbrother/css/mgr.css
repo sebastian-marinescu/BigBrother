@@ -210,3 +210,23 @@
     max-width: 60em;
     margin: 0 auto;
 }
+
+/* Allow widgets to grow in size */
+.bigbrother-widget > .body {
+    max-height: initial;
+}
+
+.bigbrother-inner-widget {
+    position: relative;
+}
+.bigbrother-inner-widget .bigbrother-spinner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #fff;
+    z-index: 1;
+}
+
+.bigbrother-row {
+    position: relative;
+}

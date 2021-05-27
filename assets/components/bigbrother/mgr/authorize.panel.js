@@ -254,9 +254,9 @@ Ext.extend(BigBrother.panel.AuthorizePanel, MODx.Panel,{
         this._accountsPanel.hide();
 
         MODx.Ajax.request({
-            url : BigBrother.config.connectorUrl,
-            params : {
-                action : 'mgr/authorize/get_state'
+            url: BigBrother.config.connectorUrl,
+            params: {
+                action: 'mgr/authorize/get_state'
             },
             method: 'POST',
             scope: this,
