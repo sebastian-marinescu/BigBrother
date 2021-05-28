@@ -229,4 +229,70 @@
 
 .bigbrother-row {
     position: relative;
+    display: flex;
 }
+
+.bigbrother-col {
+    flex: 1 0 50%;
+}
+
+.bigbrother-key-metrics {
+    min-height: 125px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem !important; /* clashes with .dashboard-block ul */
+    list-style-type: none !important; /* clashes with .dashboard-block ul */
+}
+.bigbrother-key-metric {
+    padding: 1em 2em;
+    text-align: center;
+}
+.bigbrother-key-metric > span {
+    line-height: 1em;
+}
+.bigbrother-metric-value {
+    font-size: 3rem;
+    display: block;
+}
+.bigbrother-metric-label {
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    padding: 0.5em;
+    font-weight: bold;
+    color: #777;
+}
+.bigbrother-metric-previous {
+    font-size: 1.5rem;
+    position: relative;
+}
+.bigbrother-metric-previous.bigbrother-metric-down {
+    color: red;
+}
+.bigbrother-metric-previous.bigbrother-metric-down:before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 10px solid red;
+    top: 10px;
+    position: absolute;
+    left: -15px;
+}
+.bigbrother-metric-previous.bigbrother-metric-up {
+    color: green;
+}
+.bigbrother-metric-previous.bigbrother-metric-up:before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 10px solid green;
+    top: 10px;
+    position: absolute;
+    left: -15px;
+}
+

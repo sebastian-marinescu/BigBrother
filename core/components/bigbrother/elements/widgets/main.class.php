@@ -56,6 +56,9 @@ HTML;
     <div class="bigbrother-row">
         <div id="bb{$this->widget->get('id')}-visits-line"  style="position:relative; width: 100%; height: 200px"></div>
     </div>
+    <div class="bigbrother-row">
+        <div id="bb{$this->widget->get('id')}-key-metrics"></div>
+    </div>
 </div>
 
 
@@ -63,6 +66,7 @@ HTML;
 Ext.onReady(function() {
     let charts = [];
     charts.push(BigBrother.VisitsLineGraph(document.getElementById("bb{$this->widget->get('id')}-visits-line")));
+    charts.push(BigBrother.KeyMetrics(document.getElementById("bb{$this->widget->get('id')}-key-metrics")));
     BigBrother.registerCharts(charts);
 });
 </script>
@@ -80,6 +84,7 @@ HTML;
         $this->controller->addJavascript($this->assetsUrl . 'node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.min.js?v=' . urlencode($this->bigbrother->version));
         $this->controller->addJavascript($this->assetsUrl . 'mgr/bigbrother.class.js?v=' . urlencode($this->bigbrother->version));
         $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/visits.js?v=' . urlencode($this->bigbrother->version));
+        $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/key-metrics.js?v=' . urlencode($this->bigbrother->version));
 
         $config = $this->modx->toJSON([
             'assetsUrl' => $this->assetsUrl,
