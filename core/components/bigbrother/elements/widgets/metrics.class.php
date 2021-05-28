@@ -4,9 +4,9 @@
 require_once dirname(__DIR__, 2) . '/model/bigbrother/bigbrother.class.php';
 
 
-class BigBrotherMainDashboardWidget extends modDashboardWidgetInterface
+class BigBrotherMetricsDashboardWidget extends modDashboardWidgetInterface
 {
-    public $cssBlockClass = 'bigbrother-widget bigbrother-widget--main';
+    public $cssBlockClass = 'bigbrother-widget bigbrother-widget--metrics';
     /**
      * @var BigBrother
      */
@@ -45,7 +45,7 @@ HTML;
 
         // Adjust the name shown in the widget title bar - alternatively we could also extend process() instead of
         // render() for more control, but that may require more maintenance to keep cross-version compatible
-        $this->widget->set('name', 'Google Analytics for &lt;Property Name&gt;');
+        $this->widget->set('name', 'Key Google Analytics Metrics for &lt;Property Name&gt;');
 
 
 
@@ -53,15 +53,8 @@ HTML;
         return <<<HTML
 <div class="bigbrother-inner-widget">
     <div class="bigbrother-spinner" id="bb{$this->widget->get('id')}-spinner"></div>
-    <div id="bb{$this->widget->get('id')}-visits-line"  style="position:relative; width: 100%; height: 200px"></div>
-    <div id="bb{$this->widget->get('id')}-key-metrics"></div>
     <div class="bigbrother-row">
-        <div class="bigbrother-col">
-            <div id="bb{$this->widget->get('id')}-acquisition" style="position:relative; height: 250px"></div>
-        </div>
-        <div class="bigbrother-col">
-            <div id="bb{$this->widget->get('id')}-popular-pages" class="bigbrother-report-list" style="position:relative; height: 250px"></div>
-        </div>
+        <div id="bb{$this->widget->get('id')}-key-metrics"></div>
     </div>
 </div>
 
@@ -69,10 +62,7 @@ HTML;
 <script>
 Ext.onReady(function() {
     let charts = [];
-    charts.push(BigBrother.VisitsLineGraph(document.getElementById("bb{$this->widget->get('id')}-visits-line")));
     charts.push(BigBrother.KeyMetrics(document.getElementById("bb{$this->widget->get('id')}-key-metrics")));
-    charts.push(BigBrother.Acquisition(document.getElementById("bb{$this->widget->get('id')}-acquisition")));
-    charts.push(BigBrother.PopularPages(document.getElementById("bb{$this->widget->get('id')}-popular-pages")));
     BigBrother.registerCharts(charts);
 });
 </script>
@@ -89,10 +79,7 @@ HTML;
         $this->controller->addJavascript($this->assetsUrl . 'node_modules/luxon/build/global/luxon.min.js?v=' . urlencode($this->bigbrother->version));
         $this->controller->addJavascript($this->assetsUrl . 'node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.min.js?v=' . urlencode($this->bigbrother->version));
         $this->controller->addJavascript($this->assetsUrl . 'mgr/bigbrother.class.js?v=' . urlencode($this->bigbrother->version));
-        $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/visits.js?v=' . urlencode($this->bigbrother->version));
         $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/key-metrics.js?v=' . urlencode($this->bigbrother->version));
-        $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/acquisition.js?v=' . urlencode($this->bigbrother->version));
-        $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/popular-pages.js?v=' . urlencode($this->bigbrother->version));
 
         $config = $this->modx->toJSON([
             'assetsUrl' => $this->assetsUrl,
@@ -108,4 +95,4 @@ HTML
     }
 }
 
-return BigBrotherMainDashboardWidget::class;
+return BigBrotherMetricsDashboardWidget::class;

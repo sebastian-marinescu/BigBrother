@@ -9,6 +9,8 @@ class BigBrotherReportsProcessor extends BigBrotherProcessor
     private $reports = [
         'visits/line' => \modmore\BigBrother\VisitsLineChart::class,
         'key-metrics' => \modmore\BigBrother\KeyMetrics::class,
+        'acquisition' => \modmore\BigBrother\Acquisition::class,
+        'popular-pages' => \modmore\BigBrother\PopularPages::class
     ];
 
     public function process()

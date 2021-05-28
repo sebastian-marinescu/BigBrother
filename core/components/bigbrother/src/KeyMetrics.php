@@ -9,7 +9,7 @@ class KeyMetrics extends BaseReport
 {
     public function run(array $params = []): array
     {
-        $cacheKey = 'reports/key-metrics/';
+        $cacheKey = 'reports/key-metrics';
         if ($data = $this->cacheManager->get($cacheKey, \BigBrother::$cacheOptions)) {
             return $data;
         }
