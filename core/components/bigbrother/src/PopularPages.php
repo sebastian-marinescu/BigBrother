@@ -54,7 +54,7 @@ class PopularPages extends BaseReport
                     'desc' => true,
                 ])
             ],
-            'limit' => 25
+            'limit' => 50
         ]);
 
         $data = $this->parseReportToArray($response);
@@ -80,6 +80,9 @@ class PopularPages extends BaseReport
             $output[$key]['improved'] = $values['value'] > $values['previous'];
         }
 
+        uasort($output, static function ($a, $b) {
+            return $a['value'] > $b['value'] ? -1 : 1;
+        });
         $output = array_values($output);
 
         $this->cacheManager->set($cacheKey, $output, 3600, \BigBrother::$cacheOptions);
