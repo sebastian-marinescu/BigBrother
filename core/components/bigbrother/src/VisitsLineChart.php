@@ -59,22 +59,30 @@ class VisitsLineChart extends BaseReport
         $halfway = date('Ymd', strtotime('-28 days'));
 
         foreach ($data as $stream) {
-            $dataset = $stream['date'] <= $halfway ? 1 : 0;
+            $dataset = $stream['date'] < $halfway ? 1 : 0;
             $output['data'][$dataset][$stream['date']] = [
                 'x' => $stream['date'],
                 'y' => (int)$stream['screenPageViews'],
             ];
+
+            // At the exact half-way point, make sure both sides of the chart are filled
+            if ($stream['date'] === $halfway) {
+                $output['data'][1][$stream['date']] = [
+                    'x' => $stream['date'],
+                    'y' => (int)$stream['screenPageViews'],
+                ];
+            }
         }
 
         $output['data'][0] = $this->fillGaps($output['data'][0], '-28 days');
-        $output['data'][1] = $this->fillGaps($output['data'][1], '-56 days', '-28 days');
+        $output['data'][1] = $this->fillGaps($output['data'][1], '-56 days', '-27 days');
 
         $this->cacheManager->set($cacheKey, $output, 3600, \BigBrother::$cacheOptions);
 
         return $output;
     }
 
-    private function fillGaps(array $data, $startTime, $endTime = 'now'): array
+    private function fillGaps(array $data, $startTime, $endTime = '+1 day'): array
     {
         $result = [];
         $start = new DateTime($startTime);
