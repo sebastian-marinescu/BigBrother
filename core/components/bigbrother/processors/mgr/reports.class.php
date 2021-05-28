@@ -1,42 +1,31 @@
 <?php
 
+use Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
+
 require_once __DIR__ . '/base.class.php';
 
 class BigBrotherReportsProcessor extends BigBrotherProcessor
 {
+    private $reports = [
+        'visits/line' => \modmore\BigBrother\VisitsLineChart::class,
+    ];
+
     public function process()
     {
-        sleep(2);
         $keys = $this->getProperty('reports');
         $keys = array_filter(array_map('trim', explode(',', $keys)));
 
-        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        $oauth = $this->bigBrother->getOAuth2();
+        $client = new BetaAnalyticsDataClient(['credentials' => $oauth]);
+        $cacheManager = $this->modx->getCacheManager();
+        $property = $this->bigBrother->getPropertyID();
 
+        $params = [];
         $data = [];
         foreach ($keys as $key) {
-            shuffle($days);
-            $data[$key] = [
-                'data' => [
-                    [
-                        ['x' => 1, 'y' => random_int(0, 30)],
-                        ['x' => 2, 'y' => random_int(0, 30)],
-                        ['x' => 3, 'y' => random_int(0, 30)],
-                        ['x' => 4, 'y' => random_int(0, 30)],
-                        ['x' => 5, 'y' => random_int(0, 30)],
-                        ['x' => 6, 'y' => random_int(0, 30)],
-                        ['x' => 7, 'y' => random_int(0, 30)],
-                    ], [
-                        ['x' => 1, 'y' => random_int(0, 30)],
-                        ['x' => 2, 'y' => random_int(0, 30)],
-                        ['x' => 3, 'y' => random_int(0, 30)],
-                        ['x' => 4, 'y' => random_int(0, 30)],
-                        ['x' => 5, 'y' => random_int(0, 30)],
-                        ['x' => 6, 'y' => random_int(0, 30)],
-                        ['x' => 7, 'y' => random_int(0, 30)],
-                    ],
-                ],
-                'labels' => $days,
-            ];
+            if (array_key_exists($key, $this->reports)) {
+                $data[$key] = (new $this->reports[$key]($client, $cacheManager, $property))->run($params);
+            }
         }
 
         return json_encode(['success' => true, 'message' => '', 'data' => $data]);

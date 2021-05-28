@@ -16,18 +16,44 @@ BigBrother.VisitsLineGraph = function(el) {
             data: {
                 labels: [],
                 datasets: [{
-                    label: 'Visits per day',
+                    label: 'Daily pageviews',
                     data: [],
                     fill: false,
                     borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
+                    tension: 0.1,
+                    xAxisID: 'x',
                 },{
-                    label: 'Visits per day (prev period)',
+                    label: '4 weeks before',
                     data: [],
                     fill: false,
                     borderColor: 'rgba(131,168,241, 0.6)',
-                    tension: 0.1
+                    tension: 0.1,
+                    xAxisID: 'xPrev',
                 }]
+            },
+            options: {
+                interaction: {
+                    mode: 'x'
+                },
+                scales: {
+                    x: {
+                        type: 'time',
+                        unit: 'week',
+                        min: luxon.DateTime.now().minus({days: 28}).toISODate(),
+                        max: luxon.DateTime.now().toISODate(),
+                        beginAtZero: true,
+                        ticks: {
+                            maxRotation: 0
+                        }
+                    },
+                    xPrev: {
+                        type: 'time',
+                        unit: 'week',
+                        min: luxon.DateTime.now().minus({days: 56}).toISODate(),
+                        max: luxon.DateTime.now().minus({days: 28}).toISODate(),
+                        display: false
+                    }
+                }
             }
         });
     }
