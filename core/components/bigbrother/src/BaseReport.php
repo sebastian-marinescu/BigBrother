@@ -24,7 +24,13 @@ abstract class BaseReport
      */
     protected $property;
 
-    public function __construct(BetaAnalyticsDataClient $client, \modCacheManager $cacheManager, string $property)
+    /**
+     * BaseReport constructor.
+     * @param BetaAnalyticsDataClient $client
+     * @param \modCacheManager|modCacheManager $cacheManager
+     * @param string $property
+     */
+    public function __construct(BetaAnalyticsDataClient $client, $cacheManager, string $property)
     {
         $this->client = $client;
         $this->cacheManager = $cacheManager;
