@@ -212,7 +212,7 @@
 }
 
 /* Allow widgets to grow in size */
-.bigbrother-widget > .body {
+.dashboard-block.bigbrother-widget > .body {
     max-height: initial;
 }
 
