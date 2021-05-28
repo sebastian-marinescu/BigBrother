@@ -84,14 +84,15 @@
 
 .bigbrother-spinner {
     position: relative;
+    box-sizing: border-box;
     -webkit-animation: bigbrother-rotation .6s infinite linear;
     -moz-animation: bigbrother-rotation .6s infinite linear;
     -o-animation: bigbrother-rotation .6s infinite linear;
     animation: bigbrother-rotation .6s infinite linear;
     border: 6px solid rgba(0, 174, 239, .15);
     border-radius: 100%;
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
     display: inline-block;
 }
 
@@ -211,19 +212,42 @@
     margin: 0 auto;
 }
 
-/* Allow widgets to grow in size */
+/* Allow widgets to grow in size, and reset styles to make sub-blocks */
+.dashboard-block.bigbrother-widget {
+    box-shadow: none;
+}
 .dashboard-block.bigbrother-widget > .body {
     max-height: initial;
+    padding: 0;
+    background: #F1F1F1;
+}
+.dashboard-block.bigbrother-widget .title {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /** @todo 2.x only */
+}
+.bigbrother-block {
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /** @todo 2.x only */
+}
+.bigbrother-block-title {
+    font-size: 12px;
+    padding: 8px 8px 0;
+    color: #515151;
 }
 
 .bigbrother-inner-widget {
     position: relative;
     overflow: hidden;
+    box-sizing: border-box;
+}
+.bigbrother-inner-widget * {
+    box-sizing: border-box;
 }
 .bigbrother-inner-widget .bigbrother-spinner {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 20px;
+    left: 47%;
     background: #fff;
     z-index: 1;
 }
@@ -235,12 +259,12 @@
 
 .bigbrother-col {
     flex: 1;
-    margin-right: 1em;
+    margin-right: 0.5em;
     overflow: hidden;
 }
 .bigbrother-col:last-child {
     margin-right: 0;
-    margin-left: 1em;
+    margin-left: 0.5em;
 }
 
 .bigbrother-key-metrics {
@@ -248,7 +272,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 1em !important; /* clashes with .dashboard-block ul */
+    padding: 0 !important; /* clashes with .dashboard-block ul */
     list-style-type: none !important; /* clashes with .dashboard-block ul */
 }
 .bigbrother-widget--main .bigbrother-key-metrics {
@@ -317,7 +341,7 @@
 
 .bigbrother-report-list-items {
     list-style-type: none !important;
-    padding-left: 0;
+    padding-left: 0 !important;
 }
 .bigbrother-report-list-item {
     display: flex;
@@ -351,7 +375,7 @@
 .bigbrother-report-list-item--previous {
     color: #234368;
     padding-left: 1em;
-    min-width: 3em;
+    min-width: 5em;
     text-align: right;
     padding-right: 1em; /* for arrow up/down */
     position: relative;

@@ -53,7 +53,7 @@ HTML;
         return <<<HTML
 <div class="bigbrother-inner-widget">
     <div class="bigbrother-spinner" id="bb{$this->widget->get('id')}-spinner"></div>
-    <div class="bigbrother-row">
+    <div class="bigbrother-block">
         <div id="bb{$this->widget->get('id')}-key-metrics"></div>
     </div>
 </div>

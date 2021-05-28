@@ -53,13 +53,19 @@ HTML;
         return <<<HTML
 <div class="bigbrother-inner-widget">
     <div class="bigbrother-spinner" id="bb{$this->widget->get('id')}-spinner"></div>
-    <div id="bb{$this->widget->get('id')}-visits-line"  style="position:relative; width: 100%; height: 200px"></div>
-    <div id="bb{$this->widget->get('id')}-key-metrics"></div>
+    <div class="bigbrother-block">
+        <div id="bb{$this->widget->get('id')}-visits-line" style="position:relative; width: 100%; height: 200px"></div>
+    </div>
+    <div class="bigbrother-block" style="min-height: 145px">
+        <div id="bb{$this->widget->get('id')}-key-metrics"></div>
+    </div>
     <div class="bigbrother-row">
-        <div class="bigbrother-col">
+        <div class="bigbrother-col bigbrother-block">
+            <h3 class="bigbrother-block-title">Acquisition sources</h3>
             <div id="bb{$this->widget->get('id')}-acquisition" style="position:relative; height: 250px"></div>
         </div>
-        <div class="bigbrother-col">
+        <div class="bigbrother-col bigbrother-block">
+            <h3 class="bigbrother-block-title">Most viewed pages</h3>
             <div id="bb{$this->widget->get('id')}-popular-pages" class="bigbrother-report-list" style="position:relative; height: 250px"></div>
         </div>
     </div>
