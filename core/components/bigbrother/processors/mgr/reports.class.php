@@ -16,7 +16,7 @@ class BigBrotherReportsProcessor extends BigBrotherProcessor
     public function process()
     {
         $keys = $this->getProperty('reports');
-        $keys = array_filter(array_map('trim', explode(',', $keys)));
+        $keys = array_unique(array_filter(array_map('trim', explode(',', $keys))));
 
         $oauth = $this->bigBrother->getOAuth2();
         $client = new BetaAnalyticsDataClient(['credentials' => $oauth]);
