@@ -2,63 +2,30 @@
 
 
 require_once dirname(__DIR__, 2) . '/model/bigbrother/bigbrother.class.php';
+require_once __DIR__ . '/abstract.class.php';
 
 
-class BigBrotherMetricsDashboardWidget extends modDashboardWidgetInterface
+class BigBrotherMetricsDashboardWidget extends BigBrotherAbstractDashboardWidget
 {
     public $cssBlockClass = 'bigbrother-widget bigbrother-widget--metrics';
-    /**
-     * @var BigBrother
-     */
-    protected $bigbrother;
-    /**
-     * @var mixed
-     */
-    protected $assetsUrl;
 
     public function render()
     {
         $this->initialize();
 
         // Make sure the authorization and property selection was completed. If not, show a message about needing to authorize first
-        $property = $this->bigbrother->getPropertyID();
-        $oauth = $this->bigbrother->getOAuth2();
-        if (empty($property) || empty($oauth->getAccessToken())) {
-            $authLink = $this->modx->getOption('manager_url') . '?namespace=bigbrother&a=authorize';
-            return <<<HTML
-<div class="bigbrother-inner-widget">
-    <p class="bigbrother-warning">
-        Big Brother has not yet been authorized, the authorization was revoked, or a Google Analytics property has not yet been selected. Once authorized and configured, this dashboard widget will show your Google Analytics statistics.
-        <br><br>
-        <a href="{$authLink}" class="x-btn">Authorize now &raquo;</a>
-    </p>
-</div>
-<p class="bigbrother-credits bigbrother-credits--justified">
-    <span class="bigbrother-credits__version">Powered by Big Brother v{$this->bigbrother->version}</span>
-    <a href="https://www.modmore.com/extras/bigbrother/?utm_source=bigbrother_footer" target="_blank" rel="noopener" class="bigbrother-credits__logo">
-        <img src="/BigBrother/assets/components/bigbrother/images/modmore.svg" alt="a modmore product">
-    </a>
-</p>
-HTML;
+        $authorized = $this->isAuthorized();
+        if ($authorized !== true) {
+            return $authorized;
         }
-
 
         // Adjust the name shown in the widget title bar - alternatively we could also extend process() instead of
         // render() for more control, but that may require more maintenance to keep cross-version compatible
         $this->widget->set('name', 'Key Google Analytics Metrics for &lt;Property Name&gt;');
 
 
-
-        // Return the widget contents with a spinner which will client-side build the rest of the UI.
-        return <<<HTML
-<div class="bigbrother-inner-widget">
-    <div class="bigbrother-spinner" id="bb{$this->widget->get('id')}-spinner"></div>
-    <div class="bigbrother-block">
-        <div id="bb{$this->widget->get('id')}-key-metrics"></div>
-    </div>
-</div>
-
-
+        // Register the initialisation of the chart within this widget
+        $this->controller->addHtml(<<<HTML
 <script>
 Ext.onReady(function() {
     let charts = [];
@@ -66,32 +33,18 @@ Ext.onReady(function() {
     BigBrother.registerCharts(charts);
 });
 </script>
-HTML;
-    }
-
-    protected function initialize(): void
-    {
-        $this->bigbrother = new BigBrother($this->modx);
-        $this->assetsUrl = $this->bigbrother->config['assets_url'];
-        $this->controller->addCss($this->assetsUrl . 'css/mgr.css?v=' . urlencode($this->bigbrother->version));
-
-        $this->controller->addJavascript($this->assetsUrl . 'node_modules/chart.js/dist/chart.js?v=' . urlencode($this->bigbrother->version));
-        $this->controller->addJavascript($this->assetsUrl . 'node_modules/luxon/build/global/luxon.min.js?v=' . urlencode($this->bigbrother->version));
-        $this->controller->addJavascript($this->assetsUrl . 'node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.min.js?v=' . urlencode($this->bigbrother->version));
-        $this->controller->addJavascript($this->assetsUrl . 'mgr/bigbrother.class.js?v=' . urlencode($this->bigbrother->version));
-        $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/key-metrics.js?v=' . urlencode($this->bigbrother->version));
-
-        $config = $this->modx->toJSON([
-            'assetsUrl' => $this->assetsUrl,
-            'connectorUrl' => $this->bigbrother->config['connector_url'],
-            'version' => $this->bigbrother->version,
-        ]);
-        $this->controller->addHtml(<<<HTML
-<script>
-    BigBrother.config = $config;
-</script>
 HTML
-        );
+);
+
+        // Return the widget contents that will be enhanced by the scripts
+        return <<<HTML
+<div class="bigbrother-inner-widget">
+    <div class="bigbrother-spinner" id="bb{$this->widget->get('id')}-spinner"></div>
+    <div class="bigbrother-block">
+        <div id="bb{$this->widget->get('id')}-key-metrics"></div>
+    </div>
+</div>
+HTML;
     }
 }
 
