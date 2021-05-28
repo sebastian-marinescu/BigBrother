@@ -66,7 +66,8 @@ BigBrother.VisitsLineGraph = function(el) {
 
         if (data.data) {
             chart.data.datasets.forEach((dataset, index) => {
-                dataset.data = data.data[index];
+                dataset.data = data.data[index].data;
+                dataset.labels = data.data[index].labels;
             });
         }
         if (data.labels) {

@@ -51,8 +51,14 @@ class VisitsLineChart extends BaseReport
 
         $output = [
             'data' => [
-                0 => [],
-                1 => [],
+                0 => [
+                    'data' => [],
+                    'labels' => [],
+                ],
+                1 => [
+                    'data' => [],
+                    'labels' => [],
+                ],
             ]
         ];
 
@@ -60,22 +66,24 @@ class VisitsLineChart extends BaseReport
 
         foreach ($data as $stream) {
             $dataset = $stream['date'] < $halfway ? 1 : 0;
-            $output['data'][$dataset][$stream['date']] = [
+            $output['data'][$dataset]['data'][$stream['date']] = [
                 'x' => $stream['date'],
                 'y' => (int)$stream['screenPageViews'],
             ];
+            $output['data'][$dataset]['labels'][] = $stream['date'];
 
             // At the exact half-way point, make sure both sides of the chart are filled
             if ($stream['date'] === $halfway) {
-                $output['data'][1][$stream['date']] = [
+                $output['data'][1]['data'][$stream['date']] = [
                     'x' => $stream['date'],
                     'y' => (int)$stream['screenPageViews'],
                 ];
+                $output['data'][1]['labels'][] = $stream['date'];
             }
         }
 
-        $output['data'][0] = $this->fillGaps($output['data'][0], '-28 days');
-        $output['data'][1] = $this->fillGaps($output['data'][1], '-56 days', '-27 days');
+        $output['data'][0]['data'] = $this->fillGaps($output['data'][0]['data'], '-28 days');
+        $output['data'][1]['data'] = $this->fillGaps($output['data'][1]['data'], '-56 days', '-27 days');
 
         $this->cacheManager->set($cacheKey, $output, 3600, \BigBrother::$cacheOptions);
 
