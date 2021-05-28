@@ -253,6 +253,7 @@
 .bigbrother-metric-value {
     font-size: 3rem;
     display: block;
+    color: #234368;
 }
 .bigbrother-metric-label {
     display: block;
@@ -260,14 +261,14 @@
     text-transform: uppercase;
     padding: 0.5em;
     font-weight: bold;
-    color: #777;
+    color: rgba(35, 67, 104, 0.88);
 }
 .bigbrother-metric-previous {
     font-size: 1.5rem;
     position: relative;
 }
 .bigbrother-metric-previous.bigbrother-metric-down {
-    color: red;
+    color: #d20000;
 }
 .bigbrother-metric-previous.bigbrother-metric-down:before {
     content: "";
@@ -275,13 +276,13 @@
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 10px solid red;
+    border-top: 10px solid #d20000;
     top: 10px;
     position: absolute;
     left: -15px;
 }
 .bigbrother-metric-previous.bigbrother-metric-up {
-    color: green;
+    color: #017101;
 }
 .bigbrother-metric-previous.bigbrother-metric-up:before {
     content: "";
@@ -289,7 +290,7 @@
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 10px solid green;
+    border-bottom: 10px solid #017101;
     top: 10px;
     position: absolute;
     left: -15px;
