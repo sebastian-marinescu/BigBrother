@@ -32,6 +32,7 @@ BigBrother.VisitsLineGraph = function(el) {
                 }]
             },
             options: {
+                maintainAspectRatio: false, // Doesn't work with dynamic resizing in MODX3, so best keep the height fixed
                 interaction: {
                     mode: 'x'
                 },
