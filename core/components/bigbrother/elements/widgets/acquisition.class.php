@@ -5,9 +5,9 @@ require_once dirname(__DIR__, 2) . '/model/bigbrother/bigbrother.class.php';
 require_once __DIR__ . '/abstract.class.php';
 
 
-class BigBrotherMetricsDashboardWidget extends BigBrotherAbstractDashboardWidget
+class BigBrotherAcquisitionDashboardWidget extends BigBrotherAbstractDashboardWidget
 {
-    public $cssBlockClass = 'bigbrother-widget bigbrother-widget--metrics';
+    public $cssBlockClass = 'bigbrother-widget bigbrother-widget--acquisition';
 
     public function render()
     {
@@ -21,7 +21,7 @@ class BigBrotherMetricsDashboardWidget extends BigBrotherAbstractDashboardWidget
 
         // Adjust the name shown in the widget title bar - alternatively we could also extend process() instead of
         // render() for more control, but that may require more maintenance to keep cross-version compatible
-        $this->widget->set('name', 'Key metrics');
+        $this->widget->set('name', 'Acquisition sources');
 
 
         // Register the initialisation of the chart within this widget
@@ -29,7 +29,7 @@ class BigBrotherMetricsDashboardWidget extends BigBrotherAbstractDashboardWidget
 <script>
 Ext.onReady(function() {
     let charts = [];
-    charts.push(BigBrother.KeyMetrics(document.getElementById("bb{$this->widget->get('id')}-key-metrics")));
+    charts.push(BigBrother.Acquisition(document.getElementById("bb{$this->widget->get('id')}-acquisition")));
     BigBrother.registerCharts(charts);
 });
 </script>
@@ -41,11 +41,11 @@ HTML
 <div class="bigbrother-inner-widget">
     <div class="bigbrother-spinner" id="bb{$this->widget->get('id')}-spinner"></div>
     <div class="bigbrother-block">
-        <div id="bb{$this->widget->get('id')}-key-metrics"></div>
+            <div id="bb{$this->widget->get('id')}-acquisition" style="position:relative; height: 250px"></div>
     </div>
 </div>
 HTML;
     }
 }
 
-return BigBrotherMetricsDashboardWidget::class;
+return BigBrotherAcquisitionDashboardWidget::class;
