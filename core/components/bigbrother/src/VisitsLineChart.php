@@ -2,6 +2,8 @@
 namespace modmore\BigBrother;
 
 
+use DatePeriod;
+use DateTime;
 use Google\Analytics\Data\V1beta\DateRange;
 use Google\Analytics\Data\V1beta\Dimension;
 use Google\Analytics\Data\V1beta\Metric;
@@ -13,9 +15,9 @@ class VisitsLineChart extends BaseReport
     public function run(array $params = []): array
     {
         $cacheKey = 'reports/visits-line/' . date('Ymd');
-        if ($data = $this->cacheManager->get($cacheKey, \BigBrother::$cacheOptions)) {
-            return $data;
-        }
+//        if ($data = $this->cacheManager->get($cacheKey, \BigBrother::$cacheOptions)) {
+//            return $data;
+//        }
 
         $response = $this->client->runReport([
             'property' => 'properties/' . $this->property,
@@ -58,14 +60,35 @@ class VisitsLineChart extends BaseReport
 
         foreach ($data as $stream) {
             $dataset = $stream['date'] <= $halfway ? 1 : 0;
-            $output['data'][$dataset][] = [
+            $output['data'][$dataset][$stream['date']] = [
                 'x' => $stream['date'],
-                'y' => $stream['screenPageViews'],
+                'y' => (int)$stream['screenPageViews'],
             ];
         }
+
+        $output['data'][0] = $this->fillGaps($output['data'][0], '-28 days');
+        $output['data'][1] = $this->fillGaps($output['data'][1], '-56 days', '-28 days');
 
         $this->cacheManager->set($cacheKey, $output, 3600, \BigBrother::$cacheOptions);
 
         return $output;
+    }
+
+    private function fillGaps(array $data, $startTime, $endTime = 'now'): array
+    {
+        $result = [];
+        $start = new DateTime($startTime);
+        $end = new DateTime($endTime);
+
+        $range = new DatePeriod($start, new \DateInterval('P1D'), $end);
+        foreach ($range as $value) {
+            $date = $value->format('Ymd');
+            $result[] = $data[$date] ?? [
+                'x' => $date,
+                'y' => 0,
+            ];
+        }
+        
+        return $result;
     }
 }
