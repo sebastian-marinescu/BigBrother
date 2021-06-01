@@ -4,6 +4,7 @@
 require_once dirname(__DIR__, 2) . '/model/bigbrother/bigbrother.class.php';
 require_once __DIR__ . '/abstract.class.php';
 
+use Google\Analytics\Admin\V1alpha\AnalyticsAdminServiceClient;
 
 class BigBrotherMainDashboardWidget extends BigBrotherAbstractDashboardWidget
 {
@@ -20,10 +21,21 @@ class BigBrotherMainDashboardWidget extends BigBrotherAbstractDashboardWidget
             return $authorized;
         }
 
+        // Get property name
+        $propertyId = $this->bigbrother->getPropertyID();
+        $oAuth = $this->bigbrother->getOAuth2();
+        $admin = new AnalyticsAdminServiceClient(['credentials' => $oAuth]);
+        try {
+            $property = $admin->getProperty('properties/' . $propertyId);
+        } catch (\Exception $e) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, '[BigBrother] Received ' . get_class($e) . ' verifying property: ' . $e->getMessage());
+            return false;
+        }
+
         // Create an HTML element for period dates in the title bar
         $titleElement = <<<HTML
 <div class="bb-widget-title" style="width:100%; display:flex; justify-content: space-between">
-    <span>Google Analytics for &lt;Property Name&gt;</span>
+    <span>Google Analytics for {$property->getDisplayName()}</span>
     <span id="bb{$this->widget->get('id')}-title-period" class="bb-title-period" style="padding:6px 8px 3px; margin:-6px -6px -3px 0; background-color:#fff; border-radius:3px;">Loading...</span>
 </div>
 HTML;
