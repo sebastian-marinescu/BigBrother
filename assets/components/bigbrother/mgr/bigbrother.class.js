@@ -59,7 +59,7 @@ Ext.extend(BigBrother,Ext.Component,{
         if (visitsChart['first_date'] && visitsChart['last_date']) {
             let period = visitsChart['first_date'] + ' - ' + visitsChart['last_date'];
             // TODO: get the element by id for specificity
-            let element = document.querySelector('.widget-title .title-period');
+            let element = document.querySelector('.bb-widget-title .bb-title-period');
             element.innerHTML = period;
         }
     },
