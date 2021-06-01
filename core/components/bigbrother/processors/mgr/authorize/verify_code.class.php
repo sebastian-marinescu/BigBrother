@@ -26,11 +26,11 @@ class BigBrotherVerifyCodeProcessor extends BigBrotherProcessor
 
         if (array_key_exists('access_token', $tokens)) {
             $this->bigBrother->setAccessToken($tokens);
-            return $this->success('Successfully authorized.');
+            return $this->success($this->modx->lexicon('bigbrother.authorization.success'));
         }
 
         $this->modx->log(modX::LOG_LEVEL_ERROR, '[BigBrother] Received unexpected response from fetchAuthToken ' . print_r($tokens, true));
-        return $this->failure('Unexpected response.');
+        return $this->failure($this->modx->lexicon('bigbrother.authorization.failure.unexpected_response'));
     }
 }
 

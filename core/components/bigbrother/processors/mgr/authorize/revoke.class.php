@@ -8,7 +8,7 @@ class BigBrotherRevokeProcessor extends BigBrotherProcessor
         $this->bigBrother->setRefreshToken('');
         $this->modx->getCacheManager()->delete(BigBrother::$cacheKey, BigBrother::$cacheOptions);
 
-        return $this->success('Authorization revoked. Please sign in with Google to re-authorize Big Brother.');
+        return $this->success($this->modx->lexicon('bigbrother.revoke_authorization.success'));
     }
 }
 
