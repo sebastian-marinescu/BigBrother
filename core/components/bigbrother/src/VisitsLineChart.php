@@ -90,10 +90,9 @@ class VisitsLineChart extends BaseReport
         }
 
         // Determine date range
-        // TODO: look into adding formatting options for locales
-        $firstDate = date('Y/m/d', strtotime('-28 days'));
+        $firstDate = date('M j', strtotime('-28 days'));
         $output['first_date'] = $firstDate;
-        $output['last_date'] = date('Y/m/d', strtotime($lastDate));
+        $output['last_date'] = date('M j', strtotime($lastDate));
 
         $output['data'][0]['data'] = $this->fillGaps($output['data'][0]['data'], '-28 days');
         $output['data'][1]['data'] = $this->fillGaps($output['data'][1]['data'], '-56 days', '-27 days');

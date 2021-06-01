@@ -18,3 +18,7 @@ $_lang['bigbrother.desc_title'] = 'Overview';
 $_lang['bigbrother.visits'] = 'Visits';
 $_lang['bigbrother.visitors'] = 'Visitors';
 $_lang['bigbrother.traffic_sources'] = 'Traffic Sources';
+
+$_lang['bigbrother.this_month'] = 'This month';
+$_lang['bigbrother.last_month'] = 'Last month';
+$_lang['bigbrother.page_views'] = 'page views';

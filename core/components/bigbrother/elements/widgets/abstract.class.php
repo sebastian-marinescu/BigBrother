@@ -26,6 +26,7 @@ abstract class BigBrotherAbstractDashboardWidget extends modDashboardWidgetInter
         }
         static::$initialized = true;
 
+        $this->bigbrother->modx->lexicon->load('bigbrother:mgr');
         $this->assetsUrl = $this->bigbrother->config['assets_url'];
         $this->controller->addCss($this->assetsUrl . 'css/mgr.css?v=' . urlencode($this->bigbrother->version));
         $this->controller->addJavascript($this->assetsUrl . 'node_modules/chart.js/dist/chart.js?v=' . urlencode($this->bigbrother->version));
@@ -65,15 +66,15 @@ HTML
 <div class="bigbrother-inner-widget">
     <div class="bigbrother-block">
         <p class="bigbrother-warning">
-            Big Brother has not yet been authorized, the authorization was revoked, or a Google Analytics property has not yet been selected. Once authorized and configured, this dashboard widget will show your Google Analytics statistics.
+            {$this->modx->lexicon('bigbrother.not_authorized.warning')}
             <br><br>
-            <a href="{$authLink}" class="x-btn">Authorize now &raquo;</a>
+            <a href="{$authLink}" class="x-btn">{$this->modx->lexicon('bigbrother.not_authorized.authorize_now')} &raquo;</a>
         </p>
         
         <p class="bigbrother-credits bigbrother-credits--justified">
-            <span class="bigbrother-credits__version">Powered by Big Brother v{$this->bigbrother->version}</span>
+            <span class="bigbrother-credits__version">{$this->modx->lexicon('bigbrother.powered_by_bigbrother')} v{$this->bigbrother->version}</span>
             <a href="https://www.modmore.com/extras/bigbrother/?utm_source=bigbrother_footer" target="_blank" rel="noopener" class="bigbrother-credits__logo">
-                <img src="/BigBrother/assets/components/bigbrother/images/modmore.svg" alt="a modmore product">
+                <img src="{$this->modx->getOption('assets_url')}components/bigbrother/images/modmore.svg" alt="a modmore product">
             </a>
         </p>
     </div>
