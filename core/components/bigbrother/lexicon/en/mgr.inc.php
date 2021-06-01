@@ -24,6 +24,7 @@ $_lang['bigbrother.error.invalid_property'] = 'Property does not seem valid or a
 
 $_lang['bigbrother.authorized'] = 'Authorized';
 $_lang['bigbrother.authorized_desc'] = 'Successfully authorized, Big Brother can access your Google Analytics reports. To re-authorize or use a different account, revoke the authorization.';
+$_lang['bigbrother.authorization'] = 'Authorization';
 $_lang['bigbrother.authorization.success'] = 'Successfully authorized.';
 $_lang['bigbrother.authorization.failure.unexpected_response'] = 'Unexpected response.';
 $_lang['bigbrother.revoke_authorization'] = 'Revoke authorization';
@@ -38,4 +39,4 @@ $_lang['bigbrother.save_property.success'] = 'Property set to [[+property_name]]
 
 $_lang['bigbrother.main_widget'] = 'Big Brother - Full Stats';
 $_lang['bigbrother.main_widget_desc'] = 'Shows a complete overview of your connected Google Analytics profile.';
-
+$_lang['bigbrother.widget_title'] = 'Google Analytics for [[+property_name]]';

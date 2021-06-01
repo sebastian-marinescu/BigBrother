@@ -14,6 +14,7 @@ class BigBrotherMainDashboardWidget extends BigBrotherAbstractDashboardWidget
     {
         // Load BigBrother etc
         $this->initialize();
+        $this->modx->lexicon->load('bigbrother:mgr');
 
         // Make sure the authorization and property selection was completed. If not, show a message about needing to authorize first
         $authorized = $this->isAuthorized();
@@ -39,12 +40,12 @@ class BigBrotherMainDashboardWidget extends BigBrotherAbstractDashboardWidget
         $titleElement = <<<HTML
 <div class="bb-widget-title" style="width:100%; display:flex; justify-content: space-between">
     <div>
-        <span>Google Analytics for {$property->getDisplayName()}</span>
+        <span>{$this->modx->lexicon('bigbrother.widget_title',['property_name' => $property->getDisplayName()])}</span>
         <span style="border-radius:3px; background-color:#fff; padding:6px 8px 3px; margin:-6px 0 -3px 6px;">{$propertyId}</span>
-        <a href="{$url}" title="Authorization" style="margin-left:8px; position:relative;"><i class="icon icon-cog" style="position:absolute; font-size:14px; top:-1px;"></i></a>
+        <a href="{$url}" title="{$this->modx->lexicon('bigbrother.authorization')}" style="margin-left:8px; position:relative;"><i class="icon icon-cog" style="position:absolute; font-size:14px; top:-1px;"></i></a>
     </div>
     <div style="flex-grow:1; text-align:right;">
-        <span id="bb{$this->widget->get('id')}-title-period" class="bb-title-period" style="color:#fff; padding:6px 8px 3px; margin:-6px -6px -3px 0; background-color:#00b5de; border-radius:3px;">Loading...</span>
+        <span id="bb{$this->widget->get('id')}-title-period" class="bb-title-period" style="color:#fff; padding:6px 8px 3px; margin:-6px -6px -3px 0; background-color:#00b5de; border-radius:3px;">{$this->modx->lexicon('bigbrother.loading')}</span>
     </div>
 </div>
 HTML;
