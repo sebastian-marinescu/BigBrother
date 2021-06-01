@@ -40,3 +40,10 @@ $_lang['bigbrother.save_property.success'] = 'Property set to [[+property_name]]
 $_lang['bigbrother.main_widget'] = 'Big Brother - Full Stats';
 $_lang['bigbrother.main_widget_desc'] = 'Shows a complete overview of your connected Google Analytics profile.';
 $_lang['bigbrother.widget_title'] = 'Google Analytics for [[+property_name]]';
+$_lang['bigbrother.not_found'] = 'BigBrother was not found.';
+
+$_lang['bigbrother.acquisition_sources'] = 'Acquisition sources';
+$_lang['bigbrother.most_viewed_pages'] = 'Most viewed pages';
+$_lang['bigbrother.this_month'] = 'This month';
+$_lang['bigbrother.last_month'] = 'Last month';
+$_lang['bigbrother.page_views'] = 'page views';

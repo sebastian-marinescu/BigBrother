@@ -45,7 +45,7 @@ class BigBrotherMainDashboardWidget extends BigBrotherAbstractDashboardWidget
         <a href="{$url}" title="{$this->modx->lexicon('bigbrother.authorization')}" style="margin-left:8px; position:relative;"><i class="icon icon-cog" style="position:absolute; font-size:14px; top:-1px;"></i></a>
     </div>
     <div style="flex-grow:1; text-align:right;">
-        <span id="bb{$this->widget->get('id')}-title-period" class="bb-title-period" style="color:#fff; padding:6px 8px 3px; margin:-6px -6px -3px 0; background-color:#00b5de; border-radius:3px;">{$this->modx->lexicon('bigbrother.loading')}</span>
+        <span id="bb-title-period" class="bb-title-period" style="color:#fff; padding:6px 8px 3px; margin:-6px -6px -3px 0; background-color:#00b5de; border-radius:3px;">{$this->modx->lexicon('bigbrother.loading')}</span>
     </div>
 </div>
 HTML;

@@ -19,7 +19,7 @@ abstract class BigBrotherProcessor extends modProcessor
         $corePath = $this->modx->getOption('bigbrother.core_path', null, $this->modx->getOption('core_path') . 'components/bigbrother/');
         $this->bigBrother = $this->modx->getService('bigbrother', 'BigBrother', $corePath . 'model/');
         if (!$this->bigBrother) {
-            return 'BigBrother not found.';
+            return $this->modx->lexicon('bigbrother.not_found');
         }
         return parent::initialize();
     }
