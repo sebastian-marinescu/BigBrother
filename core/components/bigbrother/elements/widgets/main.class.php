@@ -35,7 +35,10 @@ class BigBrotherMainDashboardWidget extends BigBrotherAbstractDashboardWidget
         // Create an HTML element for period dates in the title bar
         $titleElement = <<<HTML
 <div class="bb-widget-title" style="width:100%; display:flex; justify-content: space-between">
-    <span>Google Analytics for {$property->getDisplayName()}</span>
+    <div>
+        <span>Google Analytics for {$property->getDisplayName()}</span>
+        <span style="color:#fff; font-size:10px; border-radius:3px; background-color:#00b5de; padding:5px 6px 2px; margin:-9px 0 0 6px;">{$propertyId}</span>
+    </div>
     <span id="bb{$this->widget->get('id')}-title-period" class="bb-title-period" style="padding:6px 8px 3px; margin:-6px -6px -3px 0; background-color:#fff; border-radius:3px;">Loading...</span>
 </div>
 HTML;
