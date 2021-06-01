@@ -32,14 +32,20 @@ class BigBrotherMainDashboardWidget extends BigBrotherAbstractDashboardWidget
             return false;
         }
 
+        // Create authorization link
+        $url = MODX_MANAGER_URL . '?namespace=bigbrother&a=authorize';
+
         // Create an HTML element for period dates in the title bar
         $titleElement = <<<HTML
 <div class="bb-widget-title" style="width:100%; display:flex; justify-content: space-between">
     <div>
         <span>Google Analytics for {$property->getDisplayName()}</span>
-        <span style="color:#fff; font-size:10px; border-radius:3px; background-color:#00b5de; padding:5px 6px 2px; margin:-9px 0 0 6px;">{$propertyId}</span>
+        <span style="border-radius:3px; background-color:#fff; padding:6px 8px 3px; margin:-6px 0 -3px 6px;">{$propertyId}</span>
+        <a href="{$url}" title="Authorization" style="margin-left:8px; position:relative;"><i class="icon icon-cog" style="position:absolute; font-size:14px; top:-1px;"></i></a>
     </div>
-    <span id="bb{$this->widget->get('id')}-title-period" class="bb-title-period" style="padding:6px 8px 3px; margin:-6px -6px -3px 0; background-color:#fff; border-radius:3px;">Loading...</span>
+    <div style="flex-grow:1; text-align:right;">
+        <span id="bb{$this->widget->get('id')}-title-period" class="bb-title-period" style="color:#fff; padding:6px 8px 3px; margin:-6px -6px -3px 0; background-color:#00b5de; border-radius:3px;">Loading...</span>
+    </div>
 </div>
 HTML;
 
