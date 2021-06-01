@@ -55,6 +55,15 @@ Ext.extend(BigBrother,Ext.Component,{
         })
     },
 
+    renderPeriodDates(visitsChart) {
+        if (visitsChart['first_date'] && visitsChart['last_date']) {
+            let period = visitsChart['first_date'] + ' - ' + visitsChart['last_date'];
+            // TODO: get the element by id for specificity
+            let element = document.querySelector('.widget-title .title-period');
+            element.innerHTML = period;
+        }
+    },
+
     refreshCharts() {
         this.enableSpinners();
         MODx.Ajax.request({
@@ -73,6 +82,8 @@ Ext.extend(BigBrother,Ext.Component,{
                                 ch.setData(result.data[ch.key]);
                             }
                         });
+                        console.log(result.data);
+                        this.renderPeriodDates(result.data['visits/line']);
                         this.disableSpinners();
                     },
                     scope: this

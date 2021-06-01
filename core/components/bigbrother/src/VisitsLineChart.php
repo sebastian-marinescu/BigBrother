@@ -64,6 +64,8 @@ class VisitsLineChart extends BaseReport
 
         $halfway = date('Ymd', strtotime('-28 days'));
 
+        $idx = 0;
+        $lastDate = '';
         foreach ($data as $stream) {
             $dataset = $stream['date'] < $halfway ? 1 : 0;
             $output['data'][$dataset]['data'][$stream['date']] = [
@@ -80,7 +82,18 @@ class VisitsLineChart extends BaseReport
                 ];
                 $output['data'][1]['labels'][] = $stream['date'];
             }
+
+            if ($idx === count($data) - 1) {
+                $lastDate = $stream['date'];
+            }
+            $idx++;
         }
+
+        // Determine date range
+        // TODO: look into adding formatting options for locales
+        $firstDate = date('Y-m-d', strtotime('-28 days'));
+        $output['first_date'] = $firstDate;
+        $output['last_date'] = date('Y-m-d', strtotime($lastDate));
 
         $output['data'][0]['data'] = $this->fillGaps($output['data'][0]['data'], '-28 days');
         $output['data'][1]['data'] = $this->fillGaps($output['data'][1]['data'], '-56 days', '-27 days');

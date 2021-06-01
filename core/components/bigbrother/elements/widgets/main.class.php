@@ -20,9 +20,17 @@ class BigBrotherMainDashboardWidget extends BigBrotherAbstractDashboardWidget
             return $authorized;
         }
 
+        // Create an HTML element for period dates in the title bar
+        $titleElement = <<<HTML
+<div class="widget-title" style="width:100%; display:flex; justify-content: space-between">
+    <span>Google Analytics for &lt;Property Name&gt;</span>
+    <span id="bb{$this->widget->get('id')}-title-period" class="title-period" style="padding:6px 8px 3px; margin:-6px -6px -3px 0; background-color:#fff; border-radius:3px;">Loading...</span>
+</div>
+HTML;
+
         // Adjust the name shown in the widget title bar - alternatively we could also extend process() instead of
         // render() for more control, but that may require more maintenance to keep cross-version compatible
-        $this->widget->set('name', 'Google Analytics for &lt;Property Name&gt;');
+        $this->widget->set('name', $titleElement);
 
         // Register the initialisation of the charts within this widget
         $this->controller->addHtml(<<<HTML
