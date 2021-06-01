@@ -26,7 +26,7 @@ class BigBrotherSetPropertyProcessor extends BigBrotherProcessor
 
         $this->bigBrother->setProperty($propertyId);
 
-        return $this->success('Property set to ' . $property->getDisplayName());
+        return $this->success($this->modx->lexicon('bigbrother.save_property.success',['property_name', $property->getDisplayName()]));
     }
 }
 
