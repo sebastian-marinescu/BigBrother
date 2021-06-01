@@ -26,7 +26,7 @@ abstract class BigBrotherAbstractDashboardWidget extends modDashboardWidgetInter
         }
         static::$initialized = true;
 
-        $this->bigbrother->modx->lexicon->load('bigbrother:mgr');
+        $this->modx->lexicon->load('bigbrother:mgr');
         $this->assetsUrl = $this->bigbrother->config['assets_url'];
         $this->controller->addCss($this->assetsUrl . 'css/mgr.css?v=' . urlencode($this->bigbrother->version));
         $this->controller->addJavascript($this->assetsUrl . 'node_modules/chart.js/dist/chart.js?v=' . urlencode($this->bigbrother->version));
@@ -74,7 +74,7 @@ HTML
         <p class="bigbrother-credits bigbrother-credits--justified">
             <span class="bigbrother-credits__version">{$this->modx->lexicon('bigbrother.powered_by_bigbrother')} v{$this->bigbrother->version}</span>
             <a href="https://www.modmore.com/extras/bigbrother/?utm_source=bigbrother_footer" target="_blank" rel="noopener" class="bigbrother-credits__logo">
-                <img src="{$this->modx->getOption('assets_url')}components/bigbrother/images/modmore.svg" alt="a modmore product">
+                <img src="{$this->modx->getOption('bigbrother.assets_url')}images/modmore.svg" alt="a modmore product">
             </a>
         </p>
     </div>
