@@ -141,6 +141,9 @@ BigBrother.Acquisition = function(el) {
     }
 
     let setData = function(data) {
+        if (data.length < 1) {
+            return;
+        }
         if (!chart) {
             buildChart();
         }

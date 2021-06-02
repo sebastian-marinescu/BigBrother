@@ -14,7 +14,6 @@ class BigBrotherMainDashboardWidget extends BigBrotherAbstractDashboardWidget
     {
         // Load BigBrother etc
         $this->initialize();
-        $this->modx->lexicon->load('bigbrother:mgr');
 
         // Make sure the authorization and property selection was completed. If not, show a message about needing to authorize first
         $authorized = $this->isAuthorized();
