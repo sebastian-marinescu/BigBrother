@@ -82,7 +82,9 @@ Ext.extend(BigBrother,Ext.Component,{
                                 ch.setData(result.data[ch.key]);
                             }
                         });
-                        this.renderPeriodDates(result.data['visits/line']);
+                        if (result.data['visits/line']) {
+                            this.renderPeriodDates(result.data['visits/line']);
+                        }
                         this.disableSpinners();
                     },
                     scope: this
