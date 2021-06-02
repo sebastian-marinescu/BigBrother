@@ -10,7 +10,8 @@ class BigBrotherReportsProcessor extends BigBrotherProcessor
         'visits/line' => \modmore\BigBrother\VisitsLineChart::class,
         'key-metrics' => \modmore\BigBrother\KeyMetrics::class,
         'acquisition' => \modmore\BigBrother\Acquisition::class,
-        'popular-pages' => \modmore\BigBrother\PopularPages::class
+        'popular-pages' => \modmore\BigBrother\PopularPages::class,
+        'top-countries' => \modmore\BigBrother\TopCountries::class
     ];
 
     public function process()

@@ -38,6 +38,7 @@ abstract class BigBrotherAbstractDashboardWidget extends modDashboardWidgetInter
         $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/key-metrics.js?v=' . urlencode($this->bigbrother->version));
         $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/acquisition.js?v=' . urlencode($this->bigbrother->version));
         $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/popular-pages.js?v=' . urlencode($this->bigbrother->version));
+        $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/top-countries.js?v=' . urlencode($this->bigbrother->version));
 
         $config = $this->modx->toJSON([
             'assetsUrl' => $this->assetsUrl,
