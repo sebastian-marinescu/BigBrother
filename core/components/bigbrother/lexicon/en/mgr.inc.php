@@ -29,6 +29,7 @@ $_lang['bigbrother.authorized_desc'] = 'Successfully authorized, Big Brother can
 $_lang['bigbrother.authorization'] = 'Authorization';
 $_lang['bigbrother.authorization.success'] = 'Successfully authorized.';
 $_lang['bigbrother.authorization.failure.unexpected_response'] = 'Unexpected response.';
+$_lang['bigbrother.authorization.failure.missing_id_or_secret'] = 'Missing client ID or Secret. Typically, Big Brother will provide you a default pair of Google Cloud credentials to ease the setup. However it appears those credentials are missing from your installation. These credentials need to be added before you can continue. <br><br><a href="https://docs.modmore.com/en/Open_Source/BigBrother/Custom_oAuth_Credentials.html" target="_blank" rel="noopener" style="font-weight: bold;">Learn more in the Big Brother documentation &raquo;</a>';
 $_lang['bigbrother.revoke_authorization'] = 'Revoke authorization';
 $_lang['bigbrother.revoke_authorization.confirm'] = 'Are you sure?';
 $_lang['bigbrother.revoke_authorization.confirm_text'] = 'Revoking the authorization will remove the current authorization for your account. To continue using Big Brother, you will need to sign in with Google again.';

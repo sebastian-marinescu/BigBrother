@@ -62,7 +62,7 @@ HTML
         $clientSecret = $this->modx->getOption('bigbrother.native_app_client_secret');
 
         if (empty($clientId) || empty($clientSecret)) {
-            $this->failure('Missing client ID or Secret. Typically, Big Brother will provide you a default pair of Google Cloud credentials to ease the setup. However it appears those credentials are missing from your installation. These credentials need to be added before you can continue. <br><br><a href="https://docs.modmore.com/en/Open_Source/BigBrother/Custom_oAuth_Credentials.html" target="_blank" rel="noopener" style="font-weight: bold;">Learn more in the Big Brother documentation &raquo;</a>');
+            $this->failure($this->modx->lexicon('bigbrother.authorization.failure.missing_id_or_secret'));
 
             return;
         }

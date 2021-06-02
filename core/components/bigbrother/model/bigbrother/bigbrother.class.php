@@ -81,6 +81,7 @@ class BigBrother
             'chunks_path' => $core . 'elements/chunks/',
             'assets_url' => $assetsUrl,
             'connector_url' => $assetsUrl . 'connector.php',
+            'authorize_url' => MODX_MANAGER_URL . '?namespace=bigbrother&a=authorize'
         ], $config);
 
         if ($this->modx->lexicon) {
@@ -235,4 +236,10 @@ class BigBrother
     {
         $this->updateOption('refresh_token', $refreshToken);
     }
+
+    public function getAuthorizeUrl(): string
+    {
+        return $this->config['authorize_url'];
+    }
+
 }
