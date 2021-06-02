@@ -21,7 +21,7 @@ BigBrother.TopCountries = function(el) {
             li.classList.add('bigbrother-report-list-item');
 
             li.insertAdjacentHTML('beforeend', '' +
-                '<a class="bigbrother-report-list-item--label" href="' + item.uri + '" target="_blank" rel="noopener"><span class="bigbrother-ellipsis">' + item.title + '</span></a>' +
+                '<span class="bigbrother-report-list-item--label" target="_blank" rel="noopener"><span class="bigbrother-ellipsis">' + item.title + '</span></span>' +
                 '<span class="bigbrother-report-list-item--value">' + item.value + '</span>' +
                 '<span class="bigbrother-report-list-item--previous ' + (item.improved ? 'bigbrother-list-item--up' : 'bigbrother-list-item--down') + '">' +
                     item.previous +

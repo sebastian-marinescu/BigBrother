@@ -27,7 +27,6 @@ Ext.extend(BigBrother,Ext.Component,{
 
     registerCharts(charts) {
         charts.forEach((ch) => {
-            console.log(ch)
             this._charts.push(ch);
             this._keys.push(ch.key);
         });
