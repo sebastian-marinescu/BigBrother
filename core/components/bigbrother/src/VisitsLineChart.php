@@ -64,8 +64,6 @@ class VisitsLineChart extends BaseReport
 
         $halfway = date('Ymd', strtotime('-28 days'));
 
-        $idx = 0;
-        $lastDate = '';
         foreach ($data as $stream) {
             $dataset = $stream['date'] < $halfway ? 1 : 0;
             $output['data'][$dataset]['data'][$stream['date']] = [
@@ -82,11 +80,6 @@ class VisitsLineChart extends BaseReport
                 ];
                 $output['data'][1]['labels'][] = $stream['date'];
             }
-
-            if ($idx === count($data) - 1) {
-                $lastDate = $stream['date'];
-            }
-            $idx++;
         }
 
         $output['data'][0]['data'] = $this->fillGaps($output['data'][0]['data'], '-28 days');
