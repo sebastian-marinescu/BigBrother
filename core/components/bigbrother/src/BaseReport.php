@@ -8,6 +8,7 @@ use Google\Analytics\Data\V1beta\MetricHeader;
 use Google\Analytics\Data\V1beta\MetricValue;
 use Google\Analytics\Data\V1beta\Row;
 use MODX\Revolution\modCacheManager;
+use MODX\Revolution\modX;
 
 abstract class BaseReport
 {
@@ -15,6 +16,10 @@ abstract class BaseReport
      * @var BetaAnalyticsDataClient
      */
     protected $client;
+    /**
+     * @var \modX|modX
+     */
+    protected $modx;
     /**
      * @var \modCacheManager|modCacheManager
      */
@@ -30,10 +35,11 @@ abstract class BaseReport
      * @param \modCacheManager|modCacheManager $cacheManager
      * @param string $property
      */
-    public function __construct(BetaAnalyticsDataClient $client, $cacheManager, string $property)
+    public function __construct(BetaAnalyticsDataClient $client, $modx, string $property)
     {
         $this->client = $client;
-        $this->cacheManager = $cacheManager;
+        $this->modx = $modx;
+        $this->cacheManager = $modx->cacheManager;
         $this->property = $property;
     }
 

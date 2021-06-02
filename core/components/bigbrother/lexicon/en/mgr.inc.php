@@ -49,3 +49,9 @@ $_lang['bigbrother.not_found'] = 'BigBrother was not found.';
 
 $_lang['bigbrother.acquisition_sources'] = 'Acquisition sources';
 $_lang['bigbrother.most_viewed_pages'] = 'Most viewed pages';
+
+$_lang['bigbrother.metrics.sessions'] = 'Sessions';
+$_lang['bigbrother.metrics.page_views'] = 'Page Views';
+$_lang['bigbrother.metrics.unique_visitors'] = 'Unique Visitors';
+$_lang['bigbrother.metrics.engagement_rate'] = 'Engagement Rate';
+$_lang['bigbrother.metrics.avg_time_on_site'] = 'Avg Time On Site';

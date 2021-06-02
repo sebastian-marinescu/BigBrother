@@ -84,7 +84,7 @@ class KeyMetrics extends BaseReport
     private function processSessions(array $metric)
     {
         return [
-            'label' => 'Sessions',
+            'label' => $this->modx->lexicon('bigbrother.metrics.sessions'),
             'value' => number_format($metric['value']),
             'previous' => number_format($metric['previous']),
             'improved' => $metric['value'] > $metric['previous'],
@@ -94,7 +94,7 @@ class KeyMetrics extends BaseReport
     private function processScreenPageViews(array $metric)
     {
         return [
-            'label' => 'Pageviews',
+            'label' => $this->modx->lexicon('bigbrother.metrics.page_views'),
             'value' => number_format($metric['value']),
             'previous' => number_format($metric['previous']),
             'improved' => $metric['value'] > $metric['previous'],
@@ -104,7 +104,7 @@ class KeyMetrics extends BaseReport
     private function processActiveUsers(array $metric)
     {
         return [
-            'label' => 'Unique Visitors',
+            'label' => $this->modx->lexicon('bigbrother.metrics.unique_visitors'),
             'value' => number_format($metric['value']),
             'previous' => number_format($metric['previous']),
             'improved' => $metric['value'] > $metric['previous'],
@@ -113,7 +113,7 @@ class KeyMetrics extends BaseReport
     private function processEngagementRate(array $metric)
     {
         return [
-            'label' => 'Engagement Rate',
+            'label' => $this->modx->lexicon('bigbrother.metrics.engagement_rate'),
             'value' => number_format($metric['value'] * 100, 1) . '%',
             'previous' => number_format($metric['previous'] * 100, 1) . '%',
             'improved' => $metric['value'] > $metric['previous'],
@@ -123,7 +123,7 @@ class KeyMetrics extends BaseReport
     private function processAvgUserEngagementDuration(array $metric)
     {
         return [
-            'label' => 'Avg time on site',
+            'label' => $this->modx->lexicon('bigbrother.metrics.avg_time_on_site'),
             'value' => $this->formatSeconds($metric['value']),
             'previous' => $this->formatSeconds($metric['previous']),
             'improved' => $metric['value'] > $metric['previous'],

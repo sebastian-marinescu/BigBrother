@@ -20,14 +20,13 @@ class BigBrotherReportsProcessor extends BigBrotherProcessor
 
         $oauth = $this->bigBrother->getOAuth2();
         $client = new BetaAnalyticsDataClient(['credentials' => $oauth]);
-        $cacheManager = $this->modx->getCacheManager();
         $property = $this->bigBrother->getPropertyID();
 
         $params = [];
         $data = [];
         foreach ($keys as $key) {
             if (array_key_exists($key, $this->reports)) {
-                $data[$key] = (new $this->reports[$key]($client, $cacheManager, $property))->run($params);
+                $data[$key] = (new $this->reports[$key]($client, $this->modx, $property))->run($params);
             }
         }
 
