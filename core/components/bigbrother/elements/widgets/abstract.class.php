@@ -62,7 +62,7 @@ HTML
         $property = $this->bigbrother->getPropertyID();
         $oauth = $this->bigbrother->getOAuth2();
         if (empty($property) || empty($oauth->getAccessToken())) {
-            $authLink = $this->modx->getOption('manager_url') . '?namespace=bigbrother&a=authorize';
+            $authLink = $this->bigbrother->getAuthorizeUrl();
             return <<<HTML
 <div class="bigbrother-inner-widget">
     <div class="bigbrother-block">
