@@ -6,16 +6,16 @@ use Google\Analytics\Data\V1beta\DateRange;
 use Google\Analytics\Data\V1beta\Dimension;
 use Google\Analytics\Data\V1beta\Metric;
 use Google\Analytics\Data\V1beta\OrderBy;
-use Google\Analytics\Data\V1beta\OrderBy\DimensionOrderBy;
+use Google\Analytics\Data\V1beta\OrderBy\MetricOrderBy;
 
 class TopCountries extends BaseReport
 {
     public function run(array $params = []): array
     {
         $cacheKey = 'reports/top-countries';
-//        if ($data = $this->cacheManager->get($cacheKey, \BigBrother::$cacheOptions)) {
-//            return $data;
-//        }
+        if ($data = $this->cacheManager->get($cacheKey, \BigBrother::$cacheOptions)) {
+            return $data;
+        }
 
         $response = $this->client->runReport([
             'property' => 'properties/' . $this->property,
@@ -41,9 +41,8 @@ class TopCountries extends BaseReport
             ],
             'orderBys' => [
                 new OrderBy([
-                    'dimension' => new DimensionOrderBy([
-                        'dimension_name' => 'country',
-                        'order_type' => DimensionOrderBy\OrderType::ALPHANUMERIC
+                    'metric' => new MetricOrderBy([
+                        'metric_name' => 'activeUsers'
                     ]),
                     'desc' => true,
                 ])
@@ -56,14 +55,17 @@ class TopCountries extends BaseReport
 
         $output = [];
         foreach ($data as $value) {
-            $isLatest = $value['dateRange'] === 'date_range_0' ? true : false;
-            $output['country'] = [
-                'title' => $value['country'],
-                'value' => 0,
-                'previous' => 0,
-            ];
 
-            $output['country'][$isLatest ? 'previous' : 'value'] += (int)$value['country'];
+            $isLatest = $value['dateRange'] === 'date_range_0' ? true : false;
+            if (!isset($output[$value['country']])) {
+                $output[$value['country']] = [
+                    'title' => $value['country'],
+                    'value' => 0,
+                    'previous' => 0,
+                ];
+            }
+
+            $output[$value['country']][$isLatest ? 'previous' : 'value'] += (int)$value['activeUsers'];
         }
 
         foreach ($output as $key => $values) {
@@ -75,40 +77,8 @@ class TopCountries extends BaseReport
         });
         $output = array_values($output);
 
-        //$this->cacheManager->set($cacheKey, $output, 3600, \BigBrother::$cacheOptions);
-
+        $this->cacheManager->set($cacheKey, $output, 3600, \BigBrother::$cacheOptions);
         return $output;
     }
 
-    private function processMetrics(array $metrics)
-    {
-        $output = [];
-        foreach ($metrics as $key => $metric) {
-            $mn = 'process' . ucfirst($key);
-            if (method_exists($this, $mn)) {
-                $output[] = $this->{$mn}($metric);
-            }
-        }
-        return $output;
-    }
-
-    private function processSessions(array $metric)
-    {
-        return [
-            'label' => 'Sessions',
-            'value' => number_format($metric['value']),
-            'previous' => number_format($metric['previous']),
-            'improved' => $metric['value'] > $metric['previous'],
-        ];
-    }
-
-    private function processScreenPageViews(array $metric)
-    {
-        return [
-            'label' => 'Pageviews',
-            'value' => number_format($metric['value']),
-            'previous' => number_format($metric['previous']),
-            'improved' => $metric['value'] > $metric['previous'],
-        ];
-    }
 }
