@@ -114,14 +114,14 @@ HTML;
         $property = $this->getGA4Property($propertyId);
 
         return <<<HTML
-<div class="bb-widget-title" style="width:100%; display:flex; justify-content: space-between">
+<div class="bigbrother-widget-title">
     <div>
-        <span>{$this->modx->lexicon('bigbrother.widget_title',['property_name' => $property->getDisplayName()])}</span>
-        <span style="border-radius:3px; background-color:#fff; padding:6px 8px 3px; margin:-6px 0 -3px 6px;">{$propertyId}</span>
-        <a href="{$this->bigbrother->getAuthorizeUrl()}" title="{$this->modx->lexicon('bigbrother.authorization')}" style="margin-left:8px; position:relative;"><i class="icon icon-cog" style="position:absolute; font-size:14px; top:-1px;"></i></a>
+        <span>{$this->modx->lexicon('bigbrother.widget_title', ['property_name' => $property->getDisplayName()])}</span>
+        <span class="property-id">{$propertyId}</span>
+        <a href="{$this->bigbrother->getAuthorizeUrl()}" title="{$this->modx->lexicon('bigbrother.authorization')}" class="authorize-link"><i class="icon icon-cog"></i></a>
     </div>
-    <div style="flex-grow:1; text-align:right;">
-        <span id="bb-title-period" class="bb-title-period" style="color:#fff; padding:6px 8px 3px; margin:-6px -6px -3px 0; background-color:#00b5de; border-radius:3px;">{$this->modx->lexicon('bigbrother.loading')}</span>
+    <div class="period-wrapper">
+        <span id="bb-title-period" class="bigbrother-title-period">{$this->modx->lexicon('bigbrother.loading')}</span>
     </div>
 </div>
 HTML;
