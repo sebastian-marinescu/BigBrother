@@ -27,7 +27,7 @@ abstract class BigBrotherAbstractDashboardWidget extends modDashboardWidgetInter
         }
         static::$initialized = true;
 
-        $this->modx->lexicon->load('bigbrother:mgr');
+        $this->modx->lexicon->load('bigbrother:default');
         $this->assetsUrl = $this->bigbrother->config['assets_url'];
         $this->controller->addCss($this->assetsUrl . 'css/mgr.css?v=' . urlencode($this->bigbrother->version));
 

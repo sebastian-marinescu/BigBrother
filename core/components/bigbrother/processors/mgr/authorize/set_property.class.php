@@ -8,7 +8,7 @@ class BigBrotherSetPropertyProcessor extends BigBrotherProcessor
 {
     public function process()
     {
-        $this->modx->lexicon->load('bigbrother:mgr');
+        $this->modx->lexicon->load('bigbrother:default');
         $propertyId = (string)$this->getProperty('property');
         $propertyId = trim($propertyId);
         if (empty($propertyId)) {

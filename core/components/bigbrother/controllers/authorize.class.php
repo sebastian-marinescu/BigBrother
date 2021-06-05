@@ -24,7 +24,7 @@ class BigbrotherAuthorizeManagerController extends modExtraManagerController {
 
     public function getLanguageTopics()
     {
-        return ['bigbrother:default', 'bigbrother:mgr'];
+        return ['bigbrother:default'];
     }
 
     public function initialize()

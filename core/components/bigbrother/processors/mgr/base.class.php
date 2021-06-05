@@ -6,7 +6,7 @@ abstract class BigBrotherProcessor extends modProcessor
 
     public function getLanguageTopics()
     {
-        return ['bigbrother:mgr'];
+        return ['bigbrother:default'];
     }
 
     /**
