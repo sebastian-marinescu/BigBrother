@@ -37,6 +37,7 @@ BigBrother.Acquisition = function(el) {
             options: {
                 indexAxis: 'y',
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         display: false
