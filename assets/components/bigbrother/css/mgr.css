@@ -257,6 +257,10 @@
     border-radius: 3px;
     font-weight: 500;
 }
+.bigbrother-widget-subtitle {
+    font-weight: normal;
+    color: #5a5a5a;
+}
 .bigbrother-block {
     padding: 10px;
     margin-bottom: 10px;

@@ -54,11 +54,11 @@ HTML
     </div>
     <div class="bigbrother-row">
         <div class="bigbrother-col bigbrother-block">
-            <h3 class="bigbrother-block-title">{$this->modx->lexicon('bigbrother.acquisition_sources')}</h3>
+            <h3 class="bigbrother-block-title">{$this->modx->lexicon('bigbrother.acquisition_sources')} <span class="bigbrother-widget-subtitle">{$this->modx->lexicon('bigbrother.acquisition_sources.subtitle')}</span></h3>
             <div id="bb{$this->widget->get('id')}-acquisition" style="position:relative; height: 250px"></div>
         </div>
         <div class="bigbrother-col bigbrother-block">
-            <h3 class="bigbrother-block-title">{$this->modx->lexicon('bigbrother.most_viewed_pages')}</h3>
+            <h3 class="bigbrother-block-title">{$this->modx->lexicon('bigbrother.most_viewed_pages')} <span class="bigbrother-widget-subtitle">{$this->modx->lexicon('bigbrother.most_viewed_pages.subtitle')}</span></h3>
             <div id="bb{$this->widget->get('id')}-popular-pages" class="bigbrother-report-list" style="position:relative; height: 250px"></div>
         </div>
     </div>
