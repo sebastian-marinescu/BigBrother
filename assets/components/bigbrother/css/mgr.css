@@ -232,28 +232,30 @@
 .dashboard-block.bigbrother-widget .bigbrother-widget-title .property-id {
     border-radius: 3px;
     background-color: #fff;
-    padding: 6px 8px 3px;
-    margin: -6px 0 -3px 6px;
+    padding: 6px 8px;
+    margin-left: 1em;
+    font-weight: 500;
 }
 .dashboard-block.bigbrother-widget .bigbrother-widget-title .authorize-link {
-    margin-left: 8px;
-    position: relative;
+    margin-left: 1em;
+    color: #1a385b;
 }
 .dashboard-block.bigbrother-widget .bigbrother-widget-title .authorize-link i {
-    position: absolute;
+    /*position: absolute;*/
     font-size: 14px;
-    top: -1px;
+    /*top: -1px;*/
 }
 .dashboard-block.bigbrother-widget .bigbrother-widget-title .period-wrapper {
     flex-grow: 1;
     text-align: right;
 }
 .dashboard-block.bigbrother-widget .bigbrother-widget-title .period-wrapper .bigbrother-title-period {
-    color: #fff;
-    padding: 6px 8px 3px;
-    margin: -6px -6px -3px 0;
-    background-color: #00b5de;
+    color: #1a385b;
+    padding: 6px 8px;
+    margin-right: -6px;
+    background-color: rgba(131,168,241, 0.5);
     border-radius: 3px;
+    font-weight: 500;
 }
 .bigbrother-block {
     padding: 10px;
@@ -392,7 +394,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.bigbrother-report-list-item--label:hover, .bigbrother-report-list-item--label:focus {
+a.bigbrother-report-list-item--label:hover, a.bigbrother-report-list-item--label:focus {
     text-decoration: underline;
 }
 .bigbrother-report-list-item--value {
