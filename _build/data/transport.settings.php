@@ -8,47 +8,10 @@
 
 $settings = array();
 
-$settings['bigbrother.cache_timeout']= $modx->newObject('modSystemSetting');
-$settings['bigbrother.cache_timeout']->fromArray(array(
-    'key' => 'bigbrother.cache_timeout',
-    'value' => 300,
-    'xtype' => 'textfield',
-    'namespace' => 'bigbrother',
-    'area' => 'Google Analytics for MODx Revolution',
-),'',true,true);
-
-$settings['bigbrother.admin_groups']= $modx->newObject('modSystemSetting');
-$settings['bigbrother.admin_groups']->fromArray(array(
-    'key' => 'bigbrother.admin_groups',
-    'value' => 'Administrator',
-    'xtype' => 'textfield',
-    'namespace' => 'bigbrother',
-    'area' => 'Google Analytics for MODx Revolution',
-),'',true,true);
-
-$settings['bigbrother.date_begin']= $modx->newObject('modSystemSetting');
-$settings['bigbrother.date_begin']->fromArray(array(
-    'key' => 'bigbrother.date_begin',
-    'value' => 30,
-    'xtype' => 'textfield',
-    'namespace' => 'bigbrother',
-    'area' => 'Google Analytics for MODx Revolution',
-),'',true,true);
-
-$settings['bigbrother.date_end']= $modx->newObject('modSystemSetting');
-$settings['bigbrother.date_end']->fromArray(array(
-    'key' => 'bigbrother.date_end',
-    'value' => 'yesterday',
-    'xtype' => 'textfield',
-    'namespace' => 'bigbrother',
-    'area' => 'Google Analytics for MODx Revolution',
-),'',true,true);
-
-
 $settings['bigbrother.native_app_client_id']= $modx->newObject('modSystemSetting');
 $settings['bigbrother.native_app_client_id']->fromArray(array(
     'key' => 'bigbrother.native_app_client_id',
-    'value' => GAPI_CLIENT_ID,
+    'value' => '',
     'xtype' => 'text-password',
     'namespace' => 'bigbrother',
     'area' => 'Authorization',
@@ -57,7 +20,7 @@ $settings['bigbrother.native_app_client_id']->fromArray(array(
 $settings['bigbrother.native_app_client_secret']= $modx->newObject('modSystemSetting');
 $settings['bigbrother.native_app_client_secret']->fromArray(array(
     'key' => 'bigbrother.native_app_client_secret',
-    'value' => GAPI_CLIENT_SECRET,
+    'value' => '',
     'xtype' => 'text-password',
     'namespace' => 'bigbrother',
     'area' => 'Authorization',
@@ -70,6 +33,42 @@ $settings['bigbrother.property_id']->fromArray(array(
     'xtype' => 'textfield',
     'namespace' => 'bigbrother',
     'area' => 'Authorization',
+),'',true,true);
+
+$settings['bigbrother.refresh_token']= $modx->newObject('modSystemSetting');
+$settings['bigbrother.refresh_token']->fromArray(array(
+    'key' => 'bigbrother.refresh_token',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'bigbrother',
+    'area' => 'Authorization',
+),'',true,true);
+
+$settings['bigbrother.assets_url']= $modx->newObject('modSystemSetting');
+$settings['bigbrother.assets_url']->fromArray(array(
+    'key' => 'bigbrother.assets_url',
+    'value' => '{assets_url}components/bigbrother/',
+    'xtype' => 'textfield',
+    'namespace' => 'bigbrother',
+    'area' => 'Paths',
+),'',true,true);
+
+$settings['bigbrother.assets_path']= $modx->newObject('modSystemSetting');
+$settings['bigbrother.assets_path']->fromArray(array(
+    'key' => 'bigbrother.assets_path',
+    'value' => '{assets_path}components/bigbrother/',
+    'xtype' => 'textfield',
+    'namespace' => 'bigbrother',
+    'area' => 'Paths',
+),'',true,true);
+
+$settings['bigbrother.core_path']= $modx->newObject('modSystemSetting');
+$settings['bigbrother.core_path']->fromArray(array(
+    'key' => 'bigbrother.core_path',
+    'value' => '{core_path}components/bigbrother/',
+    'xtype' => 'textfield',
+    'namespace' => 'bigbrother',
+    'area' => 'Paths',
 ),'',true,true);
 
 return $settings;

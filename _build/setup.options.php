@@ -5,22 +5,10 @@
 * @package bigbrother
 * @subpackage build
 */
-/* Default value */
-$values = array(
-    'admin_groups' => 'Administrator',
-    'cache_timeout' => 300,
-);
+
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
     case xPDOTransport::ACTION_UPGRADE:
-        $setting = $modx->getObject('modSystemSetting',array('key' => 'bigbrother.admin_groups'));
-        if ($setting != null) { $values['admin_groups'] = $setting->get('value'); }
-        unset($setting);
-
-        $setting = $modx->getObject('modSystemSetting',array('key' => 'bigbrother.cache_timeout'));
-        if ($setting != null) { $values['cache_timeout'] = $setting->get('value'); }
-        unset($setting);
-    break;
     case xPDOTransport::ACTION_UNINSTALL: break;
 }
 
@@ -49,16 +37,8 @@ $output = '
 </style>';
 
 $output .= '<p class="bb-v2">
-<b>You\'re currently using Big Brother v1, which only supports MODX 2.x and Universal Analytics (Google Analytics v3).</b>
-In April 2021 we launched a <a href="https://modmore.com/extras/bigbrother/crowdfunding/" target="_blank" rel="noopener">crowdfunding campaign for Big Brother v2</a>, to support Google Analytics v4 and MODX 3. If you enjoy Big Brother, please consider contributing to make v2 possible. Thank you!
+<b>You\'re using Big Brother v2, which only supports the new Google Analytics v4. If you must use the older Google Analytics v3, please install Big Brother v1.5 instead.</b>
+In April 2021 we launched a <a href="https://modmore.com/extras/bigbrother/crowdfunding/" target="_blank" rel="noopener">crowdfunding campaign for Big Brother v2</a>, to support Google Analytics v4 and MODX 3. If you enjoy Big Brother, please consider contributing to make v2 even better. Thank you!
 </p>';
-
-$output .= '<label for="admin_groups">Administrator Groups:</label>
-<input type="text" name="admin_groups" id="admin_groups" width="300" value="'.$values['admin_groups'].'" />
-<div class="field-desc sep">Comma separated list of User Group who have access of Big Brothers options on the CMP</div>';
-
-$output .= '<label for="cache_timeout">Cache:</label>
-<input type="text" name="cache_timeout" id="cache_timeout" width="300" value="'.$values['cache_timeout'].'" />
-<div class="field-desc">How long should report results should be cached locally (in seconds)</div>';
 
 return $output;

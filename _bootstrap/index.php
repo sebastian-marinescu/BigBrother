@@ -95,15 +95,75 @@ if (!createObject('modMenu', array(
 }
 
 if (!createObject('modDashboardWidget', [
-    'name' => 'bigbrother.main_widget',
-    'description' => 'bigbrother.main_widget_desc',
+    'name' => 'bigbrother.main.name',
+    'description' => 'bigbrother.main.desc',
     'type' => 'file',
     'size' => 'full',
     'content' =>  $componentPath.'/core/components/bigbrother/elements/widgets/main.class.php',
     'namespace' => 'bigbrother',
-    'lexicon' => 'bigbrother:mgr',
+    'lexicon' => 'bigbrother:dashboard',
 ], 'name', false)) {
     echo "Error creating main_widget.\n";
+}
+
+if (!createObject('modDashboardWidget', [
+    'name' => 'bigbrother.visits.name',
+    'description' => 'bigbrother.visits.desc',
+    'type' => 'file',
+    'size' => 'half',
+    'content' =>  $componentPath.'/core/components/bigbrother/elements/widgets/visits.class.php',
+    'namespace' => 'bigbrother',
+    'lexicon' => 'bigbrother:dashboard',
+], 'name', false)) {
+    echo "Error creating visits widget.\n";
+}
+
+if (!createObject('modDashboardWidget', [
+    'name' => 'bigbrother.metrics.name',
+    'description' => 'bigbrother.metrics.desc',
+    'type' => 'file',
+    'size' => 'half',
+    'content' =>  $componentPath.'/core/components/bigbrother/elements/widgets/metrics.class.php',
+    'namespace' => 'bigbrother',
+    'lexicon' => 'bigbrother:dashboard',
+], 'name', false)) {
+    echo "Error creating metrics widget.\n";
+}
+
+if (!createObject('modDashboardWidget', [
+    'name' => 'bigbrother.acquisition.name',
+    'description' => 'bigbrother.acquisition.desc',
+    'type' => 'file',
+    'size' => 'half',
+    'content' =>  $componentPath.'/core/components/bigbrother/elements/widgets/acquisition.class.php',
+    'namespace' => 'bigbrother',
+    'lexicon' => 'bigbrother:dashboard',
+], 'name', false)) {
+    echo "Error creating acquisition widget.\n";
+}
+
+if (!createObject('modDashboardWidget', [
+    'name' => 'bigbrother.popular_pages.name',
+    'description' => 'bigbrother.popular_pages.desc',
+    'type' => 'file',
+    'size' => 'half',
+    'content' =>  $componentPath.'/core/components/bigbrother/elements/widgets/popularpages.class.php',
+    'namespace' => 'bigbrother',
+    'lexicon' => 'bigbrother:dashboard',
+], 'name', false)) {
+    echo "Error creating popular pages widget.\n";
+}
+
+if (!createObject('modDashboardWidget', [
+    'name' => 'bigbrother.top_countries.name',
+    'description' => 'bigbrother.top_countries.desc',
+    'type' => 'file',
+    'size' => 'half',
+    'content' =>  $componentPath.'/core/components/bigbrother/elements/widgets/topcountries.class.php',
+    'namespace' => 'bigbrother',
+    'lexicon' => 'bigbrother:dashboard',
+], 'name', false)) {
+    echo "Error creating top countries widget.\n";
 }
 
 $settings = include dirname(dirname(__FILE__)).'/_build/data/transport.settings.php';
