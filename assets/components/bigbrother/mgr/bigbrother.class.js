@@ -1,5 +1,7 @@
 var BigBrother = function(config) {
     config = config || {};
+    this.widgetCount = 0;
+    this.waitTime = 500;
     BigBrother.superclass.constructor.call(this,config);
 };
 Ext.extend(BigBrother,Ext.Component,{
@@ -31,7 +33,22 @@ Ext.extend(BigBrother,Ext.Component,{
             this._keys.push(ch.key);
         });
 
-        this.refreshCharts();
+        const refreshCharts = this.debounce(() => this.refreshCharts());
+
+        // Once the first widget's chart is registered, set a timer to allow the others to register before sending a
+        // request. This ensures all widgets are populated via a single request instead of one per widget.
+        this.widgetCount++;
+        if (this.widgetCount === 1) {
+            refreshCharts();
+        }
+    },
+
+    debounce(func, timeout = this.waitTime){
+        let timer;
+        return (...args) => {
+            clearTimeout(timer);
+            timer = setTimeout(() => { func.apply(this, args); }, timeout);
+        };
     },
 
     _spinners: null,
