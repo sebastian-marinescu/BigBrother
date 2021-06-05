@@ -6,7 +6,7 @@ class BigBrotherRevokeProcessor extends BigBrotherProcessor
     public function process()
     {
         $this->bigBrother->setRefreshToken('');
-        $this->modx->getCacheManager()->delete(BigBrother::$cacheKey, BigBrother::$cacheOptions);
+        $this->modx->getCacheManager()->delete(BigBrother::$accessTokenCacheKey, BigBrother::$cacheOptions);
 
         return $this->success($this->modx->lexicon('bigbrother.revoke_authorization.success'));
     }
