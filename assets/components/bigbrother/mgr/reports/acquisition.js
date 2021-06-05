@@ -17,7 +17,7 @@ BigBrother.Acquisition = function(el) {
                 labels: [],
                 datasets: [
                     {
-                        label: 'This month',//_('bigbrother.this_month'),
+                        label: _('bigbrother.this_month'),
                         data: [],
                         borderWidth: 0,
                         backgroundColor: '#234368',
@@ -25,7 +25,7 @@ BigBrother.Acquisition = function(el) {
                         barThickness: 10,
                     },
                     {
-                        label: 'Last month',//_('bigbrother.last_month'),
+                        label: _('bigbrother.last_month'),
                         data: [],
                         borderWidth: 0,
                         backgroundColor: 'rgba(131,168,241, 0.3)',
@@ -53,7 +53,7 @@ BigBrother.Acquisition = function(el) {
                         }
                     },
                     x: {
-                        title: 'page views',//_('bigbrother.page_views'),
+                        title: _('bigbrother.page_views'),
                         grid: {
                             drawBorder: false,
                         }
