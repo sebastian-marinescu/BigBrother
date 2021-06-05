@@ -21,8 +21,7 @@ class BigBrotherPopularPagesDashboardWidget extends BigBrotherAbstractDashboardW
 
         // Adjust the name shown in the widget title bar - alternatively we could also extend process() instead of
         // render() for more control, but that may require more maintenance to keep cross-version compatible
-        $this->widget->set('name', 'Most viewed pages');
-
+        $this->widget->set('name', $this->modx->lexicon('bigbrother.most_viewed_pages') . ' <span class="bigbrother-widget-subtitle">' . $this->modx->lexicon('bigbrother.most_viewed_pages.subtitle') . '</span>');
 
         // Register the initialisation of the chart within this widget
         $this->controller->addHtml(<<<HTML

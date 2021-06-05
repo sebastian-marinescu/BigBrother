@@ -49,7 +49,13 @@ $_lang['bigbrother.widget_title'] = 'Google Analytics for [[+property_name]]';
 $_lang['bigbrother.not_found'] = 'BigBrother was not found.';
 
 $_lang['bigbrother.acquisition_sources'] = 'Acquisition sources';
-$_lang['bigbrother.most_viewed_pages'] = 'Most viewed pages';
+$_lang['bigbrother.acquisition_sources.subtitle'] = 'by page views for first user source';
+$_lang['bigbrother.most_viewed_pages'] = 'Most popular pages';
+$_lang['bigbrother.most_viewed_pages.subtitle'] = 'by page views';
+$_lang['bigbrother.key_metrics'] = 'Key metrics';
+$_lang['bigbrother.top_countries'] = 'Top countries';
+$_lang['bigbrother.top_countries.subtitle'] = 'by unique users';
+$_lang['bigbrother.daily_page_views'] = 'Daily page views';
 
 $_lang['bigbrother.metrics.sessions'] = 'Sessions';
 $_lang['bigbrother.metrics.page_views'] = 'Page Views';

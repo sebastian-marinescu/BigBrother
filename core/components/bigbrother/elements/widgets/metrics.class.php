@@ -21,7 +21,7 @@ class BigBrotherMetricsDashboardWidget extends BigBrotherAbstractDashboardWidget
 
         // Adjust the name shown in the widget title bar - alternatively we could also extend process() instead of
         // render() for more control, but that may require more maintenance to keep cross-version compatible
-        $this->widget->set('name', 'Key metrics');
+        $this->widget->set('name', $this->modx->lexicon('bigbrother.key_metrics'));
 
 
         // Register the initialisation of the chart within this widget

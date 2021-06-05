@@ -21,8 +21,7 @@ class BigBrotherVisitsLineDashboardWidget extends BigBrotherAbstractDashboardWid
 
         // Adjust the name shown in the widget title bar - alternatively we could also extend process() instead of
         // render() for more control, but that may require more maintenance to keep cross-version compatible
-        $this->widget->set('name', 'Pageviews by day');
-
+        $this->widget->set('name', $this->modx->lexicon('bigbrother.daily_page_views'));
 
         // Register the initialisation of the chart within this widget
         $this->controller->addHtml(<<<HTML
