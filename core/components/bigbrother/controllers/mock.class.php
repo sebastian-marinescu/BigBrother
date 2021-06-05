@@ -34,8 +34,8 @@ class BigbrotherMockManagerController extends modExtraManagerController {
         echo '<pre>';
 //        $this->dumpProperties();
 //        $this->dumpPageSpecificReport();
-        $this->dumpRealtimeReport();
-//        $this->dumpReport();
+//        $this->dumpRealtimeReport();
+        $this->dumpReport();
 
         exit();
     }
@@ -78,15 +78,18 @@ class BigbrotherMockManagerController extends modExtraManagerController {
 //                new Dimension([
 //                    'name' => 'date',
 //                ]),
-                new Dimension([
-                    'name' => 'sessionMedium',
-                ]),
-                new Dimension([
-                    'name' => 'sessionSource',
-                ]),
-                new Dimension([
-                    'name' => 'pagePath',
-                ]),
+//                new Dimension([
+//                    'name' => 'hostName',
+//                ]),
+//                new Dimension([
+//                    'name' => 'sessionMedium',
+//                ]),
+//                new Dimension([
+//                    'name' => 'sessionSource',
+//                ]),
+//                new Dimension([
+//                    'name' => 'pagePath',
+//                ]),
             ],
             'metrics' => [
                 new Metric([
@@ -95,23 +98,23 @@ class BigbrotherMockManagerController extends modExtraManagerController {
                 new Metric([
                     'name' => 'screenPageViews',
                 ]),
-                new Metric([
-                    'name' => 'engagementRate',
-                ]),
 //                new Metric([
-//                    'name' => 'avgUserEngagementDuration',
-//                    'expression' => 'userEngagementDuration / totalUsers',
-//                ])
+//                    'name' => 'engagementRate',
+//                ]),
+                new Metric([
+                    'name' => 'avgUserEngagementDuration',
+                    'expression' => 'userEngagementDuration / totalUsers',
+                ]),
             ],
 
-            'dimensionFilter' => new \Google\Analytics\Data\V1beta\FilterExpression([
-                'filter' => new Google\Analytics\Data\V1beta\Filter([
-                    'field_name' => 'pagePath',
-                    'string_filter' => new Google\Analytics\Data\V1beta\Filter\StringFilter([
-                        'value' => '/contentblocks/'
-                    ])
-                ])
-            ]),
+//            'dimensionFilter' => new \Google\Analytics\Data\V1beta\FilterExpression([
+//                'filter' => new Google\Analytics\Data\V1beta\Filter([
+//                    'field_name' => 'pagePath',
+//                    'string_filter' => new Google\Analytics\Data\V1beta\Filter\StringFilter([
+//                        'value' => '/contentblocks/'
+//                    ])
+//                ])
+//            ]),
 
             'orderBys' => [
 //                new \Google\Analytics\Data\V1beta\OrderBy([
@@ -156,6 +159,48 @@ class BigbrotherMockManagerController extends modExtraManagerController {
         $oauth = $this->bigbrother->getOAuth2();
         $client = new BetaAnalyticsDataClient(['credentials' => $oauth]);
 
+//        $response = $client->runReport([
+//            'property' => 'properties/' . $property,
+//            'dateRanges' => [
+//                new DateRange([
+//                    'start_date' => '28daysAgo',
+//                    'end_date' => 'today',
+//                ]),
+//                new DateRange([
+//                    'start_date' => '56daysAgo',
+//                    'end_date' => '28daysAgo',
+//                ]),
+//            ],
+//            'dimensions' => [
+////                new Dimension([
+////                    'name' => 'date',
+////                ]),
+////                new Dimension([
+////                    'name' => 'audienceName',
+////                ]),
+////                new Dimension([
+////                    'name' => 'brandingInterest',
+////                ]),
+//            ],
+//            'metrics' => [
+////                new Metric([
+////                    'name' => 'sessions',
+////                ]),
+//                new Metric([
+//                    'name' => 'screenPageViews',
+//                ]),
+//            ],
+//            'orderBys' => [
+//                new OrderBy([
+//                    'dimension' => new DimensionOrderBy([
+//                        'dimension_name' => 'date'
+//                    ])
+//                ])
+//            ]
+//        ]);
+
+
+
         $response = $client->runReport([
             'property' => 'properties/' . $property,
             'dateRanges' => [
@@ -163,35 +208,27 @@ class BigbrotherMockManagerController extends modExtraManagerController {
                     'start_date' => '28daysAgo',
                     'end_date' => 'today',
                 ]),
-            ],
-            'dimensions' => [
-//                new Dimension([
-//                    'name' => 'date',
-//                ]),
-                new Dimension([
-                    'name' => 'audienceName',
-                ]),
-                new Dimension([
-                    'name' => 'brandingInterest',
+                new DateRange([
+                    'start_date' => '56daysAgo',
+                    'end_date' => '28daysAgo',
                 ]),
             ],
             'metrics' => [
-//                new Metric([
-//                    'name' => 'sessions',
-//                ]),
+                new Metric([
+                    'name' => 'sessions',
+                ]),
                 new Metric([
                     'name' => 'screenPageViews',
                 ]),
+                new Metric([
+                    'name' => 'activeUsers',
+                ]),
+                new Metric([
+                    'name' => 'avgUserEngagementDuration',
+                    'expression' => 'userEngagementDuration / totalUsers',
+                ]),
             ],
-            'orderBys' => [
-//                new OrderBy([
-//                    'dimension' => new DimensionOrderBy([
-//                        'dimension_name' => 'date'
-//                    ])
-//                ])
-            ]
         ]);
-
         var_dump($this->parseReportToArray($response));
 
 //        $response = $client->runReport([
