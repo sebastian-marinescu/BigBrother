@@ -14,7 +14,7 @@ class VisitsLineChart extends BaseReport
 {
     public function run(array $params = []): array
     {
-        $cacheKey = 'reports/visits-line/' . date('Ymd');
+        $cacheKey = 'reports/visits-line';
         if ($data = $this->cacheManager->get($cacheKey, \BigBrother::$cacheOptions)) {
             return $data;
         }
