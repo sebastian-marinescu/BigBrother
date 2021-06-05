@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "firebase/php-jwt",
-            "version": "v5.2.1",
+            "version": "v5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "f42c9110abe98dd6cfe9053c49bc86acc70b2d23"
+                "reference": "3c2d70f2e64e2922345e89f2ceae47d2463faae1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/f42c9110abe98dd6cfe9053c49bc86acc70b2d23",
-                "reference": "f42c9110abe98dd6cfe9053c49bc86acc70b2d23",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/3c2d70f2e64e2922345e89f2ceae47d2463faae1",
+                "reference": "3c2d70f2e64e2922345e89f2ceae47d2463faae1",
                 "shasum": ""
             },
             "require": {
@@ -54,7 +54,7 @@
                 "jwt",
                 "php"
             ],
-            "time": "2021-02-12T00:02:00+00:00"
+            "time": "2021-05-20T17:37:02+00:00"
         },
         {
             "name": "google/analytics-admin",
@@ -335,16 +335,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v3.15.8",
+            "version": "v3.17.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "cae7735e67acf738881c02ca12604cc4a7ad2e5a"
+                "reference": "eb88ea2fd91beedfc79ed43305bc755e66b30fe4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/cae7735e67acf738881c02ca12604cc4a7ad2e5a",
-                "reference": "cae7735e67acf738881c02ca12604cc4a7ad2e5a",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/eb88ea2fd91beedfc79ed43305bc755e66b30fe4",
+                "reference": "eb88ea2fd91beedfc79ed43305bc755e66b30fe4",
                 "shasum": ""
             },
             "require": {
@@ -372,20 +372,20 @@
             "keywords": [
                 "proto"
             ],
-            "time": "2021-04-08T17:17:35+00:00"
+            "time": "2021-06-02T18:53:02+00:00"
         },
         {
             "name": "grpc/grpc",
-            "version": "1.36.0",
+            "version": "1.38.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/grpc/grpc-php.git",
-                "reference": "6145dd917d340b579f0b663940b17cc93172b79a"
+                "reference": "e1687963fb0b087d0c70e75d3bfff9062eaeb215"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/6145dd917d340b579f0b663940b17cc93172b79a",
-                "reference": "6145dd917d340b579f0b663940b17cc93172b79a",
+                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/e1687963fb0b087d0c70e75d3bfff9062eaeb215",
+                "reference": "e1687963fb0b087d0c70e75d3bfff9062eaeb215",
                 "shasum": ""
             },
             "require": {
@@ -413,7 +413,7 @@
             "keywords": [
                 "rpc"
             ],
-            "time": "2021-03-01T21:52:11+00:00"
+            "time": "2021-05-24T20:45:41+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -567,16 +567,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.8.1",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "35ea11d335fd638b5882ff1725228b3d35496ab1"
+                "reference": "dc960a912984efb74d0a90222870c72c87f10c91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/35ea11d335fd638b5882ff1725228b3d35496ab1",
-                "reference": "35ea11d335fd638b5882ff1725228b3d35496ab1",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/dc960a912984efb74d0a90222870c72c87f10c91",
+                "reference": "dc960a912984efb74d0a90222870c72c87f10c91",
                 "shasum": ""
             },
             "require": {
@@ -634,7 +634,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2021-03-21T16:25:00+00:00"
+            "time": "2021-04-26T09:17:50+00:00"
         },
         {
             "name": "psr/cache",
