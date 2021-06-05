@@ -5,7 +5,6 @@
     "luxon": "^1.27.0",
     "uglify-js": "^3.13.9"
   },
-
   "scripts": {
     "build": "npm run build:js",
     "build:js": "uglifyjs --compress --mangle --output dist/dashboard.min.js --source-map -- node_modules/chart.js/dist/chart.min.js node_modules/luxon/build/global/luxon.min.js node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.min.js mgr/bigbrother.class.js mgr/reports/visits.js mgr/reports/key-metrics.js mgr/reports/acquisition.js mgr/reports/popular-pages.js mgr/reports/top-countries.js"
