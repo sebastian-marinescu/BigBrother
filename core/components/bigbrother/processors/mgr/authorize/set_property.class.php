@@ -26,6 +26,7 @@ class BigBrotherSetPropertyProcessor extends BigBrotherProcessor
         }
 
         $this->bigBrother->setProperty($propertyId);
+        $this->modx->getCacheManager()->delete('reports', BigBrother::$cacheOptions);
 
         return $this->success($this->modx->lexicon('bigbrother.save_property.success',['property_name' => $property->getDisplayName()]));
     }
