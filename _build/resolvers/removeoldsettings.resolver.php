@@ -9,14 +9,17 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
     case xPDOTransport::ACTION_UPGRADE:
 
-        $settings = [
+        // Remove old settings from BB v1.x
+        $removeSettings = [
             'admin_groups',
             'cache_timeout',
             'date_begin',
-            'date_end'
+            'date_end',
+            'show_metas_on_dashboard',
+            'show_pies_on_dashboard',
+            'show_visits_on_dashboard'
         ];
-
-        foreach ($settings as $key) {
+        foreach ($removeSettings as $key) {
             $setting = $object->xpdo->getObject('modSystemSetting',array('key' => 'bigbrother.'.$key));
             if ($setting !== null) {
                 if ($setting->remove() === false) {
@@ -25,9 +28,20 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             } else {
                 $object->xpdo->log(xPDO::LOG_LEVEL_ERROR,'[BigBrother] '.$key.' setting could not be found, so the setting could not be removed.');
             }
-
         }
 
+        // Make sure settings that are kept move to the correct area.
+        $updateAreaSettings = [
+            'native_app_client_id',
+            'native_app_client_secret'
+        ];
+        foreach ($removeSettings as $key) {
+            $setting = $object->xpdo->getObject('modSystemSetting', array('key' => 'bigbrother.' . $key));
+            if ($setting !== null) {
+               $setting->set('area','Authorization');
+               $setting->save();
+            }
+        }
 
     case xPDOTransport::ACTION_UNINSTALL:
 
