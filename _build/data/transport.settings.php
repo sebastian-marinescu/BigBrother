@@ -71,4 +71,13 @@ $settings['bigbrother.core_path']->fromArray(array(
     'area' => 'Paths',
 ),'',true,true);
 
+$settings['bigbrother.scripts_dev']= $modx->newObject('modSystemSetting');
+$settings['bigbrother.scripts_dev']->fromArray(array(
+    'key' => 'bigbrother.scripts_dev',
+    'value' => '0',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'bigbrother',
+    'area' => 'Paths',
+),'',true,true);
+
 return $settings;

@@ -29,3 +29,6 @@ $_lang['setting_bigbrother.assets_path_desc'] = 'The path to Big Brother\'s asse
 
 $_lang['setting_bigbrother.core_path'] = 'Core Path';
 $_lang['setting_bigbrother.core_path_desc'] = 'The path to Big Brother\'s core directory.';
+
+$_lang['setting_bigbrother.scripts_dev'] = 'Load development scripts';
+$_lang['setting_bigbrother.scripts_dev_desc'] = 'When enabled uncompressed scripts will be used on the dashboard, useful for debugging and development. <b>You must run <code>npm install</code> inside assets/components/bigbrother/ before enabling this setting to avoid errors.</b>';
