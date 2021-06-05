@@ -53,10 +53,18 @@ class Acquisition extends BaseReport
         $output = [];
         foreach ($data as $value) {
             $dataset = $value['dateRange'] === 'date_range_0' ? 0 : 1;
-            $output[$dataset]['labels'][] = $value['firstUserMedium'];
+            $output[$dataset]['labels'][] = $this->normalizeMedium($value['firstUserMedium']);
             $output[$dataset]['data'][] = (int)$value['screenPageViews'];
         }
 
         return $output;
+    }
+
+    private function normalizeMedium(string $firstUserMedium): string
+    {
+        if ($firstUserMedium === '(none)') {
+            return 'direct';
+        }
+        return $firstUserMedium;
     }
 }
