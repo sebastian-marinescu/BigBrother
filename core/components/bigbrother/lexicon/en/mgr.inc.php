@@ -39,7 +39,7 @@ $_lang['bigbrother.not_authorized.authorize_now'] = 'Authorize now';
 
 $_lang['bigbrother.current_property'] = '<p>Currently using property <b>[[+displayName]]</b> (<code>[[+propertyId]]</code>)</p>';
 $_lang['bigbrother.property'] = 'Select the Google Analytics Property';
-$_lang['bigbrother.property_desc'] = 'Using the browser below, please select the Google Analytics account and the property to use with Big Brother. Note that this information is cached, so if you have just added an account or property, it may take a few minutes to appear in the list.';
+$_lang['bigbrother.property_desc'] = 'Using the browser below, please select the Google Analytics account and the property to use with Big Brother. Note that this information is cached, so if you have recently added an account or property you may need to clear the cache (via the Manage > Clear Cache menu) before it will appear in the list.';
 $_lang['bigbrother.save_property'] = 'Save selected property';
 $_lang['bigbrother.save_property.success'] = 'Property set to [[+property_name]]';
 

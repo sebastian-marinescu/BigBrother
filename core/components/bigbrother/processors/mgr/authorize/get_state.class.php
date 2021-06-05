@@ -29,8 +29,8 @@ class BigBrotherGetStateProcessor extends BigBrotherProcessor
             return [];
         }
 
-        $cacheKey = 'accounts_' . sha1($oAuth->getRefreshToken());
-        $cached = $this->modx->getCacheManager()->get($cacheKey, BigBrother::$cacheOptions);
+        $cacheKey = 'bigbrother_accounts_' . sha1($oAuth->getRefreshToken());
+        $cached = $this->modx->getCacheManager()->get($cacheKey);
         if (is_array($cached)) {
             return $cached;
         }
@@ -74,7 +74,7 @@ class BigBrotherGetStateProcessor extends BigBrotherProcessor
             return strtolower($a['displayName']) > strtolower($b['displayName']) ? 1 : -1;
         });
 
-        $this->modx->getCacheManager()->set($cacheKey, $accounts, 3000, BigBrother::$cacheOptions);
+        $this->modx->getCacheManager()->set($cacheKey, $accounts, 3600);
         return $accounts;
     }
 
