@@ -107,7 +107,7 @@ $vehicle->resolve('file', [
 ]);
 
 $vehicle->resolve('php', [
-    'source' => $sources['resolvers'] . 'setupoptions.resolver.php',
+    'source' => $sources['resolvers'] . 'removeoldsettings.resolver.php',
 ]);
 
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in resolvers.'); flush();

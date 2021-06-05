@@ -1,6 +1,5 @@
 <?php
 /**
-* Resolves setup-options settings for Administator groups.
 *
 * @package bigbrother
 * @subpackage build
