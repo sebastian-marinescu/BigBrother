@@ -256,6 +256,7 @@
     background-color: rgba(131,168,241, 0.5);
     border-radius: 3px;
     font-weight: 500;
+    white-space: nowrap;
 }
 .bigbrother-widget-subtitle {
     font-weight: normal;
