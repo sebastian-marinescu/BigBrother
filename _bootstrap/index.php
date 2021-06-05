@@ -111,7 +111,7 @@ if (!createObject('modDashboardWidget', [
     'description' => 'bigbrother.visits.desc',
     'type' => 'file',
     'size' => 'half',
-    'content' =>  $componentPath.'/core/components/bigbrother/elements/widgets/visits.class.php',
+    'content' =>  $componentPath.'/core/components/bigbrother/elements/widgets/visitsline.class.php',
     'namespace' => 'bigbrother',
     'lexicon' => 'bigbrother:dashboard',
 ], 'name', false)) {

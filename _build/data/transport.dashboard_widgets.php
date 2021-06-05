@@ -25,7 +25,7 @@ $widgets[1]->fromArray([
     'description' => 'bigbrother.visits.desc',
     'type' => 'file',
     'size' => 'half',
-    'content' => '[[++core_path]]components/bigbrother/elements/widgets/visits.class.php',
+    'content' => '[[++core_path]]components/bigbrother/elements/widgets/visitsline.class.php',
     'namespace' => 'bigbrother',
     'lexicon' => 'bigbrother:dashboard',
 ], '', true, true);
