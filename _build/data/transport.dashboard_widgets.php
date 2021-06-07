@@ -16,7 +16,7 @@ $widgets[0]->fromArray([
     'size' => 'full',
     'content' => '[[++core_path]]components/bigbrother/elements/widgets/main.class.php',
     'namespace' => 'bigbrother',
-    'lexicon' => 'bigbrother:dashboard',
+    'lexicon' => 'bigbrother:default',
 ], '', true, true);
 
 $widgets[1]= $modx->newObject('modDashboardWidget');
@@ -27,7 +27,7 @@ $widgets[1]->fromArray([
     'size' => 'half',
     'content' => '[[++core_path]]components/bigbrother/elements/widgets/visitsline.class.php',
     'namespace' => 'bigbrother',
-    'lexicon' => 'bigbrother:dashboard',
+    'lexicon' => 'bigbrother:default',
 ], '', true, true);
 
 $widgets[2]= $modx->newObject('modDashboardWidget');
@@ -38,7 +38,7 @@ $widgets[2]->fromArray([
     'size' => 'half',
     'content' => '[[++core_path]]components/bigbrother/elements/widgets/metrics.class.php',
     'namespace' => 'bigbrother',
-    'lexicon' => 'bigbrother:dashboard',
+    'lexicon' => 'bigbrother:default',
 ], '', true, true);
 
 $widgets[3]= $modx->newObject('modDashboardWidget');
@@ -49,7 +49,7 @@ $widgets[3]->fromArray([
     'size' => 'half',
     'content' => '[[++core_path]]components/bigbrother/elements/widgets/acquisition.class.php',
     'namespace' => 'bigbrother',
-    'lexicon' => 'bigbrother:dashboard',
+    'lexicon' => 'bigbrother:default',
 ], '', true, true);
 
 $widgets[4]= $modx->newObject('modDashboardWidget');
@@ -60,7 +60,7 @@ $widgets[4]->fromArray([
     'size' => 'half',
     'content' => '[[++core_path]]components/bigbrother/elements/widgets/popularpages.class.php',
     'namespace' => 'bigbrother',
-    'lexicon' => 'bigbrother:dashboard',
+    'lexicon' => 'bigbrother:default',
 ], '', true, true);
 
 $widgets[5]= $modx->newObject('modDashboardWidget');
@@ -71,7 +71,7 @@ $widgets[5]->fromArray([
     'size' => 'half',
     'content' => '[[++core_path]]components/bigbrother/elements/widgets/topcountries.class.php',
     'namespace' => 'bigbrother',
-    'lexicon' => 'bigbrother:dashboard',
+    'lexicon' => 'bigbrother:default',
 ], '', true, true);
 
 return $widgets;
