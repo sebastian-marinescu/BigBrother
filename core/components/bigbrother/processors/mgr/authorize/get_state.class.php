@@ -40,9 +40,14 @@ class BigBrotherGetStateProcessor extends BigBrotherProcessor
         $accounts = [];
 
         /** @var AccountSummary[] $summaries */
-        $summaries = $admin->listAccountSummaries([
-            'pageSize' => 200,
-        ]);
+        try {
+            $summaries = $admin->listAccountSummaries([
+                'pageSize' => 200,
+            ]);
+        } catch (\Google\ApiCore\ApiException $e) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, '[BigBrother] Received ' . get_class($e) . ' trying to list accounts and properties: ' . $e->getMessage());
+            return false;
+        }
         foreach ($summaries as $summary) {
             $account = [
                 'account' => $summary->getAccount(),
