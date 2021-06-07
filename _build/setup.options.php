@@ -39,7 +39,7 @@ $output = '
 $output .= '<p class="bb-v2">
 <b>You\'re using Big Brother v2, which only supports the new Google Analytics v4. If you must use the older Google Analytics v3, please downgrade to Big Brother v1.x instead.</b>
 </p>
-<p class="bb-v2">Do you like Big Brother? <a href="https://modmore.com/extras/bigbrother/donate/" target="_blank" rel="noopener">Please consider a donation</a> to support our open source work. Thank you!
+<p>Do you like Big Brother? <a href="https://modmore.com/extras/bigbrother/donate/" target="_blank" rel="noopener">Please consider a donation</a> to support our open source work. Thank you!
 </p>';
 
 return $output;
