@@ -24,9 +24,9 @@ function getSnippetContent($path, $name, $debug = false) {
 if (!defined('MOREPROVIDER_BUILD')) {
     /* define version */
     define('PKG_NAME', 'BigBrother');
-    define('PKG_NAME_LOWER', strtolower(PKG_NAME));
+    define('PKG_NAMESPACE', strtolower(PKG_NAME));
     define('PKG_VERSION', '2.0.0');
-    define('PKG_RELEASE', 'dev1');
+    define('PKG_RELEASE', 'dev3');
 
     /* load modx */
     require_once dirname(dirname(__FILE__)) . '/config.core.php';
@@ -46,19 +46,19 @@ else {
 
 $root = dirname(dirname(__FILE__)).'/';
 $sources= array (
-    'debug' => true,
     'root' => $root,
-    'files' => $root .'files/',
     'build' => $root .'_build/',
-    'data' => $root .'_build/data/',
-    'resolvers' => $root .'_build/resolvers/',
-    'validators' => $root .'_build/validators/',
-    'core' => $root.'core/components/'.PKG_NAME_LOWER,
-    'snippets' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/snippets/',
-    'assets' => $root.'assets/components/'.PKG_NAME_LOWER,
-    'lexicon' => $root . 'core/components/'.PKG_NAME_LOWER.'/lexicon/',
-    'docs' => $root.'core/components/'.PKG_NAME_LOWER.'/docs/',
-    'model' => $root.'core/components/'.PKG_NAME_LOWER.'/model/',
+    'events' => $root . '_build/events/',
+    'resolvers' => $root . '_build/resolvers/',
+    'validators' => $root . '_build/validators/',
+    'data' => $root . '_build/data/',
+    'plugins' => $root.'_build/elements/plugins/',
+    'snippets' => $root.'_build/elements/snippets/',
+    'source_core' => $root.'core/components/'.PKG_NAMESPACE,
+    'source_assets' => $root.'assets/components/'.PKG_NAMESPACE,
+    'lexicon' => $root . 'core/components/'.PKG_NAMESPACE.'/lexicon/',
+    'docs' => $root.'core/components/'.PKG_NAMESPACE.'/docs/',
+    'model' => $root.'core/components/'.PKG_NAMESPACE.'/model/',
 );
 unset($root);
 
@@ -73,48 +73,43 @@ if (!defined('GAPI_CLIENT_ID')) {
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
 $builder->directory = $targetDirectory;
-$builder->createPackage(PKG_NAME_LOWER,PKG_VERSION,PKG_RELEASE);
-$builder->registerNamespace(PKG_NAME_LOWER,false,true,'{core_path}components/'.PKG_NAME_LOWER.'/', '{assets_path}components/'.PKG_NAME_LOWER.'/');
-$modx->getService('lexicon','modLexicon');
-$modx->lexicon->load('bigbrother:default');
+$builder->createPackage(PKG_NAMESPACE,PKG_VERSION,PKG_RELEASE);
+$builder->registerNamespace(PKG_NAMESPACE,false,true,'{core_path}components/'.PKG_NAMESPACE.'/', '{assets_path}components/'.PKG_NAMESPACE.'/');
 
-/* Create category */
-$category= $modx->newObject('modCategory');
-$category->set('id',1);
-$category->set('category',PKG_NAME);
-$modx->log(modX::LOG_LEVEL_INFO,'Packaged in category.'); flush();
+$builder->package->put(
+    [
+        'source' => $sources['source_core'],
+        'target' => "return MODX_CORE_PATH . 'components/';",
+    ],
+    [
+        xPDOTransport::ABORT_INSTALL_ON_VEHICLE_FAIL => true,
+        'vehicle_class' => 'xPDOFileVehicle',
+        'validate' => [
+            [
+                'type' => 'php',
+                'source' => $sources['validators'] . 'requirements.script.php'
+            ]
+        ]
+    ]
+);
+$modx->log(modX::LOG_LEVEL_INFO,'Packaged in core and requirements validator.'); flush();
 
-$vehicle= $builder->createVehicle($category, [
-    xPDOTransport::UNIQUE_KEY => 'category',
-    xPDOTransport::PRESERVE_KEYS => false,
-    xPDOTransport::UPDATE_OBJECT => true,
-    xPDOTransport::RELATED_OBJECTS => false,
-]);
-
-$modx->log(modX::LOG_LEVEL_INFO, 'Adding file resolvers to category...');
-
-$vehicle->validate('php', [
-    'source' => $sources['validators'] . 'requirements.script.php'
-]);
-$vehicle->resolve('file', [
-    'source' => $sources['core'],
-    'target' => "return MODX_CORE_PATH . 'components/';",
-]);
-
-$vehicle->resolve('file', [
-    'source' => $sources['assets'],
-    'target' => "return MODX_ASSETS_PATH . 'components/';",
-]);
-
-$vehicle->resolve('php', [
-    'source' => $sources['resolvers'] . 'removeoldsettings.resolver.php',
-]);
-$vehicle->resolve('php', [
-    'source' => $sources['resolvers'] . 'removeoldfiles.resolver.php',
-]);
-
-$modx->log(modX::LOG_LEVEL_INFO,'Packaged in resolvers.'); flush();
-$builder->putVehicle($vehicle);
+$builder->package->put(
+    [
+        'source' => $sources['source_assets'],
+        'target' => "return MODX_ASSETS_PATH . 'components/';",
+    ],
+    [
+        'vehicle_class' => 'xPDOFileVehicle',
+        'resolve' => array(
+            array(
+                'type' => 'php',
+                'source' => $sources['resolvers'] . 'removeoldfiles.resolver.php',
+            )
+        )
+    ]
+);
+$modx->log(modX::LOG_LEVEL_INFO,'Packaged in assets and removeoldfiles resolver.'); flush();
 
 /* Load system settings */
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in System Settings...');
@@ -147,6 +142,17 @@ foreach ($widgets as $widget) {
     $builder->putVehicle($vehicle);
 }
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($widgets).' widgets.'); flush();
+
+$vehicle = $builder->createVehicle([
+        'source' => $sources['resolvers'] . 'upgrade.resolver.php',
+    ],
+    [
+        'vehicle_class' => 'xPDOScriptVehicle',
+    ]
+);
+$builder->putVehicle($vehicle);
+
+$modx->log(modX::LOG_LEVEL_INFO,'Added upgrade resolver to last dashboard widget.'); flush();
 unset($widgets,$widget,$attributes);
 
 /* Pack in the license file, readme and setup options */

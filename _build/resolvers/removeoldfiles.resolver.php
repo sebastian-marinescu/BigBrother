@@ -13,13 +13,11 @@ function removeDirectory($key) {
     rmdir($key);
 }
 
-if ($object->xpdo) {
+$modx = $transport->xpdo;
+if ($transport->xpdo) {
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         case xPDOTransport::ACTION_INSTALL:
-            return true;
-
         case xPDOTransport::ACTION_UPGRADE:
-            $modx = $object->xpdo;
             $assetsPath = $modx->getOption('assets_path');
             $corePath = $modx->getOption('core_path');
             if (!$assetsPath || !$corePath) {
