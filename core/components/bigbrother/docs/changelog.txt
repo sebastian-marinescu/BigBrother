@@ -1,3 +1,17 @@
+Big Brother 2.0.0-dev3
+----------------------
+Released on 2021-06-07
+
+- Make sure v1 widget is removed on upgrade to v2, attempt to automatically migrate
+- Adjust the build to be more in line with our other packages
+
+Big Brother 2.0.0-dev2
+----------------------
+Released on 2021-06-07
+
+- Fix broken lexicons in the dashboard widget selection
+- Fix requirements disallowing MODX3 (left-over from 1.5)
+
 Big Brother 2.0.0-dev1
 ----------------------
 Released on 2021-06-07
