@@ -135,8 +135,12 @@ class BigBrother
             }
             // If we don't have the access token, but we do have a refresh token, fetch a new auth token
             elseif ($this->OAuth2->getRefreshToken()) {
-                $accessToken = $this->OAuth2->fetchAuthToken();
-                $this->setAccessToken($accessToken);
+                try {
+                    $accessToken = $this->OAuth2->fetchAuthToken();
+                    $this->setAccessToken($accessToken);
+                } catch (Exception $e) {
+                    $this->modx->log(modX::LOG_LEVEL_ERROR, '[BigBrother] Unexpected ' . get_class($e) . ' refreshing access token: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
+                }
             }
         }
 

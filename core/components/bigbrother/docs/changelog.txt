@@ -3,7 +3,7 @@ Big Brother 2.0.0-dev4
 Released on 2021-06-07
 
 - Fail installation if bcmath extension is not loaded; this is a requirement in the Google Protobuf dependency
-- Catch API errors in listing accounts/properties, generating reports, and verifying oAuth code
+- Catch API errors in listing accounts/properties, generating reports, verifying oAuth code, and refreshing access token [#47]
 - Downgrade some dependencies to allow installation on 7.1 and up (once requirement goes up to 7.3+ this can be reverted)
 
 Big Brother 2.0.0-dev3
