@@ -19,7 +19,7 @@ class BigBrotherVerifyCodeProcessor extends BigBrotherProcessor
         // Fetch new tokens
         try {
             $tokens = $oAuth->fetchAuthToken();
-        } catch (\GuzzleHttp\Exception\GuzzleException $e) {
+        } catch (Exception $e) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, '[BigBrother] Received oAuth error when verifying token: ' . $e->getMessage());
             return $this->failure($this->modx->lexicon('bigbrother.oauth_error'));
         }

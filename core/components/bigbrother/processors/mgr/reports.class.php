@@ -27,7 +27,13 @@ class BigBrotherReportsProcessor extends BigBrotherProcessor
         $data = [];
         foreach ($keys as $key) {
             if (array_key_exists($key, $this->reports)) {
-                $data[$key] = (new $this->reports[$key]($client, $this->modx, $property))->run($params);
+                try {
+                    $data[$key] = (new $this->reports[$key]($client, $this->modx, $property))->run($params);
+                } catch (Exception $e) {
+                    $this->modx->log(modX::LOG_LEVEL_ERROR, '[BigBrother] Received ' . get_class($e) . ' running report "' . $key . '": ' . $e->getMessage());
+                } catch (Error $e) {
+                    $this->modx->log(modX::LOG_LEVEL_ERROR, '[BigBrother] Received ' . get_class($e) . ' running report "' . $key . '": ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
+                }
             }
         }
 
