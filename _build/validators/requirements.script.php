@@ -23,11 +23,19 @@ switch($options[xPDOTransport::PACKAGE_ACTION]) {
         }
         $modx->log($level, '- PHP version 7.1.0+: ' . PHP_VERSION);
 
+        $level = xPDO::LOG_LEVEL_INFO;
+        $bcMath = extension_loaded('bcmath');
+        if (!$bcMath) {
+            $level = xPDO::LOG_LEVEL_ERROR;
+            $success = false;
+        }
+        $modx->log($level, '- bcmath extension loaded: ' . ($bcMath ? 'yes' : 'no'));
+
         if ($success) {
             $modx->log(xPDO::LOG_LEVEL_INFO, 'Requirements look good!');
         }
         else {
-            $modx->log(xPDO::LOG_LEVEL_ERROR, 'Unfortunately, your server does not meet the minimum requirements for SiteDash Client and installation cannot continue.');
+            $modx->log(xPDO::LOG_LEVEL_ERROR, 'Unfortunately, your server does not meet the minimum requirements for the installation to continue.');
         }
 
         break;
