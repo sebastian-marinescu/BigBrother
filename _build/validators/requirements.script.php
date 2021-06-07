@@ -14,11 +14,7 @@ switch($options[xPDOTransport::PACKAGE_ACTION]) {
             $level = xPDO::LOG_LEVEL_ERROR;
             $success = false;
         }
-        if (version_compare($modxVersion['full_version'], '3.0.0-dev1') > 0) {
-            $level = xPDO::LOG_LEVEL_ERROR;
-            $success = false;
-        }
-        $modx->log($level, '- MODX Revolution 2.7 (< 3.0): ' . $modxVersion['full_version']);
+        $modx->log($level, '- MODX Revolution 2.7+: ' . $modxVersion['full_version']);
 
         $level = xPDO::LOG_LEVEL_INFO;
         if (version_compare(PHP_VERSION, '7.1.0') < 0) {
