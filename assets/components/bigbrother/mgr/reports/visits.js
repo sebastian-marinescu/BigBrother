@@ -15,7 +15,7 @@ BigBrother.VisitsLineGraph = function(el) {
             type: 'line',
             data: {
                 datasets: [{
-                    label: 'Daily pageviews',
+                    label: _('bigbrother.daily_page_views'),
                     data: [],
                     fill: false,
                     borderColor: '#234368',
@@ -28,7 +28,7 @@ BigBrother.VisitsLineGraph = function(el) {
                     tension: 0.1,
                     xAxisID: 'x',
                 },{
-                    label: '4 weeks before',
+                    label: _('bigbrother.four_weeks_before'),
                     data: [],
                     fill: 'origin',
                     borderColor: 'rgba(131,168,241, 0.5)',
