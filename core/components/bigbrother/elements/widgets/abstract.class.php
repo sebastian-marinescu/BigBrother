@@ -52,6 +52,7 @@ abstract class BigBrotherAbstractDashboardWidget extends modDashboardWidgetInter
             'version' => $this->bigbrother->version,
         ]);
         $this->controller->addHtml(<<<HTML
+<script>Ext.applyIf(MODx.lang, {$this->modx->toJSON($this->modx->lexicon->loadCache('bigbrother'))});</script>
 <script>
     BigBrother.config = $config;
 </script>
