@@ -1,3 +1,7 @@
+Big Brother 2.0.0-pl
+----------------------
+Released on 2021-08-02
+
 - Bump minimum PHP version to 7.2; this matches the updated MODX3 minimum version and resolves a Guzzle version conflict
 - On MODX3 alpha4+, use the core-provided PSR7 Client with the Google SDK
 - Update dependencies (uglify-js 3.14.1, chart.js 3.5.0, luxon 1.28, google/analytics-data 0.5.1, google/analytics-admin 0.3.0)
