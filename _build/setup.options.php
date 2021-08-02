@@ -49,9 +49,9 @@ $output = '
 </style>';
 
 $output .= '<p class="bb-v2">
-<b>You\'re currently using Big Brother v1, which only supports MODX 2.x and Universal Analytics (Google Analytics v3).</b>
-In April 2021 we launched a <a href="https://modmore.com/extras/bigbrother/crowdfunding/" target="_blank" rel="noopener">crowdfunding campaign for Big Brother v2</a>, to support Google Analytics v4 and MODX 3. If you enjoy Big Brother, please consider contributing to make v2 possible. Thank you!
-</p>';
+<b>You\'re using Big Brother v1, which only supports Google Analytics v3 (Universal Analytics) and MODX 2.7+.</b>
+If you use Google Analytics v4 or MODX 3, you need to upgrade to Big Brother v2. <a href="https://support.modmore.com/article/228-what-is-universal-analytics-google-analytics-4" target="_blank" rel="noopener">Learn more about the difference.</a></p>
+<p>Do you like Big Brother? <a href="https://modmore.com/extras/bigbrother/donate/" target="_blank" rel="noopener">Please consider a donation</a> to support our open source work. Thank you!</p>';
 
 $output .= '<label for="admin_groups">Administrator Groups:</label>
 <input type="text" name="admin_groups" id="admin_groups" width="300" value="'.$values['admin_groups'].'" />
