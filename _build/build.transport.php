@@ -78,6 +78,33 @@ $builder->registerNamespace(PKG_NAME_LOWER,false,true,'{core_path}components/'.P
 $modx->getService('lexicon','modLexicon');
 $modx->lexicon->load('bigbrother:default');
 
+$builder->package->put(
+    [
+        'source' => $sources['source_core'],
+        'target' => "return MODX_CORE_PATH . 'components/';",
+    ],
+    [
+        xPDOTransport::ABORT_INSTALL_ON_VEHICLE_FAIL => true,
+        'vehicle_class' => 'xPDOFileVehicle',
+        'validate' => [
+            [
+                'type' => 'php',
+                'source' => $sources['validators'] . 'requirements.script.php'
+            ]
+        ]
+    ]
+);
+$modx->log(modX::LOG_LEVEL_INFO,'Packaged in core and requirements validator.'); flush();
+
+$builder->package->put(
+    [
+        'source' => $sources['source_assets'],
+        'target' => "return MODX_ASSETS_PATH . 'components/';",
+    ]
+);
+$modx->log(modX::LOG_LEVEL_INFO,'Packaged in assets and removeoldfiles resolver.'); flush();
+
+
 /* Create category */
 $category= $modx->newObject('modCategory');
 $category->set('id',1);
@@ -92,19 +119,6 @@ $vehicle= $builder->createVehicle($category, array(
 ));
 
 $modx->log(modX::LOG_LEVEL_INFO, 'Adding file resolvers to category...');
-
-$vehicle->validate('php', array(
-    'source' => $sources['validators'] . 'requirements.script.php'
-));
-$vehicle->resolve('file',array(
-    'source' => $sources['core'],
-    'target' => "return MODX_CORE_PATH . 'components/';",
-));
-
-$vehicle->resolve('file',array(
-    'source' => $sources['assets'],
-    'target' => "return MODX_ASSETS_PATH . 'components/';",
-));
 
 $vehicle->resolve('php',array(
     'source' => $sources['resolvers'] . 'setupoptions.resolver.php',

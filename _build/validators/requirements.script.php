@@ -1,6 +1,6 @@
 <?php
 /** @var modX $modx */
-$modx =& $object->xpdo;
+$modx =& $transport->xpdo;
 $success = false;
 switch($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
@@ -31,7 +31,7 @@ switch($options[xPDOTransport::PACKAGE_ACTION]) {
             $modx->log(xPDO::LOG_LEVEL_INFO, 'Requirements look good!');
         }
         else {
-            $modx->log(xPDO::LOG_LEVEL_ERROR, 'Unfortunately, your server does not meet the minimum requirements for SiteDash Client and installation cannot continue.');
+            $modx->log(xPDO::LOG_LEVEL_ERROR, 'Unfortunately, your server does not meet the minimum requirements for the installation to continue.');
         }
 
         break;
