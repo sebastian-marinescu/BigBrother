@@ -1,6 +1,8 @@
 <?php
 
 use Google\Auth\OAuth2;
+use Psr\Container\ContainerInterface;
+use Psr\Http\Client\ClientInterface;
 
 require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
 
@@ -101,6 +103,18 @@ class BigBrother
      */
     public function getOAuth2(): OAuth2
     {
+        // On MODX3 (alpha4 or up), grab the core-provided Client and pass that into the Google instance.
+        if ($this->modx->services instanceof ContainerInterface) {
+            try {
+                $client = $this->modx->services->get(ClientInterface::class);
+                if ($client instanceof \GuzzleHttp\Client) {
+                    \Google\Auth\HttpHandler\HttpClientCache::setHttpClient($client);
+                }
+            } catch (Exception $e) {
+                // ignore
+            }
+        }
+
         if (!$this->OAuth2) {
             $clientId = $this->modx->getOption('bigbrother.native_app_client_id');
             $clientSecret = $this->modx->getOption('bigbrother.native_app_client_secret');

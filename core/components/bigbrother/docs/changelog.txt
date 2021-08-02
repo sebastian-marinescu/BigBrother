@@ -1,4 +1,5 @@
 - Bump minimum PHP version to 7.2; this matches the updated MODX3 minimum version and resolves a Guzzle version conflict
+- On MODX3 alpha4+, use the core-provided PSR7 Client with the Google SDK
 
 Big Brother 2.0.0-dev4
 ----------------------
