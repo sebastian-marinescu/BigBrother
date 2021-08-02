@@ -46,6 +46,14 @@ abstract class BigBrotherAbstractDashboardWidget extends modDashboardWidgetInter
             $this->controller->addJavascript($this->assetsUrl . 'dist/dashboard.min.js?v=' . urlencode($this->bigbrother->version));
         }
 
+        // Manually load the "bigbrother:default" lexicon so that translations can be accessed within the widgets.
+        $this->controller->addHtml(<<<HTML
+<script>
+    Ext.applyIf(MODx.lang, {$this->modx->toJSON($this->modx->lexicon->loadCache('bigbrother'))});
+</script>
+HTML
+        );
+
         $config = $this->modx->toJSON([
             'assetsUrl' => $this->assetsUrl,
             'connectorUrl' => $this->bigbrother->config['connector_url'],

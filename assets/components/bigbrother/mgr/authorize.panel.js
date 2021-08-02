@@ -53,7 +53,7 @@ BigBrother.panel.AuthorizePanel = function(config) {
                     columnWidth: 1,
                     items: [{
                         xtype: 'button',
-                        text: '<img src="' + BigBrother.config.assetsUrl + 'images/signin-google.png" alt="Signin with Google" width="191px" height="46px">',
+                        text: '<img src="' + BigBrother.config.assetsUrl + 'images/signin-google.png" alt="' + _('bigbrother.sign_in_with_google') + '" width="191px" height="46px">',
                         name: 'authorize',
                         id: 'bigbrother-authorize-login-btn',
                         anchor: '100%',
@@ -170,7 +170,7 @@ BigBrother.panel.AuthorizePanel = function(config) {
                         singleSelect: true,
                         overClass: 'x-view-over',
                         itemSelector: 'li.bigbrother-list-item',
-                        emptyText: '<p class="bigbrother-no-accounts">The authorized Google account does not seem to have any Google Analytics web properties. Revoke the authorization and try signing in with a different account.</p>',
+                        emptyText: '<p class="bigbrother-no-accounts">' + _('bigbrother.missing_web_properties') + '</p>',
                         listeners: {
                             click: {fn: function(view) {
                                 var selected = view.getSelectedRecords()[0];
@@ -208,7 +208,7 @@ BigBrother.panel.AuthorizePanel = function(config) {
                         singleSelect: true,
                         overClass: 'x-view-over',
                         itemSelector: 'li.bigbrother-list-item',
-                        emptyText: '<p class="bigbrother-no-properties">The selected account does not have any Google Analytics 4 properties. <br><br> To use Google Analytics 3 ("Universal Analytics") properties, please downgrade to Big Brother v1, available from modmore. <a href="https://support.modmore.com/article/233-how-can-i-use-universal-analytics-properties-with-big-brother" target="_blank" rel="noopener">Learn more &raquo;</a></p>',
+                        emptyText: '<p class="bigbrother-no-properties">' + _('bigbrother.missing_ga4_web_properties') + '</p>',
                         listeners: {
                             click: {fn: function(view) {
                                 var selected = view.getSelectedRecords()[0];

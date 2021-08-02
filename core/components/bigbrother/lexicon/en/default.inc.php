@@ -35,6 +35,7 @@ $_lang['bigbrother.initial_authorization'] = 'Authorization';
 $_lang['bigbrother.initial_authorization_description'] = '<p>To access your Google Analytics data, Big Brother needs authorization to access your Google account in three simple steps. The integration requires only read-only access, authorization secrets will never leave your site. </p>';
 $_lang['bigbrother.authorization_step1desc'] = 'Click the button to start the sign in process in a new window. Choose your Google Account if prompted, and authorize the Big Brother integration. Copy the provided authorization token.';
 $_lang['bigbrother.authorization_step2desc'] = 'Copy and paste the authorization token into the field below. ';
+$_lang['bigbrother.sign_in_with_google'] = 'Sign in with Google';
 $_lang['bigbrother.code'] = 'Paste the Authorization Code';
 $_lang['bigbrother.loading'] = 'Loading...';
 $_lang['bigbrother.verify_code'] = 'Verify Code';
@@ -62,6 +63,8 @@ $_lang['bigbrother.property'] = 'Select the Google Analytics Property';
 $_lang['bigbrother.property_desc'] = 'Using the browser below, please select the Google Analytics account and the property to use with Big Brother. Note that this information is cached, so if you have recently added an account or property you may need to clear the cache (via the Manage > Clear Cache menu) before it will appear in the list.';
 $_lang['bigbrother.save_property'] = 'Save selected property';
 $_lang['bigbrother.save_property.success'] = 'Property set to [[+property_name]]';
+$_lang['bigbrother.missing_web_properties'] = 'The authorized Google account does not seem to have any Google Analytics web properties. Revoke the authorization and try signing in with a different account.';
+$_lang['bigbrother.missing_ga4_web_properties'] = 'The selected account does not have any Google Analytics 4 properties. <br><br> To use Google Analytics 3 ("Universal Analytics") properties, please downgrade to Big Brother v1, available from modmore. <a href="https://support.modmore.com/article/233-how-can-i-use-universal-analytics-properties-with-big-brother" target="_blank" rel="noopener">Learn more &raquo;</a>';
 
 /** Lexicons used by the widgets themselves */
 $_lang['bigbrother.main_widget'] = 'Big Brother - Full Stats';
@@ -77,6 +80,7 @@ $_lang['bigbrother.key_metrics'] = 'Key metrics';
 $_lang['bigbrother.top_countries'] = 'Top countries';
 $_lang['bigbrother.top_countries.subtitle'] = 'by unique users';
 $_lang['bigbrother.daily_page_views'] = 'Daily page views';
+$_lang['bigbrother.four_weeks_before'] = '4 weeks before';
 
 $_lang['bigbrother.metrics.sessions'] = 'Sessions';
 $_lang['bigbrother.metrics.page_views'] = 'Page Views';

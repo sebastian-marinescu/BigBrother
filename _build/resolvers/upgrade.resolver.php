@@ -43,6 +43,24 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                $setting->save();
             }
         }
+
+        // Remove v1 menu item
+        $menu = $modx->getObject('modMenu', [
+            'text'  =>  'BigBrother',
+            'namespace' => 'bigbrother'
+        ]);
+        if ($menu instanceof modMenu) {
+            $modx->log(xPDO::LOG_LEVEL_WARN, 'Removing Big Brother v1 menu item...');
+            $success = $menu->remove();
+
+            if (!$success) {
+                $modx->log(xPDO::LOG_LEVEL_ERROR, 'Unable to remove Big Brother v1 menu item!');
+            }
+            else {
+                $modx->log(xPDO::LOG_LEVEL_WARN, 'Successfully removed Big Brother v1 menu item.');
+            }
+        }
+
         
         // Make sure v1 widget is replaced with v2 automatically
         $oldWidget = $modx->getObject('modDashboardWidget', [
@@ -51,17 +69,30 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $newWidget = $modx->getObject('modDashboardWidget', [
             'name' => 'bigbrother.main.name',
         ]);
+
         if ($oldWidget && $newWidget) {
             foreach ($modx->getIterator('modDashboardWidgetPlacement', [
                 'widget' => $oldWidget->get('id')
             ]) as $placement) {
-                $modx->log(xPDO::LOG_LEVEL_WARN,'Replacing Big Brother v1 widget with Big Brother v2 widget on dashboard #' . $placement->get('dashboard'));
-                $placement->set('widget', $newWidget->get('id'));
-                $placement->save();
-            }
+                $dashboardId = $placement->get('dashboard');
+                $position = $placement->get('rank');
 
-            $modx->log(xPDO::LOG_LEVEL_WARN, 'Removing Big Brother v1 widget');
-            $oldWidget->remove();
+                $modx->log(xPDO::LOG_LEVEL_WARN,'Replacing Big Brother v1 widget with Big Brother v2 widget on dashboard #' . $placement->get('dashboard'));
+                $oldWidget->remove();
+
+                // Create new placement to avoid strange behaviour of old placement disappearing
+                $newPlacement = $modx->newObject('modDashboardWidgetPlacement');
+                $newPlacement->set('dashboard', $dashboardId);
+                $newPlacement->set('widget', $newWidget->get('id'));
+                $newPlacement->set('rank', $position);
+                $success = $newPlacement->save();
+                if ($success) {
+                    $modx->log(xPDO::LOG_LEVEL_WARN, 'Successfully replaced Big Brother v1 widget.');
+                }
+                else {
+                    $modx->log(xPDO::LOG_LEVEL_ERROR, 'Something went wrong replacing the Big Brother v1 widget!');
+                }
+            }
         }
 
     case xPDOTransport::ACTION_UNINSTALL:
