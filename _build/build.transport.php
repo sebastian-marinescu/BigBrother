@@ -25,7 +25,7 @@ if (!defined('MOREPROVIDER_BUILD')) {
     /* define version */
     define('PKG_NAME', 'BigBrother');
     define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-    define('PKG_VERSION', '1.5.0');
+    define('PKG_VERSION', '1.5.1');
     define('PKG_RELEASE', 'pl');
 
     /* load modx */
@@ -80,7 +80,7 @@ $modx->lexicon->load('bigbrother:default');
 
 $builder->package->put(
     [
-        'source' => $sources['source_core'],
+        'source' => $sources['core'],
         'target' => "return MODX_CORE_PATH . 'components/';",
     ],
     [
@@ -98,7 +98,7 @@ $modx->log(modX::LOG_LEVEL_INFO,'Packaged in core and requirements validator.');
 
 $builder->package->put(
     [
-        'source' => $sources['source_assets'],
+        'source' => $sources['assets'],
         'target' => "return MODX_ASSETS_PATH . 'components/';",
     ]
 );

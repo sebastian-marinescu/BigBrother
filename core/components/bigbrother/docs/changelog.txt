@@ -1,4 +1,9 @@
+Big Brother 1.5.1-pl
+----------------------
+Released on 2021-08-02
+
 - Make sure installation fails when requirements aren't met [#69]
+- Upgrade setup notice to clarify v1/v2
 
 Big Brother 1.5.0-pl
 ----------------------
