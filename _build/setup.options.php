@@ -37,8 +37,7 @@ $output = '
 </style>';
 
 $output .= '<p class="bb-v2">
-<b>You\'re using Big Brother v2, which only supports the new Google Analytics v4. If you must use the older Google Analytics v3, please downgrade to Big Brother v1.x instead.</b>
-</p>
+<b>You\'re using Big Brother v2, which only supports the new Google Analytics v4</b>. If you use the older Google Analytics v3 (also known as "Universal Analytics"), <a href="https://support.modmore.com/article/239-how-can-i-install-big-brother-1-5" target="_blank" rel="noopener">downgrade to Big Brother v1.5</a>.</p>
 <p>Do you like Big Brother? <a href="https://modmore.com/extras/bigbrother/donate/" target="_blank" rel="noopener">Please consider a donation</a> to support our open source work. Thank you!
 </p>';
 
