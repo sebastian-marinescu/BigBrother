@@ -1,3 +1,10 @@
+Big Brother 2.0.1-pl
+----------------------
+Released on 2021-08-03
+
+- Remove guzzlehttp/guzzle from Big Brother, instead depend on the new guzzle7 package to avoid dependency conflicts (https://modx.com/extras/package/guzzle7)
+
+
 Big Brother 2.0.0-pl
 ----------------------
 Released on 2021-08-02

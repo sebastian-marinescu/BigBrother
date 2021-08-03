@@ -25,7 +25,7 @@ if (!defined('MOREPROVIDER_BUILD')) {
     /* define version */
     define('PKG_NAME', 'BigBrother');
     define('PKG_NAMESPACE', strtolower(PKG_NAME));
-    define('PKG_VERSION', '2.0.0');
+    define('PKG_VERSION', '2.0.1');
     define('PKG_RELEASE', 'pl');
 
     /* load modx */
@@ -101,12 +101,16 @@ $builder->package->put(
     ],
     [
         'vehicle_class' => 'xPDOFileVehicle',
-        'resolve' => array(
-            array(
+        'resolve' => [
+            [
                 'type' => 'php',
                 'source' => $sources['resolvers'] . 'removeoldfiles.resolver.php',
-            )
-        )
+            ],
+            [
+                'type' => 'php',
+                'source' => $sources['resolvers'] . 'dependencies.resolver.php',
+            ]
+        ],
     ]
 );
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in assets and removeoldfiles resolver.'); flush();
