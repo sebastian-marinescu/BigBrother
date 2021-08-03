@@ -75,7 +75,26 @@ HTML
     protected function isAuthorized()
     {
         $property = $this->bigbrother->getPropertyID();
-        $oauth = $this->bigbrother->getOAuth2();
+        try {
+            $oauth = $this->bigbrother->getOAuth2();
+        } catch (Exception $e) {
+            return <<<HTML
+<div class="bigbrother-inner-widget">
+    <div class="bigbrother-block">
+        <p class="bigbrother-warning">
+            {$this->modx->lexicon('bigbrother.guzzle_error')}
+        </p>
+        
+        <p class="bigbrother-credits bigbrother-credits--justified">
+            <span class="bigbrother-credits__version">{$this->modx->lexicon('bigbrother.powered_by_bigbrother')} v{$this->bigbrother->version}</span>
+            <a href="https://www.modmore.com/extras/bigbrother/?utm_source=bigbrother_footer" target="_blank" rel="noopener" class="bigbrother-credits__logo">
+                <img src="{$this->modx->getOption('bigbrother.assets_url')}images/modmore.svg" alt="a modmore product">
+            </a>
+        </p>
+    </div>
+</div>
+HTML;
+        }
         if (empty($property) || empty($oauth->getAccessToken())) {
             $authLink = $this->bigbrother->getAuthorizeUrl();
             return <<<HTML

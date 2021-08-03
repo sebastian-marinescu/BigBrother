@@ -56,6 +56,7 @@ $_lang['bigbrother.revoke_authorization.confirm_text'] = 'Revoking the authoriza
 $_lang['bigbrother.revoke_authorization.success'] = 'Authorization revoked. Please sign in with Google to re-authorize Big Brother.';
 $_lang['bigbrother.not_authorized.warning'] = 'Big Brother has not yet been authorized, the authorization was revoked, or a Google Analytics property has not yet been selected. Once authorized and configured, this dashboard widget will show your Google Analytics statistics.';
 $_lang['bigbrother.not_authorized.authorize_now'] = 'Authorize now';
+$_lang['bigbrother.guzzle_error'] = 'Big Brother requires Guzzle to work, but it cannot be found. Please install the Guzzle7 package (available via the MODX Package Manager) to resolve this issue and continue setting up Big Brother.';
 
 /** Property selection */
 $_lang['bigbrother.current_property'] = '<p>Currently using property <b>[[+displayName]]</b> (<code>[[+propertyId]]</code>)</p>';

@@ -100,6 +100,7 @@ class BigBrother
      * fetch a new access token automatically and save that.
      *
      * @return OAuth2
+     * @throws Exception Fails if Guzzle is not available.
      */
     public function getOAuth2(): OAuth2
     {
@@ -111,8 +112,13 @@ class BigBrother
                     \Google\Auth\HttpHandler\HttpClientCache::setHttpClient($client);
                 }
             } catch (Exception $e) {
-                // ignore
+                // ignore as we're likely on alpha3 or before
             }
+        }
+
+        // Make sure that by now we do have a guzzle client instance, otherwise fail.
+        if (!class_exists(\GuzzleHttp\Client::class)) {
+            throw new Exception('Failed loading Guzzle Client.');
         }
 
         if (!$this->OAuth2) {

@@ -63,11 +63,15 @@ HTML
 
         if (empty($clientId) || empty($clientSecret)) {
             $this->failure($this->modx->lexicon('bigbrother.authorization.failure.missing_id_or_secret'));
-
             return;
         }
 
-        $oauth = $this->bigbrother->getOAuth2();
+        try {
+            $oauth = $this->bigbrother->getOAuth2();
+        } catch (Exception $e) {
+            $this->failure($this->modx->lexicon('bigbrother.guzzle_error'));
+            return;
+        }
 
         $authUrl = $oauth->buildFullAuthorizationUri();
         $this->addHtml("<script>BigBrother.config.authorizeUrl = '$authUrl';</script>");

@@ -21,6 +21,12 @@ abstract class BigBrotherProcessor extends modProcessor
         if (!$this->bigBrother) {
             return $this->modx->lexicon('bigbrother.not_found');
         }
+        try {
+            $this->bigBrother->getOAuth2();
+        } catch (Exception $e) {
+            return $this->modx->lexicon('bigbrother.guzzle_error');
+        }
+
         return parent::initialize();
     }
 }

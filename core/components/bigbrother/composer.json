@@ -7,10 +7,12 @@
     "require": {
         "google/analytics-data": "^0.5.0",
         "google/analytics-admin": "^0.3.0",
-        "guzzlehttp/guzzle": "^7.0",
-        "php": ">=7.1",
+        "php": ">=7.2",
         "ext-json": "*",
         "ext-bcmath": "*"
+    },
+    "replace": {
+        "guzzlehttp/guzzle": "*"
     },
     "autoload": {
         "psr-4": {
