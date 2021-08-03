@@ -17,7 +17,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
          * Define required packages: name => minimum version
          */
         $packages = [
-            'Guzzle7' => '1.0.0-pl',
+            'Guzzle7' => '1.0.0',
         ];
 
         /** @var modTransportProvider|\MODX\Revolution\Transport\modTransportProvider $provider */
