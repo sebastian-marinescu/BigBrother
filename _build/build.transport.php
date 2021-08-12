@@ -131,6 +131,39 @@ foreach ($settings as $setting) {
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' system settings.'); flush();
 unset($settings,$setting,$attributes);
 
+/**
+ * Access Policy Templates & Access Policies
+ */
+$templates = include $sources['data'].'transport.policy_templates.php';
+$attributes = [
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UNIQUE_KEY => ['name'],
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::RELATED_OBJECTS => true,
+    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => [
+        'Permissions' => [
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => ['template','name'],
+        ],
+        'Policies' => [
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => ['template','name'],
+        ],
+    ]
+];
+if (is_array($templates)) {
+    foreach ($templates as $template) {
+        $vehicle = $builder->createVehicle($template,$attributes);
+        $builder->putVehicle($vehicle);
+    }
+    $modx->log(\modX::LOG_LEVEL_INFO,'Packaged in '.count($templates).' Access Policy Templates.'); flush();
+} else {
+    $modx->log(\modX::LOG_LEVEL_ERROR,'Could not package in Access Policy Templates.');
+}
+unset ($templates, $template, $attributes);
+
 /* Load Dashboard Widgets */
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in Dashboard Widgets...');
 $widgets = include $sources['data'].'transport.dashboard_widgets.php';
