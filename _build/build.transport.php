@@ -94,46 +94,10 @@ $builder->package->put(
 );
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in core and requirements validator.'); flush();
 
-$builder->package->put(
-    [
-        'source' => $sources['source_assets'],
-        'target' => "return MODX_ASSETS_PATH . 'components/';",
-    ],
-    [
-        'vehicle_class' => 'xPDOFileVehicle',
-        'resolve' => [
-            [
-                'type' => 'php',
-                'source' => $sources['resolvers'] . 'removeoldfiles.resolver.php',
-            ],
-            [
-                'type' => 'php',
-                'source' => $sources['resolvers'] . 'dependencies.resolver.php',
-            ]
-        ],
-    ]
-);
-$modx->log(modX::LOG_LEVEL_INFO,'Packaged in assets and removeoldfiles resolver.'); flush();
-
-/* Load system settings */
-$modx->log(modX::LOG_LEVEL_INFO,'Packaging in System Settings...');
-$settings = include $sources['data'].'transport.settings.php';
-if (empty($settings)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
-$attributes= array(
-    xPDOTransport::UNIQUE_KEY => 'key',
-    xPDOTransport::PRESERVE_KEYS => true,
-    xPDOTransport::UPDATE_OBJECT => false,
-);
-foreach ($settings as $setting) {
-    $vehicle = $builder->createVehicle($setting,$attributes);
-    $builder->putVehicle($vehicle);
-}
-$modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' system settings.'); flush();
-unset($settings,$setting,$attributes);
-
 /**
  * Access Policy Templates & Access Policies
  */
+$modx->log(modX::LOG_LEVEL_INFO,'Packaging in Access Policy Templates...');
 $templates = include $sources['data'].'transport.policy_templates.php';
 $attributes = [
     xPDOTransport::PRESERVE_KEYS => true,
@@ -163,6 +127,49 @@ if (is_array($templates)) {
     $modx->log(\modX::LOG_LEVEL_ERROR,'Could not package in Access Policy Templates.');
 }
 unset ($templates, $template, $attributes);
+
+
+$builder->package->put(
+    [
+        'source' => $sources['source_assets'],
+        'target' => "return MODX_ASSETS_PATH . 'components/';",
+    ],
+    [
+        'vehicle_class' => 'xPDOFileVehicle',
+        'resolve' => [
+            [
+                'type' => 'php',
+                'source' => $sources['resolvers'] . 'removeoldfiles.resolver.php',
+            ],
+            [
+                'type' => 'php',
+                'source' => $sources['resolvers'] . 'dependencies.resolver.php',
+            ],
+            [
+                'type' => 'php',
+                'source' => $sources['resolvers'] . 'policies.resolver.php',
+            ]
+        ],
+    ]
+);
+$modx->log(modX::LOG_LEVEL_INFO,'Packaged in assets and removeoldfiles resolver.'); flush();
+
+/* Load system settings */
+$modx->log(modX::LOG_LEVEL_INFO,'Packaging in System Settings...');
+$settings = include $sources['data'].'transport.settings.php';
+if (empty($settings)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
+$attributes= array(
+    xPDOTransport::UNIQUE_KEY => 'key',
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => false,
+);
+foreach ($settings as $setting) {
+    $vehicle = $builder->createVehicle($setting,$attributes);
+    $builder->putVehicle($vehicle);
+}
+$modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' system settings.'); flush();
+unset($settings,$setting,$attributes);
+
 
 /* Load Dashboard Widgets */
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in Dashboard Widgets...');
