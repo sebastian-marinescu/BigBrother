@@ -1,8 +1,10 @@
 <?php
-
-/** @var modX $modx */
-$modx =& $object->xpdo;
-
+/**
+ * @var modX $modx
+ * @var modTransportPackage $transport
+ * @var array $options
+ */
+$modx =& $transport->xpdo;
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
     case xPDOTransport::ACTION_UPGRADE:

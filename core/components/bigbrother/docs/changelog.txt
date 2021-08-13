@@ -1,3 +1,10 @@
+Big Brother 2.
+----------------------
+Released on
+
+- Add BigBrother Admin policy/template and assign to admin on install
+- Restrict authorization page to users with the bigbrother_authorize permission
+
 Big Brother 2.0.2-pl
 ----------------------
 Released on 2021-08-03
