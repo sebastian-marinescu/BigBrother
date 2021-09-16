@@ -64,7 +64,7 @@ $_lang['bigbrother.property'] = 'Select the Google Analytics Property';
 $_lang['bigbrother.property_desc'] = 'Using the browser below, please select the Google Analytics account and the property to use with Big Brother. Note that this information is cached, so if you have recently added an account or property you may need to clear the cache (via the Manage > Clear Cache menu) before it will appear in the list.';
 $_lang['bigbrother.save_property'] = 'Save selected property';
 $_lang['bigbrother.save_property.success'] = 'Property set to [[+property_name]]';
-$_lang['bigbrother.missing_web_properties'] = 'The authorized Google account does not seem to have any Google Analytics web properties. Revoke the authorization and try signing in with a different account.';
+$_lang['bigbrother.missing_web_properties'] = 'The authorized Google account does not seem to have any Google Analytics web properties or an error occurred loading the properties. Revoke the authorization and try signing in with a different account.<br><br>In case of an error, you will find more details in the MODX Error Log. Do you use custom oAuth credentials? Make sure the Google Analytics API <em>and</em> Google Analytics Admin API are enabled.';
 $_lang['bigbrother.missing_ga4_web_properties'] = 'The selected account does not have any Google Analytics 4 properties. <br><br> To use Google Analytics 3 ("Universal Analytics") properties, please downgrade to Big Brother v1, available from modmore. <a href="https://support.modmore.com/article/233-how-can-i-use-universal-analytics-properties-with-big-brother" target="_blank" rel="noopener">Learn more &raquo;</a>';
 
 /** Lexicons used by the widgets themselves */
