@@ -1,7 +1,8 @@
-Big Brother 2.
+Big Brother 2.1.0-pl
 ----------------------
-Released on
+Released on 2021-9-16
 
+- Fix javascript error when profiles can't be loaded in the authorized screen, and adjust error message to indicate potential reasons [#78]
 - Add BigBrother Admin policy/template and assign to admin on install
 - Restrict authorization page to users with the bigbrother_authorize permission
 - Update dependencies: chart.js to 3.5.1, luxon to 1.28.0, chartjs-adapter-luxon to 1.1.0, uglify-js to 3.14.2, google/analytics-admin to 0.4.0, google/analytics-data to 0.7.0
