@@ -11,7 +11,7 @@ $settings = array();
 $settings['bigbrother.native_app_client_id']= $modx->newObject('modSystemSetting');
 $settings['bigbrother.native_app_client_id']->fromArray(array(
     'key' => 'bigbrother.native_app_client_id',
-    'value' => '',
+    'value' => GAPI_CLIENT_ID,
     'xtype' => 'text-password',
     'namespace' => 'bigbrother',
     'area' => 'Authorization',
@@ -20,7 +20,7 @@ $settings['bigbrother.native_app_client_id']->fromArray(array(
 $settings['bigbrother.native_app_client_secret']= $modx->newObject('modSystemSetting');
 $settings['bigbrother.native_app_client_secret']->fromArray(array(
     'key' => 'bigbrother.native_app_client_secret',
-    'value' => '',
+    'value' => GAPI_CLIENT_SECRET,
     'xtype' => 'text-password',
     'namespace' => 'bigbrother',
     'area' => 'Authorization',

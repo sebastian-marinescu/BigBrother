@@ -1,6 +1,12 @@
+Big Brother 2.1.1-pl
+----------------------
+Released on 2021-09-25
+
+- Fix default credentials missing from the v2 build. If you installed an earlier v2 release and do not want to use custom oAuth credentials, delete the bigbrother.native_app_client_id and bigbrother.native_app_client_secret system settings (yes, delete them entirely) and reinstall the package to return to the default. [S29488]
+
 Big Brother 2.1.0-pl
 ----------------------
-Released on 2021-9-16
+Released on 2021-09-16
 
 - Fix javascript error when profiles can't be loaded in the authorized screen, and adjust error message to indicate potential reasons [#78]
 - Add BigBrother Admin policy/template and assign to admin on install
