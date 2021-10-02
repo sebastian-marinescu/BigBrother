@@ -25,7 +25,7 @@ if (!defined('MOREPROVIDER_BUILD')) {
     /* define version */
     define('PKG_NAME', 'BigBrother');
     define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-    define('PKG_VERSION', '1.5.1');
+    define('PKG_VERSION', '1.5.2');
     define('PKG_RELEASE', 'pl');
 
     /* load modx */
@@ -100,9 +100,11 @@ $builder->package->put(
     [
         'source' => $sources['assets'],
         'target' => "return MODX_ASSETS_PATH . 'components/';",
+    ],[
+        'vehicle_class' => 'xPDOFileVehicle',
     ]
 );
-$modx->log(modX::LOG_LEVEL_INFO,'Packaged in assets and removeoldfiles resolver.'); flush();
+$modx->log(modX::LOG_LEVEL_INFO,'Packaged in assets resolver.'); flush();
 
 
 /* Create category */
@@ -118,7 +120,7 @@ $vehicle= $builder->createVehicle($category, array(
     xPDOTransport::RELATED_OBJECTS => false,
 ));
 
-$modx->log(modX::LOG_LEVEL_INFO, 'Adding file resolvers to category...');
+$modx->log(modX::LOG_LEVEL_INFO, 'Adding setup options resolvers to category...');
 
 $vehicle->resolve('php',array(
     'source' => $sources['resolvers'] . 'setupoptions.resolver.php',
@@ -144,7 +146,7 @@ $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' system setting
 unset($settings,$setting,$attributes);
 
 /* Load action/menu */
-$menus = include $sources['data'].'transport.menu.php';
+$menu = include $sources['data'].'transport.menu.php';
 $vehicle= $builder->createVehicle($menu,array (
     xPDOTransport::PRESERVE_KEYS => true,
     xPDOTransport::UPDATE_OBJECT => true,

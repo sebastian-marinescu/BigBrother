@@ -1,3 +1,5 @@
+- Fix missing assets (bug introduced in v1.5.1)
+
 Big Brother 1.5.1-pl
 ----------------------
 Released on 2021-08-02
