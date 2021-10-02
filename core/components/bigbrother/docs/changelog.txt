@@ -1,3 +1,7 @@
+Big Brother 2.2.0-pl
+----------------------
+Released on 2021-10-02
+
 - Add new "Top Referrers" widget to show common domain referrals. This is a standalone widget, so add it to your dashboard to use.
 - Catch JS errors when instantiating widgets to avoid subsequent widgets from breaking if one fails
 - Fix error in acquisitions widget if only one time period is returned (i.e. on freshly created properties)
