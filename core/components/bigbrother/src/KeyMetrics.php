@@ -56,8 +56,10 @@ class KeyMetrics extends BaseReport
                 'previous' => 0,
             ];
         }
-        foreach ($data[1] as $metric => $previous) {
-            $output[$metric]['previous'] = $previous;
+        if (isset($data[1])) {
+            foreach ($data[1] as $metric => $previous) {
+                $output[$metric]['previous'] = $previous;
+            }
         }
 
         // Output as an iterable array while applying appropriate formatting to each metric
