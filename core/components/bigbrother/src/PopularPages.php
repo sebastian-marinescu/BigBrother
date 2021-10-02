@@ -73,7 +73,7 @@ class PopularPages extends BaseReport
                 ];
             }
 
-            $output[$fullPath][$isLatest ? 'previous' : 'value'] += (int)$value['screenPageViews'];
+            $output[$fullPath][$isLatest ? 'value' : 'previous'] += (int)$value['screenPageViews'];
         }
 
         foreach ($output as $key => $values) {
