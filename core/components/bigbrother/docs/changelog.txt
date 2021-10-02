@@ -1,4 +1,5 @@
 - Catch JS errors when instantiating widgets to avoid subsequent widgets from breaking if one fails
+- Fix error in acquisitions widget if only one time period is returned (i.e. on freshly created properties)
 
 Big Brother 2.1.1-pl
 ----------------------
