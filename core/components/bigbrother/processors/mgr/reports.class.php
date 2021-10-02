@@ -11,7 +11,8 @@ class BigBrotherReportsProcessor extends BigBrotherProcessor
         'key-metrics' => \modmore\BigBrother\KeyMetrics::class,
         'acquisition' => \modmore\BigBrother\Acquisition::class,
         'popular-pages' => \modmore\BigBrother\PopularPages::class,
-        'top-countries' => \modmore\BigBrother\TopCountries::class
+        'top-countries' => \modmore\BigBrother\TopCountries::class,
+        'top-referrers' => \modmore\BigBrother\TopReferrers::class,
     ];
 
     public function process()

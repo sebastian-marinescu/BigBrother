@@ -80,6 +80,8 @@ $_lang['bigbrother.most_viewed_pages.subtitle'] = 'by page views';
 $_lang['bigbrother.key_metrics'] = 'Key metrics';
 $_lang['bigbrother.top_countries'] = 'Top countries';
 $_lang['bigbrother.top_countries.subtitle'] = 'by unique users';
+$_lang['bigbrother.top_referrers'] = 'Top referring domains';
+$_lang['bigbrother.top_referrers.subtitle'] = 'by page views';
 $_lang['bigbrother.daily_page_views'] = 'Daily page views';
 $_lang['bigbrother.four_weeks_before'] = '4 weeks before';
 
