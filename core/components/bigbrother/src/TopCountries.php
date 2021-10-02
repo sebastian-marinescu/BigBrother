@@ -56,7 +56,7 @@ class TopCountries extends BaseReport
         $output = [];
         foreach ($data as $value) {
 
-            $isLatest = $value['dateRange'] === 'date_range_0' ? true : false;
+            $isLatest = $value['dateRange'] === 'date_range_0';
             if (!isset($output[$value['country']])) {
                 $output[$value['country']] = [
                     'title' => $value['country'],
@@ -65,7 +65,7 @@ class TopCountries extends BaseReport
                 ];
             }
 
-            $output[$value['country']][$isLatest ? 'previous' : 'value'] += (int)$value['activeUsers'];
+            $output[$value['country']][$isLatest ? 'value' : 'previous'] += (int)$value['activeUsers'];
         }
 
         foreach ($output as $key => $values) {

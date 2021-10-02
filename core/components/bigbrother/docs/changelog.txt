@@ -1,6 +1,6 @@
 - Catch JS errors when instantiating widgets to avoid subsequent widgets from breaking if one fails
 - Fix error in acquisitions widget if only one time period is returned (i.e. on freshly created properties)
-- Fix incorrect values and comparison arrow in popular pages list
+- Fix incorrect values and comparison arrow in popular pages and top countries widgets
 - Fix "Invalid argument supplied for foreach()" in key metrics widget if only one time period is returned [S29809]
 
 Big Brother 2.1.1-pl
