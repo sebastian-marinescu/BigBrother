@@ -74,4 +74,15 @@ $widgets[5]->fromArray([
     'lexicon' => 'bigbrother:default',
 ], '', true, true);
 
+$widgets[6]= $modx->newObject('modDashboardWidget');
+$widgets[6]->fromArray([
+    'name' => 'bigbrother.top_referrers.name',
+    'description' => 'bigbrother.top_referrers.desc',
+    'type' => 'file',
+    'size' => 'half',
+    'content' => '[[++core_path]]components/bigbrother/elements/widgets/topreferrers.class.php',
+    'namespace' => 'bigbrother',
+    'lexicon' => 'bigbrother:default',
+], '', true, true);
+
 return $widgets;

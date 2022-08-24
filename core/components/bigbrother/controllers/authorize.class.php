@@ -27,6 +27,11 @@ class BigbrotherAuthorizeManagerController extends modExtraManagerController {
         return ['bigbrother:default'];
     }
 
+    public function checkPermissions(): bool
+    {
+        return $this->modx->context->checkPolicy('bigbrother_authorize');
+    }
+
     public function initialize()
     {
         $this->bigbrother = new BigBrother($this->modx);

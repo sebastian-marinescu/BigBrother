@@ -6,6 +6,31 @@ In light of Google's deprecation of Out-Of-Band (OOB) authorizations, we've impl
 
 **Custom oAuth credentials are no longer supported for new authorizations.**
 
+Big Brother 2.2.0-pl
+----------------------
+Released on 2021-10-02
+
+- Add new "Top Referrers" widget to show common domain referrals. This is a standalone widget, so add it to your dashboard to use.
+- Catch JS errors when instantiating widgets to avoid subsequent widgets from breaking if one fails
+- Fix error in acquisitions widget if only one time period is returned (i.e. on freshly created properties)
+- Fix incorrect values and comparison arrow in popular pages and top countries widgets
+- Fix "Invalid argument supplied for foreach()" in key metrics widget if only one time period is returned [S29809]
+
+Big Brother 2.1.1-pl
+----------------------
+Released on 2021-09-25
+
+- Fix default credentials missing from the v2 build. If you installed an earlier v2 release and do not want to use custom oAuth credentials, delete the bigbrother.native_app_client_id and bigbrother.native_app_client_secret system settings (yes, delete them entirely) and reinstall the package to return to the default. [S29488]
+
+Big Brother 2.1.0-pl
+----------------------
+Released on 2021-09-16
+
+- Fix javascript error when profiles can't be loaded in the authorized screen, and adjust error message to indicate potential reasons [#78]
+- Add BigBrother Admin policy/template and assign to admin on install
+- Restrict authorization page to users with the bigbrother_authorize permission
+- Update dependencies: chart.js to 3.5.1, luxon to 1.28.0, chartjs-adapter-luxon to 1.1.0, uglify-js to 3.14.2, google/analytics-admin to 0.4.0, google/analytics-data to 0.7.0
+
 Big Brother 2.0.2-pl
 ----------------------
 Released on 2021-08-03

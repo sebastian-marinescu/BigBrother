@@ -4,15 +4,18 @@ namespace modmore\BigBrother;
 
 use Google\Analytics\Data\V1beta\DateRange;
 use Google\Analytics\Data\V1beta\Dimension;
+use Google\Analytics\Data\V1beta\Filter\StringFilter;
+use Google\Analytics\Data\V1beta\FilterExpression;
 use Google\Analytics\Data\V1beta\Metric;
 use Google\Analytics\Data\V1beta\OrderBy;
+use Google\Analytics\Data\V1beta\Filter;
 use Google\Analytics\Data\V1beta\OrderBy\MetricOrderBy;
 
-class TopCountries extends BaseReport
+class TopReferrers extends BaseReport
 {
     public function run(array $params = []): array
     {
-        $cacheKey = 'reports/top-countries';
+        $cacheKey = 'reports/top-referrers';
         if ($data = $this->cacheManager->get($cacheKey, \BigBrother::$cacheOptions)) {
             return $data;
         }
@@ -31,22 +34,31 @@ class TopCountries extends BaseReport
             ],
             'dimensions' => [
                 new Dimension([
-                    'name' => 'country',
+                    'name' => 'sessionSource',
                 ]),
             ],
             'metrics' => [
                 new Metric([
-                    'name' => 'activeUsers',
+                    'name' => 'screenPageViews',
                 ]),
             ],
             'orderBys' => [
                 new OrderBy([
                     'metric' => new MetricOrderBy([
-                        'metric_name' => 'activeUsers'
+                        'metric_name' => 'screenPageViews'
                     ]),
                     'desc' => true,
                 ])
             ],
+
+            'dimensionFilter' => new FilterExpression([
+                'filter' => new Filter([
+                    'field_name' => 'sessionMedium',
+                    'string_filter' => new StringFilter([
+                        'value' => 'referral'
+                    ])
+                ])
+            ]),
             'limit' => 50
         ]);
 
@@ -57,15 +69,15 @@ class TopCountries extends BaseReport
         foreach ($data as $value) {
 
             $isLatest = $value['dateRange'] === 'date_range_0';
-            if (!isset($output[$value['country']])) {
-                $output[$value['country']] = [
-                    'title' => $value['country'],
+            if (!isset($output[$value['sessionSource']])) {
+                $output[$value['sessionSource']] = [
+                    'title' => $value['sessionSource'],
                     'value' => 0,
                     'previous' => 0,
                 ];
             }
 
-            $output[$value['country']][$isLatest ? 'value' : 'previous'] += (int)$value['activeUsers'];
+            $output[$value['sessionSource']][$isLatest ? 'value' : 'previous'] += (int)$value['screenPageViews'];
         }
 
         foreach ($output as $key => $values) {

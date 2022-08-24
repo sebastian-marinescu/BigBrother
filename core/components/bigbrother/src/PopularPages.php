@@ -62,7 +62,7 @@ class PopularPages extends BaseReport
 
         $output = [];
         foreach ($data as $value) {
-            $isLatest = $value['dateRange'] === 'date_range_0' ? true : false;
+            $isLatest = $value['dateRange'] === 'date_range_0';
             $fullPath = ($_SERVER['HTTPS'] ? 'https://' : 'http://') . $value['hostName'] . $value['pagePath'];
             if (!array_key_exists($fullPath, $output)) {
                 $output[$fullPath] = [
@@ -73,7 +73,7 @@ class PopularPages extends BaseReport
                 ];
             }
 
-            $output[$fullPath][$isLatest ? 'previous' : 'value'] += (int)$value['screenPageViews'];
+            $output[$fullPath][$isLatest ? 'value' : 'previous'] += (int)$value['screenPageViews'];
         }
 
         foreach ($output as $key => $values) {

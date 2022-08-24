@@ -46,7 +46,7 @@ class BigBrotherGetStateProcessor extends BigBrotherProcessor
             ]);
         } catch (\Google\ApiCore\ApiException $e) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, '[BigBrother] Received ' . get_class($e) . ' trying to list accounts and properties: ' . $e->getMessage());
-            return false;
+            return [];
         }
         foreach ($summaries as $summary) {
             $account = [

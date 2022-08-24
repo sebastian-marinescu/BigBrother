@@ -41,6 +41,7 @@ abstract class BigBrotherAbstractDashboardWidget extends modDashboardWidgetInter
             $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/acquisition.js?v=' . urlencode($this->bigbrother->version));
             $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/popular-pages.js?v=' . urlencode($this->bigbrother->version));
             $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/top-countries.js?v=' . urlencode($this->bigbrother->version));
+            $this->controller->addJavascript($this->assetsUrl . 'mgr/reports/top-referrers.js?v=' . urlencode($this->bigbrother->version));
         }
         else {
             $this->controller->addJavascript($this->assetsUrl . 'dist/dashboard.min.js?v=' . urlencode($this->bigbrother->version));
@@ -146,12 +147,20 @@ HTML;
     {
         $property = $this->getGA4Property($propertyId);
 
+        // Only display the authorize link if the user has the correct permissions
+        $authorizeLink = '';
+        if ($this->modx->context->checkPolicy('bigbrother_authorize')) {
+            $authorizeLink = <<<HTML
+<a href="{$this->bigbrother->getAuthorizeUrl()}" title="{$this->modx->lexicon('bigbrother.authorization')}" class="authorize-link"><i class="icon icon-cog"></i></a>
+HTML;
+        }
+
         return <<<HTML
 <div class="bigbrother-widget-title">
     <div>
         <span>{$this->modx->lexicon('bigbrother.widget_title', ['property_name' => $property->getDisplayName()])}</span>
         <span class="property-id">{$propertyId}</span>
-        <a href="{$this->bigbrother->getAuthorizeUrl()}" title="{$this->modx->lexicon('bigbrother.authorization')}" class="authorize-link"><i class="icon icon-cog"></i></a>
+        {$authorizeLink}
     </div>
     <div class="period-wrapper">
         <span id="bb-title-period" class="bigbrother-title-period">{$this->modx->lexicon('bigbrother.loading')}</span>

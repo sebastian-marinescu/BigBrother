@@ -69,12 +69,12 @@ Ext.extend(BigBrother,Ext.Component,{
         }
     },
 
-    refreshCharts() {
+    refreshCharts: function () {
         this.enableSpinners();
         MODx.Ajax.request({
             url: BigBrother.config.connectorUrl,
             params: {
-                action : 'mgr/reports',
+                action: 'mgr/reports',
                 reports: this._keys.join(',')
             },
             method: 'GET',
@@ -82,14 +82,19 @@ Ext.extend(BigBrother,Ext.Component,{
             listeners: {
                 success: {
                     fn: function (result) {
-                        this._charts.forEach((ch) => {
-                            if (result.data[ch.key]) {
-                                ch.setData(result.data[ch.key]);
-                            }
-                        });
                         if (result.data['visits/line']) {
                             this.renderPeriodDates(result.data['visits/line']);
                         }
+
+                        this._charts.forEach((ch) => {
+                            if (result.data[ch.key]) {
+                                try {
+                                    ch.setData(result.data[ch.key]);
+                                } catch (err) {
+                                    console.error('Failed rendering widget "' + ch.key + '": ', err);
+                                }
+                            }
+                        });
                         this.disableSpinners();
                     },
                     scope: this
