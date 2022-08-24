@@ -57,7 +57,6 @@ HTML
      */
     public function process(array $scriptProperties = array())
     {
-
         $clientId = $this->modx->getOption('bigbrother.native_app_client_id');
         $clientSecret = $this->modx->getOption('bigbrother.native_app_client_secret');
 
@@ -66,20 +65,59 @@ HTML
             return;
         }
 
-        try {
-            $oauth = $this->bigbrother->getOAuth2();
-        } catch (Exception $e) {
-            $this->failure($this->modx->lexicon('bigbrother.guzzle_error'));
-            return;
+        if (!empty($scriptProperties['code'])) {
+            $oAuth = $this->bigbrother->getOAuth2();
+            $oAuth->setRefreshToken('');
+            $oAuth->setAccessToken('');
+            $oAuth->setCode($scriptProperties['code']);
+
+
+
+            // Fetch new tokens
+            try {
+                $oAuth->setGrantType('authorization_code');
+                $tokens = $oAuth->fetchAuthToken();
+            } catch (Exception $e) {
+                $this->modx->log(modX::LOG_LEVEL_ERROR, '[BigBrother] Received oAuth error when verifying token: ' . $e->getMessage());
+                $this->failure($this->modx->lexicon('bigbrother.oauth_error'));
+                return $this->modx->lexicon('bigbrother.oauth_error');
+            }
+
+            $this->modx->log(1, print_r($tokens, true));
+
+            if (array_key_exists('access_token', $tokens)) {
+                $this->bigbrother->setAccessToken($tokens);
+                $this->modx->sendRedirect($this->getReturnUrl());
+                return 'Code received...';
+            }
+
+            $this->modx->log(modX::LOG_LEVEL_ERROR, '[BigBrother] Received unexpected response from fetchAuthToken ' . print_r($tokens, true));
+            $this->failure($this->modx->lexicon('bigbrother.authorization.failure.unexpected_response'));
+            return $this->modx->lexicon('bigbrother.authorization.failure.unexpected_response');
         }
 
-        $authUrl = $oauth->buildFullAuthorizationUri();
+
+        $authUrl = "https://modmore.com/bigbrotherauth/?";
+        $authUrl .= http_build_query([
+            'client_id' => sha1($clientId),
+            'return' => $this->getReturnUrl(),
+        ]);
         $this->addHtml("<script>BigBrother.config.authorizeUrl = '$authUrl';</script>");
     }
 
     public function getTemplateFile()
     {
         return $this->bigbrother->config['templates_path'] . 'page.tpl';
+    }
+
+    private function getReturnUrl()
+    {
+        $url = 'https://'; // force https
+        $url .= $this->modx->getOption('http_host');
+        $url .= $this->modx->getOption('manager_url');
+        $url .= '?namespace=bigbrother&a=authorize';
+
+        return $url;
     }
 }
 

@@ -42,66 +42,21 @@ BigBrother.panel.AuthorizePanel = function(config) {
                 html: '<h2>'+_('bigbrother.initial_authorization')+'</h2>' + _('bigbrother.initial_authorization_description'),
                 xtype: 'modx-panel'
             },{
-                xtype: 'panel',
-                layout: 'column',
-                cls: 'bigbrother-columns',
+                xtype: 'modx-panel',
+                layout: 'form',
+                columnWidth: 1,
                 items: [{
-                    html: '<div class="bigbrother-step"><span>1</span></div>',
-                    width: 50,
+                    xtype: 'button',
+                    text: '<img src="' + BigBrother.config.assetsUrl + 'images/signin-google.png" alt="' + _('bigbrother.sign_in_with_google') + '" width="191px" height="46px">',
+                    name: 'authorize',
+                    id: 'bigbrother-authorize-login-btn',
+                    anchor: '100%',
+                    cls: 'bigbrother-signin-button',
+                    handler: function () {
+                        window.location.href = BigBrother.config.authorizeUrl;
+                    }
                 },{
-                    layout: 'form',
-                    columnWidth: 1,
-                    items: [{
-                        xtype: 'button',
-                        text: '<img src="' + BigBrother.config.assetsUrl + 'images/signin-google.png" alt="' + _('bigbrother.sign_in_with_google') + '" width="191px" height="46px">',
-                        name: 'authorize',
-                        id: 'bigbrother-authorize-login-btn',
-                        anchor: '100%',
-                        cls: 'bigbrother-signin-button',
-                        handler: function () {
-                            window.authorizeWindow = window.open(BigBrother.config.authorizeUrl, 'bigbrother_authorize', 'height=500,width=450');
-                        }
-                    },{
-                        html: '<p class="bigbrother-desc">' + _('bigbrother.authorization_step1desc') + '</p>',
-                    }]
-                }]
-            },{
-                xtype: 'panel',
-                layout: 'column',
-                cls: 'bigbrother-columns',
-                items: [{
-                    html: '<div class="bigbrother-step"><span>2</span></div>',
-                    width: 50,
-                },{
-                    layout: 'form',
-                    labelAlign: 'top',
-                    columnWidth: 1,
-                    items: [{
-                        xtype: 'textfield',
-                        fieldLabel: _('bigbrother.code'),
-                        labelStyle: 'padding-top: 0;',
-                        name: 'code',
-                        id: 'bigbrother-authorization-code',
-                        anchor: '50%'
-                    }]
-                }]
-            },{
-                xtype: 'panel',
-                layout: 'column',
-                cls: 'bigbrother-columns',
-                items: [{
-                    html: '<div class="bigbrother-step"><span>3</span></div>',
-                    width: 50,
-                },{
-                    layout: 'form',
-                    columnWidth: 1,
-                    items: [{
-                        xtype: 'button',
-                        text: _('bigbrother.verify_code'),
-                        cls: 'primary-button',
-                        handler: this.verifyCode,
-                        scope: this
-                    }]
+                    html: '<p class="bigbrother-desc">' + _('bigbrother.authorization_step1desc') + '</p>',
                 }]
             }]
         },{

@@ -1,3 +1,11 @@
+Big Brother 3.0.0-pl
+----------------------
+Released on 2022-08-24
+
+In light of Google's deprecation of Out-Of-Band (OOB) authorizations, we've implemented a proxy to keep authorizations smooth and quick.
+
+**Custom oAuth credentials are no longer supported for new authorizations.**
+
 Big Brother 2.0.2-pl
 ----------------------
 Released on 2021-08-03

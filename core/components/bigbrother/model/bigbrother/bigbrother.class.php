@@ -129,7 +129,7 @@ class BigBrother
                 'scope' => 'https://www.googleapis.com/auth/analytics.readonly',
                 'tokenCredentialUri' => 'https://oauth2.googleapis.com/token',
                 'authorizationUri' => 'https://accounts.google.com/o/oauth2/auth',
-                'redirectUri' => 'urn:ietf:wg:oauth:2.0:oob', // "out of band", i.e. copy/paste token instead of redirect
+                'redirectUri' => 'https://modmore.com/bigbrotherauth/',
                 'clientId' => $clientId,
                 'clientSecret' => $clientSecret,
             ]);

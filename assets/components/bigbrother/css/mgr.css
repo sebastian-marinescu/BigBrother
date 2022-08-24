@@ -1,6 +1,7 @@
 .bigbrother-signin-button {
     padding: 0;
     box-shadow: none;
+    margin: 1em 0;
 }
 
 .bigbrother-signin-button:hover,
