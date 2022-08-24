@@ -102,7 +102,7 @@ class BigBrother
      * @return OAuth2
      * @throws Exception Fails if Guzzle is not available.
      */
-    public function getOAuth2(): OAuth2
+    public function getOAuth2(bool $forceWebappFlow = false): OAuth2
     {
         // On MODX3 (alpha4 or up), grab the core-provided Client and pass that into the Google instance.
         if ($this->modx->services instanceof ContainerInterface) {
@@ -122,17 +122,29 @@ class BigBrother
         }
 
         if (!$this->OAuth2) {
-            $clientId = $this->modx->getOption('bigbrother.native_app_client_id');
-            $clientSecret = $this->modx->getOption('bigbrother.native_app_client_secret');
+            // webapp flow (3.0+) using authorization proxy
+            if ($forceWebappFlow || $this->modx->getOption('bigbrother.oauth_flow') === 'webapp') {
+                $clientId = $this->modx->getOption('bigbrother.oauth_client_id');
+                $clientSecret = $this->modx->getOption('bigbrother.oauth_client_secret');
+                $redirectUri = 'https://modmore.com/bigbrotherauth/';
+            }
+            // native OOB flow (<3.0) with possibly custom credentials
+            // this is deprecated and will be removed from GCP by February 2023
+            else {
+                $clientId = $this->modx->getOption('bigbrother.native_app_client_id');
+                $clientSecret = $this->modx->getOption('bigbrother.native_app_client_secret');
+                $redirectUri = 'urn:ietf:wg:oauth:2.0:oob';
+            }
 
-            $this->OAuth2 = new OAuth2([
+            $config = [
                 'scope' => 'https://www.googleapis.com/auth/analytics.readonly',
                 'tokenCredentialUri' => 'https://oauth2.googleapis.com/token',
                 'authorizationUri' => 'https://accounts.google.com/o/oauth2/auth',
-                'redirectUri' => 'https://modmore.com/bigbrotherauth/',
+                'redirectUri' => $redirectUri,
                 'clientId' => $clientId,
                 'clientSecret' => $clientSecret,
-            ]);
+            ];
+            $this->OAuth2 = new OAuth2($config);
         }
 
         // If the scope doesn't already have the refresh token, but we do have it, set it
@@ -259,6 +271,11 @@ class BigBrother
     public function setRefreshToken(string $refreshToken)
     {
         $this->updateOption('refresh_token', $refreshToken);
+    }
+
+    public function setOauthFlow(string $flow)
+    {
+        $this->updateOption('oauth_flow', $flow);
     }
 
     public function getAuthorizeUrl(): string

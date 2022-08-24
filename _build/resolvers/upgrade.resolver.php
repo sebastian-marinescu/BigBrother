@@ -95,6 +95,26 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             }
         }
 
+
+        // Try to gracefully handle the v2 > v3 upgrade with new credentials
+        $token = $modx->getOption('bigbrother.refresh_token');
+        $flow = $modx->getOption('bigbrother.oauth_flow');
+        $setting = $modx->getObject('modSystemSetting', array('key' => 'bigbrother.oauth_flow'));
+        if ($setting) {
+            if (!empty($token) && empty($flow)) {
+                $setting->set('value', 'native');
+                $modx->log(xPDO::LOG_LEVEL_WARN, 'Existing refresh_token found, configured the oauth_flow to <b>native</b>.');
+                $modx->log(xPDO::LOG_LEVEL_WARN, '<b>Important: the next time you authorize Big Brother, it will go through the new webapp proxy flow and previous (custom) oauth credentials will no longer apply.');
+            } elseif (empty($flow)) {
+                $setting->set('value', 'webapp');
+                $modx->log(xPDO::LOG_LEVEL_WARN, 'No existing refresh_token found, configured the oauth_flow to <b>webapp</b>.');
+            }
+            $setting->save();
+        }
+        else {
+            $modx->log(xPDO::LOG_LEVEL_ERROR, 'Error: could not find the bigbrother.oauth_flow setting to smoothly handle potential v2 > v3 upgrades! You may need to re-authorize after installation if this was an upgrade.');
+        }
+
     case xPDOTransport::ACTION_UNINSTALL:
 
 }

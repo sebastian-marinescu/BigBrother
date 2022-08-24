@@ -8,19 +8,28 @@
 
 $settings = array();
 
-$settings['bigbrother.native_app_client_id']= $modx->newObject('modSystemSetting');
-$settings['bigbrother.native_app_client_id']->fromArray(array(
-    'key' => 'bigbrother.native_app_client_id',
-    'value' => GAPI_CLIENT_ID,
+$settings['bigbrother.oauth_flow']= $modx->newObject('modSystemSetting');
+$settings['bigbrother.oauth_flow']->fromArray(array(
+    'key' => 'bigbrother.oauth_flow',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'bigbrother',
+    'area' => 'Authorization',
+),'',true,true);
+
+$settings['bigbrother.oauth_client_id']= $modx->newObject('modSystemSetting');
+$settings['bigbrother.oauth_client_id']->fromArray(array(
+    'key' => 'bigbrother.oauth_client_id',
+    'value' => GAPI_WA_CLIENT_ID,
     'xtype' => 'text-password',
     'namespace' => 'bigbrother',
     'area' => 'Authorization',
 ),'',true,true);
 
-$settings['bigbrother.native_app_client_secret']= $modx->newObject('modSystemSetting');
-$settings['bigbrother.native_app_client_secret']->fromArray(array(
-    'key' => 'bigbrother.native_app_client_secret',
-    'value' => GAPI_CLIENT_SECRET,
+$settings['bigbrother.oauth_client_secret']= $modx->newObject('modSystemSetting');
+$settings['bigbrother.oauth_client_secret']->fromArray(array(
+    'key' => 'bigbrother.oauth_client_secret',
+    'value' => GAPI_WA_CLIENT_SECRET,
     'xtype' => 'text-password',
     'namespace' => 'bigbrother',
     'area' => 'Authorization',

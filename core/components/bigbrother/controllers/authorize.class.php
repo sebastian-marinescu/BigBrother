@@ -62,8 +62,8 @@ HTML
      */
     public function process(array $scriptProperties = array())
     {
-        $clientId = $this->modx->getOption('bigbrother.native_app_client_id');
-        $clientSecret = $this->modx->getOption('bigbrother.native_app_client_secret');
+        $clientId = $this->modx->getOption('bigbrother.oauth_client_id');
+        $clientSecret = $this->modx->getOption('bigbrother.oauth_client_secret');
 
         if (empty($clientId) || empty($clientSecret)) {
             $this->failure($this->modx->lexicon('bigbrother.authorization.failure.missing_id_or_secret'));
@@ -71,12 +71,10 @@ HTML
         }
 
         if (!empty($scriptProperties['code'])) {
-            $oAuth = $this->bigbrother->getOAuth2();
+            $oAuth = $this->bigbrother->getOAuth2(true);
             $oAuth->setRefreshToken('');
             $oAuth->setAccessToken('');
             $oAuth->setCode($scriptProperties['code']);
-
-
 
             // Fetch new tokens
             try {
@@ -88,10 +86,9 @@ HTML
                 return $this->modx->lexicon('bigbrother.oauth_error');
             }
 
-            $this->modx->log(1, print_r($tokens, true));
-
             if (array_key_exists('access_token', $tokens)) {
                 $this->bigbrother->setAccessToken($tokens);
+                $this->bigbrother->setOauthFlow('webapp');
                 $this->modx->sendRedirect($this->getReturnUrl());
                 return 'Code received...';
             }
@@ -117,7 +114,7 @@ HTML
 
     private function getReturnUrl()
     {
-        $url = 'https://'; // force https
+        $url = 'https://'; // force https always
         $url .= $this->modx->getOption('http_host');
         $url .= $this->modx->getOption('manager_url');
         $url .= '?namespace=bigbrother&a=authorize';
