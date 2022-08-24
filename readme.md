@@ -8,15 +8,38 @@ Licensed as MIT, so you're free to use and adapt Big Brother. [Donations to supp
 
 ## Compatibility
 
-Big Brother v2 is currently in active development and only available from modmore.com.
+Big Brother v2 is the current version and available from modmore.com and MODX.
 
-We expect to release v2 on MODX.com when it's stable. After that, v1.5+ (for legacy Google Analytics 3) will be exclusively available from modmore.com as MODX.com does not support multiple release branches.
+Due to [https://developers.googleblog.com/2022/02/making-oauth-flows-safer.html](Google's deprecation of the out-of-band authorizations), new users **must** use version 3.x after October 3rd, 2022. 
 
-| Version | Status | Google Analytics | MODX | Available from |
-| ------- | ------ | ---------------- | ---- | -------------- |
-| 2.0+ (2.x branch) | Active development | 4 ("Google Analytics 4") | 2.8+, 3.0.0-alpha3+ | modmore.com |
-| 1.5+ (1.x branch) | Maintenance-only | 3 ("Universal Analytics") | 2.7+, no MODX 3 | modmore.com, modx.com |
-| < 1.5 | End of life | 3 ("Universal analytics") | 2.2+, no MODX 3 | modx.com |
+However, 3.x does **not** support custom credentials anymore.
+
+Existing v2 users are welcome to keep using v2. We'll still release patches as needed, however 
+
+| Version           | Status                                                           | Google Analytics          | MODX                | Available from        |
+|-------------------|------------------------------------------------------------------|---------------------------|---------------------|-----------------------|
+| 3.0+ (2.x branch) | Active development                                               | 4 ("Google Analytics 4")  | 2.8+, 3.0.0-alpha3+ | modmore.com           |
+| 2.0+ (2.x branch) | Maintenance-only (no new authorizations after October 3rd, 2022) | 4 ("Google Analytics 4")  | 2.8+, 3.0.0-alpha3+ | modmore.com           |
+| 1.5+ (1.x branch) | Maintenance-only                                                 | 3 ("Universal Analytics") | 2.7+, no MODX 3     | modmore.com, modx.com |
+| < 1.5             | End of life                                                      | 3 ("Universal analytics") | 2.2+, no MODX 3     | modx.com              |
+
+## Upgrading from v2 to v3
+
+When first upgrading from v2 to v3, your existing oauth credentials (`bigbrother.native_app_client_id` and `bigbrother.native_app_client_secret`) will continue to be used, and you should not have to re-authorize immediately.
+
+**The next time you either revoke the authorization or it fails and must be re-authorized, you will be upgraded to the new oauth flow with new credentials** (`bigbrother.oauth_client_id` and `bigbrother.oauth_client_secret`).
+
+In v3, it is **not possible to use custom oauth credentials anymore.** This is because we're using an authorization proxy to initialise the authentication on your behalf, and that cannot do so with custom credentials.
+
+If adding support for custom authorization proxies is something you'd be interested in sponsoring, please reach out.
+
+## What's this about an authorization proxy? Is it safe?
+
+The authorization proxy runs on modmore.com and acts as an intermediate for the oauth redirects. You're authorizing modmore.com to access your Google Analytics profiles, which then asks you to confirm if you want to share that access with the site that initiated the authorization.
+
+Only requests with the modmore-provided `bigbrother.oauth_client_id` can use the proxy. Once authorized, it will ask you to confirm you want to share the access with the specific site as an extra precaution. 
+
+It's worth noting that while modmore _receives_ the authorization code (which can be used once to create a long-lived refresh token to access your account), it does not _store_ nor _claim_ it. The authorization code is only kept in memory briefly until you confirm you wish to share it with the specific site. As authorization codes are single use, you can confirm this without needing access to the server-side code by reviewing core/components/bigbrother/controllers/authorize.class.php which takes in the `code` and turns it into the refresh token; that would not be possible if the proxy were to use the token.
 
 ## Usage
 
