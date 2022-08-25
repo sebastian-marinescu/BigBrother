@@ -20,7 +20,10 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'date_end',
             'show_metas_on_dashboard',
             'show_pies_on_dashboard',
-            'show_visits_on_dashboard'
+            'show_visits_on_dashboard',
+            'account',
+            'account_name',
+            'total_account',
         ];
         foreach ($removeSettings as $key) {
             $setting = $modx->getObject('modSystemSetting',array('key' => 'bigbrother.'.$key));

@@ -91,11 +91,20 @@ $_lang['bigbrother.metrics.engagement_rate'] = 'Engagement Rate';
 $_lang['bigbrother.metrics.avg_time_on_site'] = 'Avg Time On Site';
 
 /* System settings */
-$_lang['setting_bigbrother.native_app_client_id'] = 'OAuth2.0 Client ID (Desktop/Native App)';
+$_lang['setting_bigbrother.native_app_client_id'] = '(Deprecated) OAuth2.0 Client ID (Desktop/Native App)';
 $_lang['setting_bigbrother.native_app_client_id_desc'] = 'Provide your Client ID from https://console.developers.google.com/apis/credentials';
 
-$_lang['setting_bigbrother.native_app_client_secret'] = 'OAuth2.0 Client Secret';
+$_lang['setting_bigbrother.native_app_client_secret'] = '(Deprecated) OAuth2.0 Client Secret (Desktop/Native App)';
 $_lang['setting_bigbrother.native_app_client_secret_desc'] = 'Provide your Client Secret from https://console.developers.google.com/apis/credentials';
+
+$_lang['setting_bigbrother.oauth_client_id'] = 'OAuth2.0 Client ID';
+$_lang['setting_bigbrother.oauth_client_id_desc'] = 'OAuth credentials for authorizing your Google account. For details, please see <a href="https://docs.modmore.com/en/Open_Source/BigBrother/Custom_oAuth_Credentials.html">the documentation</a>.';
+
+$_lang['setting_bigbrother.oauth_client_secret'] = 'OAuth2.0 Client Secret';
+$_lang['setting_bigbrother.oauth_client_secret_desc'] = 'OAuth credentials for authorizing your Google account. For details, please see <a href="https://docs.modmore.com/en/Open_Source/BigBrother/Custom_oAuth_Credentials.html">the documentation</a>.';
+
+$_lang['setting_bigbrother.oauth_flow'] = 'OAuth2.0 Flow';
+$_lang['setting_bigbrother.oauth_flow_desc'] = 'Either <code>native</code> or <code>webapp</code>. The <code>native</code> option is the legacy authorization flow used by Big Brother v2. If you\'ve upgraded from v2, this setting is automatically set to <code>native</code> and uses your <code>bigbrother.native_app_client_id</code> and <code>bigbrother.native_app_client_secret</code> credentials. For Big Brother v3, the <code>webapp</code> authorization flow is used for any new authorizations (including when this setting is set to native!), which goes through an authorization proxy hosted by modmore. It\'s not currently possible to authorize Big Brother v3 with custom oauth credentials.';
 
 $_lang['setting_bigbrother.property_id'] = 'GA4 Property ID';
 $_lang['setting_bigbrother.property_id_desc'] = 'This will automatically be filled with your Google Analytics v4 property id when you authorize Big Brother.';
