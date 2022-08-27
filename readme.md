@@ -8,20 +8,20 @@ Licensed as MIT, so you're free to use and adapt Big Brother. [Donations to supp
 
 ## Compatibility
 
-Big Brother v2 is the current version and available from modmore.com and MODX.
+Big Brother v3 is the current version and available from modmore.com and MODX.
 
-Due to [https://developers.googleblog.com/2022/02/making-oauth-flows-safer.html](Google's deprecation of the out-of-band authorizations), new users **must** use version 3.x after October 3rd, 2022. 
+Due to [https://developers.googleblog.com/2022/02/making-oauth-flows-safer.html](Google's deprecation of the out-of-band authorizations), new users **must** use v3 after October 3rd, 2022. v1 and v2 are considered deprecated as of August 27th 2022. 
 
-However, 3.x does **not** support custom credentials anymore.
+Please note that unlike v2, v3 does **not** support custom OAuth credentials anymore.
 
-Existing v2 users are welcome to keep using v2. We'll still release patches as needed, however 
+[Learn more about the v1 and v2 deprecations and end-of-life dates in the v3 announcement](https://modmore.com/blog/2022/big-brother-3.0-now-available/).
 
-| Version           | Status                                                           | Google Analytics          | MODX                | Available from        |
-|-------------------|------------------------------------------------------------------|---------------------------|---------------------|-----------------------|
-| 3.0+ (2.x branch) | Active development                                               | 4 ("Google Analytics 4")  | 2.8+, 3.0.0-alpha3+ | modmore.com           |
-| 2.0+ (2.x branch) | Maintenance-only (no new authorizations after October 3rd, 2022) | 4 ("Google Analytics 4")  | 2.8+, 3.0.0-alpha3+ | modmore.com           |
-| 1.5+ (1.x branch) | Maintenance-only                                                 | 3 ("Universal Analytics") | 2.7+, no MODX 3     | modmore.com, modx.com |
-| < 1.5             | End of life                                                      | 3 ("Universal analytics") | 2.2+, no MODX 3     | modx.com              |
+| Version           | Status                                           | Google Analytics          | MODX                | Available from        |
+|-------------------|--------------------------------------------------|---------------------------|---------------------|-----------------------|
+| 3.0+ (3.x branch) | Active development                               | 4 ("Google Analytics 4")  | 2.8+, 3.0.0-alpha3+ | modmore.com           |
+| 2.0+ (2.x branch) | Deprecated, end-of-life on **October 3rd, 2022** | 4 ("Google Analytics 4")  | 2.8+, 3.0.0-alpha3+ | modmore.com           |
+| 1.5+ (1.x branch) | Deprecated, end-of-life on **July 1st, 2023**    | 3 ("Universal Analytics") | 2.7+, no MODX 3     | modmore.com, modx.com |
+| < 1.5             | End-of-life                                      | 3 ("Universal analytics") | 2.2+, no MODX 3     | modx.com              |
 
 ## Upgrading from v2 to v3
 
