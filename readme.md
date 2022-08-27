@@ -18,8 +18,8 @@ Please note that unlike v2, v3 does **not** support custom OAuth credentials any
 
 | Version           | Status                                           | Google Analytics          | MODX                | Available from        |
 |-------------------|--------------------------------------------------|---------------------------|---------------------|-----------------------|
-| 3.0+ (3.x branch) | Active development                               | 4 ("Google Analytics 4")  | 2.8+, 3.0.0-alpha3+ | modmore.com           |
-| 2.0+ (2.x branch) | Deprecated, end-of-life on **October 3rd, 2022** | 4 ("Google Analytics 4")  | 2.8+, 3.0.0-alpha3+ | modmore.com           |
+| 3.0+ (3.x branch) | Active development                               | 4 ("Google Analytics 4")  | 2.8+, 3.0.0-alpha3+ | modmore.com (rc)      |
+| 2.0+ (2.x branch) | Deprecated, end-of-life on **October 3rd, 2022** | 4 ("Google Analytics 4")  | 2.8+, 3.0.0-alpha3+ | modmore.com, modx.com |
 | 1.5+ (1.x branch) | Deprecated, end-of-life on **July 1st, 2023**    | 3 ("Universal Analytics") | 2.7+, no MODX 3     | modmore.com, modx.com |
 | < 1.5             | End-of-life                                      | 3 ("Universal analytics") | 2.2+, no MODX 3     | modx.com              |
 
