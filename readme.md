@@ -10,7 +10,7 @@ Licensed as MIT, so you're free to use and adapt Big Brother. [Donations to supp
 
 Big Brother v3 is the current version and available from modmore.com and MODX.
 
-Due to [https://developers.googleblog.com/2022/02/making-oauth-flows-safer.html](Google's deprecation of the out-of-band authorizations), new users **must** use v3 after October 3rd, 2022. v1 and v2 are considered deprecated as of August 27th 2022. 
+Due to [Google's deprecation of the out-of-band authorizations](https://developers.googleblog.com/2022/02/making-oauth-flows-safer.html), new users **must** use v3 after October 3rd, 2022. v1 and v2 are considered deprecated as of August 27th 2022. 
 
 Please note that unlike v2, v3 does **not** support custom OAuth credentials anymore.
 
