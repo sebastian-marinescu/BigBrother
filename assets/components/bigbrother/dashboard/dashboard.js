@@ -8,20 +8,41 @@
  */
 BigBrother.Panel.Dashboard = function(config) {
     config = config || {};
+    var panels = [];
+
+    if (BigBrother.showBanner) {
+        panels.push({
+            xtype: 'panel'
+            ,id: 'bigbrother-eol-warning-container'
+            ,items: [{
+                xtype: 'panel'
+                ,id: 'bigbrother-eol-warning'
+                ,html:
+                    '<div class="bigbrother-eol-main-col">' +
+                    '<h4>' + _('bigbrother.eol_banner.heading', {link: '&nbsp;<a href="https://support.google.com/analytics/answer/10089681" target="_blank" rel="nofollow noreferrer"><i class="icon icon-external-link"></i></a>'}) + '</h4>' +
+                    '<p>' + _('bigbrother.eol_banner.content', {link: '<a href="https://support.google.com/analytics/answer/11583528?hl=en" target="_blank" rel="nofollow noreferrer">stop working soon</a>'}) + '</p>' +
+                    '</div>' +
+                    '<a class="upgrade-btn" href="https://modmore.com/blog/2022/big-brother-3.0-now-available/" target="_blank" rel="noopener noreferrer"><span>' + _('bigbrother.eol_banner.button') + ' &nbsp;&nbsp;<i class="icon icon-arrow-right"></i></span></a>'
+            }]
+        });
+    }
+
+    panels.push({
+        xtype: 'modx-desc-panel'
+        ,startingMarkup: '<tpl for=".">' + _('bigbrother.desc_markup') + '</tpl>'
+        ,startingText: _('bigbrother.desc_title')
+    },{
+        xtype: 'panel'
+        ,cls: 'main-wrapper'
+        ,id: 'bb-container'
+        ,items:[]
+    });
+
     Ext.applyIf(config,{
         id: 'modx-panel-bigbrother'
         ,unstyled: true
         ,defaults: { collapsible: false, autoHeight: true, unstyled: true }
-        ,items: [{
-            xtype: 'modx-desc-panel'
-            ,startingMarkup: '<tpl for=".">' + _('bigbrother.desc_markup') + '</tpl>'
-            ,startingText: _('bigbrother.desc_title')
-        },{
-            xtype: 'panel'
-            ,cls: 'main-wrapper'
-            ,id: 'bb-container'
-            ,items:[]
-        }]
+        ,items: panels
         ,renderTo: "bb-panel"
     });
     BigBrother.Panel.Dashboard.superclass.constructor.call(this,config);

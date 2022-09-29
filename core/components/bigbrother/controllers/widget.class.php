@@ -45,6 +45,7 @@ class modDashboardWidgetBigBrother extends modDashboardWidgetInterface {
 
         $url = $this->bigbrother->getManagerLink() . '?a=report&namespace=bigbrother';
         $this->modx->controller->addHtml('<script type="text/javascript">
+    BigBrother.showBanner = '. $this->showBanner() .';
     BigBrother.RedirectUrl = "'.$url.'";
     BigBrother.ConnectorUrl = "'.$this->bigbrother->config['connector_url'].'";
     BigBrother.DateBegin = "'.$date['begin'].'";
@@ -60,6 +61,19 @@ class modDashboardWidgetBigBrother extends modDashboardWidgetInterface {
     });
 </script>');
         return '<div id="bb-panel"></div>';
+    }
+
+    /**
+     * Show banner after specified date
+     * @return string
+     */
+    public function showBanner(): string
+    {
+        if (strtotime(date('2022-10-03 00:00:00')) <= strtotime('now')) {
+            return 'true';
+        }
+
+        return 'false';
     }
 
 }
