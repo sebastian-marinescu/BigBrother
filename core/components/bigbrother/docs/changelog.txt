@@ -1,3 +1,9 @@
+Big Brother 1.5.3-pl
+----------------------
+Released on 2022-09-29
+
+- Display banner to upgrade to GA4 once Big Brother 1.5 is deprecated.
+
 Big Brother 1.5.2-pl
 ----------------------
 Released on 2021-10-02

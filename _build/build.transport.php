@@ -25,7 +25,7 @@ if (!defined('MOREPROVIDER_BUILD')) {
     /* define version */
     define('PKG_NAME', 'BigBrother');
     define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-    define('PKG_VERSION', '1.5.2');
+    define('PKG_VERSION', '1.5.3');
     define('PKG_RELEASE', 'pl');
 
     /* load modx */
